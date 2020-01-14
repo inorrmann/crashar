@@ -1,0 +1,19 @@
+tent
+<i className="fas fa-campground"></i>
+
+messages
+<i className="fas fa-comments"></i>
+
+user
+<i className="fas fa-user"></i>
+
+car
+<i className="fas fa-car-alt"></i>
+
+taupe #574F44
+dark taupe #302C26
+light taupe #8C7F6D
+
+yellow #EBC023
+dark yello #BD9A1C
+bright yellow #FFD026
