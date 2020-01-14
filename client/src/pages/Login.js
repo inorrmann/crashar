@@ -6,7 +6,7 @@ import NavbarBrand from "../components/NavbarBrand/index";
 import ButtonSubmit from "../components/ButtonSubmit/index";
 import "./Pages.css";
 
-const styleLink = { fontSize: "2rem", color: "#574F44"}
+const styleLink = { fontSize: "1.7rem", color: "#574F44"}
 const styleBrand = { color: "#574F44" }
 const styleButton = { backgroundColor: "#EBC023", color: "#574F44", fontWeight: "bold" }
 

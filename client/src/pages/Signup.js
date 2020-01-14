@@ -6,7 +6,7 @@ import NavbarBrand from "../components/NavbarBrand/index";
 import ButtonSubmit from "../components/ButtonSubmit/index";
 import "./Pages.css";
 
-const styleLink = { fontSize: "2rem", color: "#EBC023" }
+const styleLink = { fontSize: "1.7rem", color: "#EBC023" }
 const styleBrand = { color: "#EBC023" }
 const styleButton = { backgroundColor: "#EBC023", color: "#574F44", fontWeight: "bold" }
 
@@ -23,9 +23,62 @@ function Signup() {
             </NavBar>
             <div className="my-5">
                 <br></br>
-                <br></br>
-                <br></br>
+                <h3 className="text-center" style={{fontFamily: "Roboto", color: "#EBC023"}}>Create an account</h3>
             </div>
+
+            {/* <form onSubmit={handleFormSubmit}> */}
+            <form className="mx-4">
+            <div className="form-group">
+                    {/* <label htmlFor="name">Name:</label> */}
+                    <input
+                        className="form-control"
+                        placeholder="Name"
+                        name="name"
+                        type="text"
+                        id="name"
+                        // onChange={handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    {/* <label htmlFor="username">Username:</label> */}
+                    <input
+                        className="form-control"
+                        placeholder="Username"
+                        name="username"
+                        type="text"
+                        id="username"
+                        // onChange={handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    {/* <label htmlFor="email">Email address:</label> */}
+                    <input
+                        className="form-control"
+                        placeholder="Email"
+                        name="email"
+                        type="email"
+                        id="email"
+                        // onChange={handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    {/* <label htmlFor="pwd">Password:</label> */}
+                    <input
+                        className="form-control"
+                        placeholder="Password"
+                        name="password"
+                        type="password"
+                        id="pwd"
+                        // onChange={handleChange}
+                    />
+                </div>
+                <div className="text-center mt-4">
+                <ButtonSubmit className="shadow" style={styleButton} name="SUBMIT" />
+                </div>
+            </form>
+            <h6 className="mt-3 text-center text-light" style={{fontFamily: "Barlow"}}>Already have an account? <a className="text-light" href="/login">Login here</a> </h6>
+
+
         </div>
     )
 }
@@ -82,44 +135,44 @@ function Signup() {
 //   return (
 //     <div className="container">
 //       <h1>Signup</h1>
-//       <form onSubmit={handleFormSubmit}>
-//         <div className="form-group">
-//           <label htmlFor="username">Username:</label>
-//           <input
-//             className="form-control"
-//             placeholder="Username goes here..."
-//             name="username"
-//             type="text"
-//             id="username"
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="email">Email address:</label>
-//           <input
-//             className="form-control"
-//             placeholder="Email goes here..."
-//             name="email"
-//             type="email"
-//             id="email"
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="pwd">Password:</label>
-//           <input
-//             className="form-control"
-//             placeholder="Password goes here..."
-//             name="password"
-//             type="password"
-//             id="pwd"
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <button type="submit" className="btn btn-primary">
-//           Submit
-//         </button>
-//       </form>
+//   <form onSubmit={handleFormSubmit}>
+//     <div className="form-group">
+//       <label htmlFor="username">Username:</label>
+//       <input
+//         className="form-control"
+//         placeholder="Username goes here..."
+//         name="username"
+//         type="text"
+//         id="username"
+//         onChange={handleChange}
+//       />
+//     </div>
+//     <div className="form-group">
+//       <label htmlFor="email">Email address:</label>
+//       <input
+//         className="form-control"
+//         placeholder="Email goes here..."
+//         name="email"
+//         type="email"
+//         id="email"
+//         onChange={handleChange}
+//       />
+//     </div>
+//     <div className="form-group">
+//       <label htmlFor="pwd">Password:</label>
+//       <input
+//         className="form-control"
+//         placeholder="Password goes here..."
+//         name="password"
+//         type="password"
+//         id="pwd"
+//         onChange={handleChange}
+//       />
+//     </div>
+//     <button type="submit" className="btn btn-primary">
+//       Submit
+//     </button>
+//   </form>
 //       <p>
 //         <Link to="/login">Go to Login</Link>
 //       </p>
