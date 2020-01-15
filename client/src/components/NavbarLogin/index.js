@@ -28,7 +28,7 @@ function NavLog(props) {
     const { isLoggedIn, logout } = useAuth();
     let link = [];
     if (isLoggedIn) {
-        link = { text: 'Logout', onClick: () => logout(), style: props.style};
+        link = { text: 'Logout', onClick: () => logout(), style: props.style };
     } else {
         link = { text: 'Login', to: '/login', style: props.style };
     }

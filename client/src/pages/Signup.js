@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import API from './../utils/API';
-import {useAuth} from '../utils/auth';
+import { useAuth } from '../utils/auth';
 import Navbar from '../components/Navbar/Navbar';
-import NavBrand from "../components/NavbarBrand/index"
-
+import NavBrand from "../components/NavbarBrand/index";
+import Button from "../components/ButtonSubmit/index";
 
 
 function Signup() {
   const [formState, setFormState] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
@@ -24,10 +24,9 @@ function Signup() {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    API.signUpUser(formState.username, formState.email, formState.password)
+    API.signUpUser(formState.name, formState.email, formState.password)
       .then(res => {
-        // once the user has signed up
-        // send them to the login page
+        // once the user has created an account, send them to the login page
         history.replace('/login');
       })
       .catch(err => alert(err));
@@ -41,30 +40,35 @@ function Signup() {
     });
   };
 
+
+  const styleBrand = { color: "#24211C" }
+  const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+
   return (
-    // <div className="container">
     <div className="signup">
       <Navbar>
-        <NavBrand />
+        <NavBrand style={styleBrand} />
       </Navbar>
-      <h1>Signup</h1>
-      <form onSubmit={handleFormSubmit}>
+      <div className="mt-5">
+        <br></br>
+        <br></br>
+        <h2 className="text-center mt-3" style={{ fontFamily: "Roboto", color: "#302C26" }}>Create an Account</h2>
+      </div>
+      <form className="mt-4 mx-4" onSubmit={handleFormSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
           <input
-            className="form-control"
-            placeholder="Username goes here..."
-            name="username"
+            className="form-control shadow"
+            placeholder="Name"
+            name="name"
             type="text"
-            id="username"
+            id="name"
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email address:</label>
           <input
-            className="form-control"
-            placeholder="Email goes here..."
+            className="form-control shadow"
+            placeholder="Email"
             name="email"
             type="email"
             id="email"
@@ -72,23 +76,24 @@ function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="pwd">Password:</label>
           <input
-            className="form-control"
-            placeholder="Password goes here..."
+            className="form-control shadow"
+            placeholder="Password"
             name="password"
             type="password"
             id="pwd"
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="text-center mt-4">
+          <Button style={styleButton} name="SUBMIT" />
+        </div>
       </form>
-      <p>
-        <Link to="/login">Go to Login</Link>
-      </p>
+      <div className="mt-3" style={{ color: "white" }}>
+        <p className="text-center">
+          Already have an account? <Link to="/login" style={{ color: "white" }}>Login here.</Link>
+        </p>
+      </div>
     </div>
   );
 }

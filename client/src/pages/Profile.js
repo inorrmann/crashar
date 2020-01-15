@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
 
 function Profile() {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const { user } = useAuth();
 
   useEffect(() => {
     API.getUser(user.id).then(res => {
-      setUsername(res.data.username);
+      setName(res.data.name);
       setEmail(res.data.email);
     });
   }, [user]);
@@ -18,9 +18,9 @@ function Profile() {
   return (
     <div className="container Profile">
       <h1>On the profile page!</h1>
-      <p>Username: {username}</p>
+      <p>Name: {name}</p>
       <p>Email: {email}</p>
-      <Link to="/">Go home</Link>
+      {/* <Link to="/">Go home</Link> */}
     </div>
   );
 }

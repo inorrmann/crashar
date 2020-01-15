@@ -9,7 +9,7 @@ function Jumbo() {
             textShadow: "0 0 10px #302C26",
         }}>
             <h2 className="mb-3">Tent Crashing</h2>
-            <h6>Building a camping community <br></br> one stake at a time</h6>
+            <h6 style={{ fontFamily: "Barlow" }}>Building a camping community <br></br> one stake at a time</h6>
         </Jumbotron>
     )
 }

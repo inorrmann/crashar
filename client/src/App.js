@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Menu from './pages/Menu';
+import Landing from './pages/Landing';
 import Home from './pages/Home';
 
 // Here is if we have an id_token in localStorage
@@ -35,7 +36,7 @@ function ProtectedRoute({ children, ...rest }) {
   if (isLoggedIn) {
     return children;
   }
-  return <Redirect to="/signup" />;
+  return <Redirect to="/home" />;
 }
 
 
@@ -45,9 +46,9 @@ function App() {
       <Router>
         <div>
           <Switch>
-          <Route exact path="/">
+            <ProtectedRoute exact path="/">
               <Home />
-            </Route>
+            </ProtectedRoute>
             <ProtectedRoute exact path="/menu">
               <Menu />
             </ProtectedRoute>
@@ -57,12 +58,15 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
-            <Route exact path="/profile">
+            <ProtectedRoute exact path="/profile">
               <Profile />
+            </ProtectedRoute>
+            <Route exact path="/home">
+              <Landing />
             </Route>
           </Switch>
         </div>
-      </Router>
+      </Router> 
     </AuthProvider>
   );
 }

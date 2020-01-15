@@ -11,7 +11,7 @@ const styleLink = { color: "#302C26", fontWeight: "bold" }
 const styleButton = { backgroundColor: "#EBC023"}
 
 
-function Home() {
+function Landing() {
     return (
         <div className="home">
             <Navbar>
@@ -32,4 +32,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Landing;
