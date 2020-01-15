@@ -56,6 +56,10 @@ app.post('/api/signup', (req, res) => {
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
+  // to make sure the user only access its own data, 
+  // query the id from the database and compare with the params.id
+  req.user.id === req.params.id
+
   db.User.findById(req.params.id).then(data => {
     if(data) {
       res.json(data);

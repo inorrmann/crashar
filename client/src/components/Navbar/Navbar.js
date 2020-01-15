@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../utils/auth';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Navbar";
+
 
 const createLink = ({ text, to, ...rest }) => {
   const className = 'nav-link';
@@ -44,17 +47,14 @@ function NavLinks() {
   );
 }
 
-function Navbar() {
+
+function NavBar(props) {
   return (
-    <nav className="navbar navbar-expand navbar-dark bg-primary">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          React JWT App
-        </Link>
-        <NavLinks />
-      </div>
-    </nav>
-  );
+    <Navbar style={{ fontFamily: "Roboto", fontSize: "1.2rem", color: "#EBC023"}}>
+      {props.children}
+      {/* <NavLinks  /> */}
+    </Navbar>
+  )
 }
 
-export default Navbar;
+export default NavBar;

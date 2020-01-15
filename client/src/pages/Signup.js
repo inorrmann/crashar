@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import API from './../utils/API';
-import {useAuth} from '../utils/auth'
+import {useAuth} from '../utils/auth';
+import Navbar from '../components/Navbar/Navbar';
+import NavBrand from "../components/NavbarBrand/index"
+
 
 
 function Signup() {
@@ -39,7 +42,11 @@ function Signup() {
   };
 
   return (
-    <div className="container">
+    // <div className="container">
+    <div className="signup">
+      <Navbar>
+        <NavBrand />
+      </Navbar>
       <h1>Signup</h1>
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
