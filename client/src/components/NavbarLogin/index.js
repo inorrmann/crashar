@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../utils/auth';
 
 
-const createLink = ({ text, to, style, ...rest }) => {
+const createLink = ({ text, to, ...rest }) => {
     const className = 'nav-link';
     if (to) {
         return (
-            <Link className={className} to={to} {...rest} style={style}>
+            <Link className={className} to={to} {...rest}>
                 {text}
             </Link>
         );
@@ -28,7 +28,7 @@ function NavLog(props) {
     const { isLoggedIn, logout } = useAuth();
     let link = [];
     if (isLoggedIn) {
-        link = { text: 'Logout', onClick: () => logout(), style: props.style };
+        link = { text: 'Logout', style: props.style, onClick: () => logout() };
     } else {
         link = { text: 'Login', to: '/login', style: props.style };
     }
