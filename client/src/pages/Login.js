@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
+import Navbar from "../components/Navbar/Navbar";
+import NavBrand from "../components/NavbarBrand/index";
+import Button from "../components/ButtonSubmit/index";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -23,15 +26,29 @@ function Login() {
       });
   };
 
+  const styleBrand = { color: "#24211C" }
+  const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+
+
   return (
-    <div className="container">
-      <h1>Login</h1>
-      <form onSubmit={handleFormSubmit}>
+    <div className="login">
+      <Navbar>
+        <NavBrand style={styleBrand} />
+        <div className="ml-auto" >
+          <Link to="/signup" style={{ color: "#24211C" }}>Signup</Link>
+        </div>
+      </Navbar>
+      <div className="mt-5">
+        <br></br>
+        <br></br>
+        <br></br>
+        <h2 className="text-center mt-3" style={{ fontFamily: "Roboto", color: "#302C26" }}>Login</h2>
+      </div>
+      <form className="mt-4 mx-4" onSubmit={handleFormSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email address:</label>
           <input
             className="form-control"
-            placeholder="Email goes here..."
+            placeholder="Email"
             name="email"
             type="email"
             id="email"
@@ -40,10 +57,9 @@ function Login() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="pwd">Password:</label>
           <input
             className="form-control"
-            placeholder="Password goes here..."
+            placeholder="Password"
             name="password"
             type="password"
             id="pwd"
@@ -51,12 +67,11 @@ function Login() {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="text-center mt-4">
+          <Button style={styleButton} name="SUBMIT" />
+        </div>
       </form>
       <p>
-        <Link to="/signup">Go to Signup</Link>
       </p>
     </div>
   );
