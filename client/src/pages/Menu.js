@@ -8,14 +8,14 @@ import Button from "../components/ButtonLink/index";
 import "./style.css"
 
 function Menu() {
-  const { user, logout } = useAuth();
-  console.log(user)
+  const { user } = useAuth();
+  // const { user, logout } = useAuth();
   // const history = useHistory();
 
   // const goToEditProfsile = () => history.push('/profile');
 
   const styleLogin = { color: "#EBC023" }
-  const styleLink = { color: "#EBC023", fontSize: "2rem", paddingLeft: ".5rem" }
+  const styleLink = { color: "#EBC023", fontSize: "2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .4)" }
   const styleButton = { backgroundColor: "#574F44", width: "60%" }
   const styleButtonLink = { color: "#EBC023", fontWeight: "bold" }
@@ -36,17 +36,17 @@ function Menu() {
         <div className="text-center">
           <Button
             style={styleButton}
-            link="/spots/new"
+            link="/sites/new"
             styleLink={styleButtonLink}
-            name="SHARE A SPOT"
+            name="SHARE A SITE"
           />
         </div>
         <div className="text-center my-2">
           <Button
             style={styleButton}
-            link="/spots/:id"
+            link="/sites/:id"
             styleLink={styleButtonLink}
-            name="SEE MY SHARED SPOTS"
+            name="SEE MY SHARED SITES"
           />
         </div>
       </div>
@@ -58,9 +58,9 @@ function Menu() {
         <div className="text-center">
           <Button
             style={styleButton}
-            link="/spots/search"
+            link="/sites/search"
             styleLink={styleButtonLink}
-            name="FIND AN OPEN SPOT"
+            name="FIND AN OPEN SITE"
           />
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import {
   Route,
   BrowserRouter as Router,
@@ -17,6 +16,7 @@ import Messages from './pages/Messages';
 import Signup from './pages/Signup';
 import Menu from './pages/Menu';
 import Landing from './pages/Landing';
+import ShareSite from './pages/ShareSite';
 // import Home from './pages/Home';
 
 // Here is if we have an id_token in localStorage
@@ -58,17 +58,17 @@ function App() {
             <ProtectedRoute path="/messages/:id">
               <Messages />
             </ProtectedRoute>
-            <ProtectedRoute exact path="/spots/new">
-              {/* <ShareSpot /> */}
+            <ProtectedRoute exact path="/sites/new">
+              <ShareSite />
             </ProtectedRoute>
-            <ProtectedRoute path="/spots/:id">
-              {/* <SeeMySpots /> */}
+            <ProtectedRoute path="/sites/:id">
+              {/* <SeeMySites /> */}
             </ProtectedRoute>
             <Route exact path="/home">
               <Landing />
             </Route>
-            <Route exact path="/spots/search">
-              {/* <SearchSpots /> */}
+            <Route exact path="/sites/search">
+              {/* <SearchSites /> */}
             </Route>
           </Switch>
         </div>

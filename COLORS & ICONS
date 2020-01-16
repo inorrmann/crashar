@@ -19,3 +19,4 @@ jumbotron transparent dark rgba(15, 14, 12, .3)
 yellow #EBC023
 dark yello #BD9A1C
 yellow white #FFF8D5
+yellow white transparent rgba(255, 248, 213, .3)

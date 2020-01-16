@@ -22,7 +22,7 @@ function Home() {
             <Jumbotron />
             <div style={{ fontFamily: "Barlow" }}>
                 <h6 className="text-center text-white px-5 homeText">Have a campground reservation with extra spots you won't use?</h6>
-                <h6 className="text-center text-white px-5 homeText my-3">Have a National Park in mind to go camping, but all spots are already full?</h6>
+                <h6 className="text-center text-white px-5 homeText my-3">Have a National Park in mind to go camping, but all campsites are already full?</h6>
                 <h5 className="text-center text-white px-5 homeText">Find like-minded people to share a campsite with!</h5>
             </div>
             <div className="text-center mt-5">
