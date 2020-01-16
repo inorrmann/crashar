@@ -11,6 +11,12 @@ export default {
   // share a campsite with open sites
   shareNewSite: (campground, park, state, site, loop, people, tents, cars, arrival, departure, cost, about, children, party, pets, smokers, drinkers, image, maxPeople, maxCars, maxCarLength, accessible, createdBy) => {
     return axios.post('/api/sites', {campground, park, state, site, loop, people, tents, cars, arrival, departure, cost, about, children, party, pets, smokers, drinkers, image, maxPeople, maxCars, maxCarLength, accessible, createdBy});
+  },
+  // 
+  // WILL THIS GET ME ALL THE FACILITIES????
+  // 
+  getFacility: () => {
+    return axios.get('/api/facility');
   }
 };
 

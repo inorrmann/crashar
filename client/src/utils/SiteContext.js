@@ -24,6 +24,7 @@ const SiteContext = React.createContext({
     maxCarLength: 0,
     accessible: false,
     createdBy: '',
+    
 });
 
 export default SiteContext;

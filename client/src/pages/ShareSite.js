@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import API from "../utils/API";
-import {useAuth} from "../utils/auth";
+import { useAuth } from "../utils/auth";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Navbar from "../components/Navbar/Navbar";
@@ -17,7 +17,8 @@ import FormCheck from "../components/FormCheck/index";
 
 
 function ShareSite() {
-    const {user} = useAuth();
+    // retrieve userID to embed it to the posting 
+    const { user } = useAuth();
     const userID = user.id
 
     const [createSite, setCreateSite] = useState({
@@ -49,7 +50,7 @@ function ShareSite() {
     const [searchPark, setSearchPark] = useState("");
 
 
-    
+
 
 
     // ON LOAD QUERY FOR DATABASE TO EXTRACT LIST OF CAMPGROUNDS
@@ -86,6 +87,16 @@ function ShareSite() {
         name: "Dorst Creek",
         area: "Kings Canyon NP",
         state: "CA"
+    },
+    {
+        name: "Cottonwood",
+        area: "Joshua Tree NP",
+        state: "CA"
+    },
+    {
+        name: "Cottonwood",
+        area: "Death Valley NP",
+        state: "CA"
     }])
 
     // all campgrounds will go here on load
@@ -101,7 +112,7 @@ function ShareSite() {
     const handleFormSubmit = event => {
         event.preventDefault();
         // ajax call to get information from recreation.gov for the missing items in the Site model
-        
+
         // this posts the data from the campground to the DB˜
         API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.site, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.maxPeople, createSite.maxCars, createSite.maxCarLength, createSite.accessible, createSite.createdBy)
             .then(res => {
