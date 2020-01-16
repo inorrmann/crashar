@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import API from "../utils/API";
 import Navbar from "../components/Navbar/Navbar";
@@ -15,6 +15,7 @@ import Form from "react-bootstrap/Form";
 
 
 function ShareSite() {
+
     const [createSite, setCreateSite] = useState({
         campground: '',
         park: '',
@@ -40,6 +41,57 @@ function ShareSite() {
     });
     const [searchCampground, setSearchCampground] = useState("");
     const [searchPark, setSearchPark] = useState("");
+
+
+
+    // ON LOAD QUERY FOR DATABASE TO EXTRACT LIST OF CAMPGROUNDS
+
+    // useEffect(() => {
+    //     API.getUsers()
+    //         .then(res => {
+    //             setUsers(res.data.results);
+    //             let namesArr = [];
+    //             res.data.results.map(result => {
+    //                 const sameName = (nameArr) => { return nameArr === result.name.first }
+    //                 if (!namesArr.some(sameName)) {
+    //                     return namesArr.push(result.name.first);
+    //                 }
+    //             });
+    //             setNames(namesArr);
+    //         })
+    //         .catch(err => console.log(err));
+    //     // include the second argument as an empty array to prevent 
+    //     // an infinite loop of API calls
+    // }, []);
+
+    // const [facilities, setFacilities] = useState(dataTest)
+
+    // const dataTest = [{
+    //     name: "Potwisha",
+    //     area: "Sequoia NP",
+    //     state: "CA"
+    // },
+    // {
+    //     name: "Lodgepole",
+    //     area: "Sequoia NP",
+    //     state: "CA"
+    // },
+    // {
+    //     name: "Dorst Creek",
+    //     area: "Kings Canyon NP",
+    //     state: "CA"
+    // }]
+
+    const campTest = ["Potwisha", "Lodgepole", "Dorst Creek"]
+    const areaTest = ["Sequoia NP", "Kings Canyon NP"]
+    const stateTest = "CA"
+
+    // all campgrounds will go here on load
+    const [campgrounds, setCampgrounds] = useState(["Potwisha", "Lodgepole", "Dorst Creek"]);
+    // parks connected to the campground selected will go here onChange
+    const [parks, setParks] = useState(areaTest);
+    // the state connected to the park selected will go here on RecArea change
+    const [state, setState] = useState(stateTest);
 
 
     // const history = useHistory()
@@ -88,12 +140,10 @@ function ShareSite() {
     const styleText = { fontFamily: "Barlow", fontSize: "1rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
     // const styleText = { fontFamily: "Barlow", fontSize: "1.1rem", fontWeight: "bold", color: "#302C26", textShadow: "0 0 20px #FFF8D5", backgroundColor: "rgba(255, 248, 213, .3)" }
     const styleTextSm = { fontFamily: "Barlow", fontSize: "0.9rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
-    const stylePreferences = { fontFamily: "Roboto", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C"}
+    const stylePreferences = { fontFamily: "Roboto", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
 
 
-    const campgrounds = ["Potwisha", "Lodgepole", "Dorst Creek"]
-    const parks = ["Sequoia NP", "Yosemite NP", "Death Valley NP"]
 
     return (
         <div className="shareSite overflow-auto pb-5">
@@ -104,25 +154,17 @@ function ShareSite() {
             <h3 className="display-4 text-center" style={{ fontWeight: "bold", color: "#302C26", textShadow: "0 0 20px #FFF8D5" }}>Share a Site</h3>
             <Forms onSubmit={handleFormSubmit}>
                 <FormGroup>
-                    {/* <input className="form-control shadow"
-                        placeholder="Campground"
-                        name="campground"
-                        id="campground"
-                        list="campground"
-                        type="text"
-                        value={searchCampground}
-                        onChange={handleNameChange}
-                    /> */}
                     <FormControlList
                         placeholder="Campground"
                         name="campground"
+                        list="campground-data"
                         type="text"
                         value={searchCampground}
                         onChange={handleCampgroundChange}
                     />
-                    <datalist id="campground">
+                    <datalist id="campground-data">
                         {campgrounds.map(campground => (
-                            <option value={campground} key={campground} />
+                            <option value={campground} key={campground}/>
                         ))}
                     </datalist>
                 </FormGroup>
@@ -132,10 +174,11 @@ function ShareSite() {
                         placeholder="NPS Recreation Area"
                         name="park"
                         type="text"
+                        list="park-data"
                         value={searchPark}
                         onChange={handleParkChange}
                     />
-                    <datalist id="park">
+                    <datalist id="park-data">
                         {parks.map(park => (
                             <option value={park} key={park} />
                         ))}
@@ -249,7 +292,7 @@ function ShareSite() {
                 </FormGroup>
 
 
-                <div className="pt-3" style={{ color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }}>
+                <div className="pt-3" style={{ color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }}>
                     <h5 className="text-center" style={stylePreferences}>PREFERENCES</h5>
 
                     <div className="px-3">
@@ -284,18 +327,12 @@ function ShareSite() {
                 </div>
 
                 <div className="text-center mt-4">
-          <Button style={styleButton} name="SUBMIT" />
-        </div>
+                    <Button style={styleButton} name="SUBMIT" />
+                </div>
             </Forms>
 
         </div>
     )
-
-
-    // datalist to populate value of search bar while typing an entry
-
-
-
 
 
 

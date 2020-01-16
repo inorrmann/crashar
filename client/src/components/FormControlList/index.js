@@ -9,7 +9,7 @@ function FormControlList(props) {
             placeholder={props.placeholder}
             name={props.name}
             id={props.name}
-            list={props.name}
+            list={props.list}
             type={props.type}
             value={props.value}
             onChange={props.onChange}
