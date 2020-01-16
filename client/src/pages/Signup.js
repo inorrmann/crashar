@@ -24,7 +24,7 @@ function Signup() {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    API.signUpUser(formState.name, formState.email, formState.password)
+    API.signUpUser(formState.firstName, formState.lastName, formState.email, formState.password)
       .then(res => {
         // once the user has created an account, send them to the login page
         history.replace('/login');
@@ -43,10 +43,11 @@ function Signup() {
 
   const styleBrand = { color: "#24211C" }
   const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+  const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem" }
 
   return (
     <div className="signup">
-      <Navbar>
+      <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />
       </Navbar>
       <div className="mt-5">
@@ -58,10 +59,20 @@ function Signup() {
         <div className="form-group">
           <input
             className="form-control shadow"
-            placeholder="Name"
-            name="name"
+            placeholder="First Name"
+            name="firstName"
             type="text"
-            id="name"
+            id="firstName"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            className="form-control shadow"
+            placeholder="Last Name"
+            name="lastName"
+            type="text"
+            id="lastName"
             onChange={handleChange}
           />
         </div>

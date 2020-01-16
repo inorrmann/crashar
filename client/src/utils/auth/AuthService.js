@@ -56,6 +56,4 @@ export default class AuthService {
         window.location.reload('/');
     }
 
-
-
 }

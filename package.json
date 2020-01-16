@@ -29,6 +29,7 @@
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "typed.js": "^2.0.11"
   }
 }

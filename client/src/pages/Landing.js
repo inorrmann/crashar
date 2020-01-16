@@ -1,23 +1,23 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Jumbotron from "../components/Jumbotron/index";
-import Nav from "react-bootstrap/Navbar";
 import NavLogin from "../components/NavbarLogin/index";
 import Button from "../components/ButtonLink/index"
 import "./style.css";
 
 const styleLogin = { color: "#EBC023" }
 const styleLink = { color: "#302C26", fontWeight: "bold" }
-const styleButton = { backgroundColor: "#EBC023"}
-
+const styleButton = { backgroundColor: "#EBC023" }
+const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .3)" }
+const classNavbar = "shadow"
 
 function Landing() {
     return (
         <div className="home">
-            <Navbar>
-                <Nav className="ml-auto">
+            <Navbar class={classNavbar} style={styleNavbar}>
+                <div className="ml-auto">
                     <NavLogin style={styleLogin} />
-                </Nav>
+                </div>
             </Navbar>
             <Jumbotron />
             <div style={{ fontFamily: "Barlow" }}>

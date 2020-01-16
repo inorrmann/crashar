@@ -1,4 +1,4 @@
-.home, .login, .signup {
+.home, .login, .signup, .menu {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -20,18 +20,74 @@
     z-index: -1;
 }
 
+/* HOME PAGE */
 .home::after {
     background-image: url("./images/lighted-tents-night-sky.jpg");
 }
 
+.homeText {
+    font-family: 'Barlow', sans-serif ;
+}
+
+
+/* LOGIN PAGE */
 .login::after {
     background-image: url("./images/single-tent-desert.jpg");
 }
 
+
+/* SIGNUP PAGE */
 .signup::after {
     background-image: url("./images/solo-tent-sunset.jpg")
 }
 
-.homeText {
-    font-family: 'Barlow', sans-serif ;
+
+/* MENU PAGE */
+
+.menuTop {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+}
+
+.menuTop::after {
+    content: "";
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.menuTop::after {
+    background-image: url("./images/single-tent-blue.jpg")
+}
+
+.menuBottom {
+    position: fixed;
+    top: 50%;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+}
+
+.menuBottom::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.menuBottom::after {
+    background-image: url("./images/two-red-tents-short.jpg")
 }

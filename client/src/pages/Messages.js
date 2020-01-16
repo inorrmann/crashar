@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import API from './../utils/API';
+import API from '../utils/API';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
 
-function Profile() {
+function Messages() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const { user } = useAuth();
@@ -25,4 +25,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Messages;

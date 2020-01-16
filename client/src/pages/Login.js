@@ -19,8 +19,8 @@ function Login() {
     event.preventDefault();
 
     login(email, password)
-      // navigate to the profile page
-      .then(() => history.push('/profile'))
+      // navigate to the main menu
+      .then(() => history.push('/'))
       .catch(err => {
         alert(err.response.data.message);
       });
@@ -28,11 +28,12 @@ function Login() {
 
   const styleBrand = { color: "#24211C" }
   const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+  const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem" }
 
 
   return (
     <div className="login">
-      <Navbar>
+      <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />
         <div className="ml-auto" >
           <Link to="/signup" style={{ color: "#24211C" }}>Signup</Link>
