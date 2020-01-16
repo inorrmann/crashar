@@ -57,24 +57,22 @@ const SiteSchema = new Schema({
         trim: true
     },
     children: {
-        type: Boolean,
-        default: true
+        type: Boolean
     },
     party: {
-        type: Boolean,
-        default: true
+        type: Boolean
     },
     pets: {
-        type: Boolean,
-        default: true
+        type: Boolean
     },
     smokers: {
-        type: Boolean,
-        default: true
+        type: Boolean
     },
     drinkers: {
-        type: Boolean,
-        default: true
+        type: Boolean
+    },
+    image: {
+        type: String
     },
     maxPeople: {
         type: Number
@@ -91,6 +89,10 @@ const SiteSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    createdBy: {
+        type: String,
+        required: true
     }
 });
 

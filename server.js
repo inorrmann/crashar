@@ -33,7 +33,7 @@ const dbOptions = {
 };
 
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/appDB', dbOptions)
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/tentcrashingDB', dbOptions)
   .then(() => console.log("MongoDB Connected!"))
   .catch(err => console.error(err));
 
@@ -52,6 +52,14 @@ app.post('/api/signup', (req, res) => {
   db.User.create(req.body)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
+});
+
+// SHARE A SITE ROUTE
+app.post('/api/sites', (req, res) => {
+  console.log(req.body)
+  db.Site.create(req.body)
+  .then(data => res.json(data))
+  .catch(err => res.status(400).json(err));
 });
 
 // Any route with isAuthenticated is protected and you need a valid token
