@@ -1,3 +1,14 @@
+.loading {
+    background-color: black;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: "Barlow", sans-serif; 
+}
+
+
 .home, .login, .signup, .menu, .shareSite {
     background-color: #574F44;
     position: fixed;
@@ -8,7 +19,7 @@
     font-family: "Roboto", sans-serif; 
 }
 
-.home::after, .login::after, .signup::after, .shareSite::after {
+.home::after, .login::after, .signup::after, .shareSite::after, .loading::after {
     content: "";
     position: fixed;
     top: 0px;
@@ -18,6 +29,11 @@
     background-size: cover;
     opacity: 0.8;
     z-index: -1;
+}
+
+/* LOADING PAGE */
+.loading::after {
+    background-image: url("./images/Fire-left.gif");
 }
 
 /* HOME PAGE */

@@ -71,7 +71,7 @@ app.post('/api/facilities', (req, res) => {
 });
 
 // GET ALL FACILITIES
-app.get('/api/facility', (req, res) => {
+app.get('/api/facilities', (req, res) => {
   db.Facility.find()
   .then(data => {
     if(data) {

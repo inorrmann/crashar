@@ -9,13 +9,11 @@ const SiteSchema = new Schema({
     },
     park: {
         type: String,
-        required: true,
-        default: "N/A"
+        trim: true
     },
     state: {
         type: String,
-        required: true,
-        default: "N/A"
+        trim: true
     },
     campsite: {
         type: String,

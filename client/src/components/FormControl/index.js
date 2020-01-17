@@ -6,11 +6,7 @@ function FormControl(props) {
     return (
         <Form.Control
             className="shadow"
-            placeholder={props.placeholder}
-            name={props.name}
-            type={props.type}
-            id={props.name}
-            onChange={props.onChange}
+            {...props}
         >
         </Form.Control>
     )
