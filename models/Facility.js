@@ -6,7 +6,7 @@ const FacilitySchema = new Schema({
         type: String,
         trim: true
     },
-    area: {
+    park: {
         type: String,
         trim: true
     },
