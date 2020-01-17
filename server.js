@@ -62,6 +62,14 @@ app.post('/api/sites', (req, res) => {
   .catch(err => res.status(400).json(err));
 });
 
+// SEED FACILITIES ROUTE
+app.post('/api/facilities', (req, res) => {
+  console.log(req.body)
+  db.Facility.create(req.body)
+     .then(data => res.json(data))
+     .catch(err => res.status(400).json(err));
+});
+
 // GET ALL FACILITIES
 app.get('/api/facility', (req, res) => {
   db.Facility.find()

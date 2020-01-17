@@ -17,7 +17,7 @@ const SiteSchema = new Schema({
         required: true,
         default: "N/A"
     },
-    site: {
+    campsite: {
         type: String,
         required: true,
         trim: true,
@@ -92,7 +92,6 @@ const SiteSchema = new Schema({
     },
     createdBy: {
         type: String,
-        required: true
     }
 });
 

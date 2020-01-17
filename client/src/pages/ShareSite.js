@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { useHistory } from 'react-router-dom';
 import API from "../utils/API";
 import { useAuth } from "../utils/auth";
@@ -13,19 +13,21 @@ import FormText from "../components/FormText/index";
 import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import FormCheck from "../components/FormCheck/index";
-import SiteContext from "../utils/SiteContext";
+// import SiteContext from "../utils/SiteContext";
 
 
 function ShareSite() {
+    // const site = useContext(SiteContext)
+
     // retrieve userID to embed it to the posting 
+    const [isLoading, setIsLoading] = useState(setFacilities)
     const { user } = useAuth();
     const userID = user.id
 
     const [createSite, setCreateSite] = useState({
         campground: '',
-        park: '',
-        state: '',
-        site: '',
+        park: "N/A",
+        campsite: "N/A",
         loop: '',
         people: 0,
         tents: 0,
@@ -44,7 +46,9 @@ function ShareSite() {
         maxCars: 0,
         maxCarLength: 0,
         accessible: false,
-        createdBy: userID
+        createdBy: userID,
+        // changeCampground: campground => setCreateSite({ ...createSite, campground })
+
     });
     const [searchCampground, setSearchCampground] = useState("");
     const [searchPark, setSearchPark] = useState("");
@@ -111,22 +115,26 @@ function ShareSite() {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        // ajax call to get information from recreation.gov for the missing items in the Site model
 
+        setIsLoading(true)
 
         // incorporate the state from the form submission
         let parkChosen = facilities.find(element => element.park === createSite.park)
-
         setCreateSite({
             ...createSite,
             state: parkChosen.state
         });
 
+        // ajax call to get information from recreation.gov for the missing items in the Site model
+
+
+
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.site, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.maxPeople, createSite.maxCars, createSite.maxCarLength, createSite.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.maxPeople, createSite.maxCars, createSite.maxCarLength, createSite.accessible, createSite.createdBy)
             .then(res => {
                 // HOW DO I GET THE ID?? res.data.id
                 // history.replace(`/sites/${res.data.id}`)
+                setIsLoading(false)
             })
             .catch(err => alert(err));
     }
@@ -139,6 +147,10 @@ function ShareSite() {
     // ****** CAMPGROUND ******
     const handleCampgroundChange = event => {
         setSearchCampground(event.target.value);
+
+        // CONTEXT API not working
+        // site.changeCampground(event.target.value)
+        
         setCreateSite({
             ...createSite,
             campground: event.target.value
@@ -159,6 +171,7 @@ function ShareSite() {
             ...createSite,
             park: event.target.value
         });
+        console.log(createSite)
     };
 
     // ****** OTHER ELEMENTS ******
@@ -177,11 +190,10 @@ function ShareSite() {
             ...createSite,
             [name]: checked
         })
-        console.log(name)
         console.log(createSite);
     }
 
-    
+
     // 
     // **************************** STYLES FOR FORM ****************************
     // 
@@ -196,9 +208,12 @@ function ShareSite() {
     // 
     // **************************** RENDERED COMPONENTS ****************************
     // 
+    if (isLoading) {
+        return <div>loading..</div>
+    }
 
     return (
-        <SiteContext.Provider value={createSite}>
+        // <SiteContext.Provider value={createSite}>
 
             <div className="shareSite overflow-auto pb-5">
                 <Navbar style={styleNavbar}>
@@ -229,7 +244,7 @@ function ShareSite() {
                     <FormRow>
                         <Col xs={7}>
                             <FormGroup>
-                                <FormControl placeholder="Campsite Number" name="site" type="text" onChange={handleChange} />
+                                <FormControl placeholder="Campsite Number" name="campsite" type="text" onChange={handleChange} />
                             </FormGroup>
                         </Col>
                         <Col>
@@ -308,7 +323,7 @@ function ShareSite() {
                     </div>
                 </Forms>
             </div>
-        </SiteContext.Provider>
+        // </SiteContext.Provider>
 
     )
 

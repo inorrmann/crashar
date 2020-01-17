@@ -4,7 +4,7 @@ const SiteContext = React.createContext({
     campground: '',
     park: '',
     state: '',
-    site: '',
+    campsite: '',
     loop: '',
     people: 0,
     tents: 0,
@@ -24,7 +24,7 @@ const SiteContext = React.createContext({
     maxCarLength: 0,
     accessible: false,
     createdBy: '',
-    
+    changeCampground: () => undefined,
 });
 
 export default SiteContext;
