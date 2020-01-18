@@ -1,3 +1,6 @@
+# ignore the data file that has all the files from Recreation.gov
+data/
+
 # Logs
 logs
 *.log
