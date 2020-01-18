@@ -1,7 +1,6 @@
 const campgrounds = require("./facilities-api").facilities.RECDATA;
 const recAreas = require("./rec-areas-api").recAreas;
 const facilityAddresses = require("./facilities-addresses-api").facilityAddresses;
-const axios = require("axios");
 const fs = require("fs");
 
 // filter all facilities to extract campgrounds in National Parks (Organization Parent 128 = NPS) that are reservable
@@ -10,7 +9,7 @@ const campsNPS = campgrounds.filter((campground) => {
 })
 
 // combine campground objects from NPS (campsNPS) with campground zipcodes (facilityAddresses)
-const campAddressNPS = campsNPS.map(campground => {
+const campAddressNPS =    campsNPS.map(campground => {
 
    // add state from facilities-addresses-api.js
    var postalCode = "";
@@ -38,9 +37,10 @@ function seedFacilities() {
       let facility = {
          name: camp.FacilityName,
          park: camp.FacilityRecArea,
-         state: camp.FacilityPostalCode
+         state: camp.FacilityPostalCode,
+         campgroundID: camp.FacilityID
       }
-      fs.appendFile("seedsDB.json", JSON.stringify(facility, null, "\t") + ",", (err) =>{
+      fs.appendFile("seedsDB.js", JSON.stringify(facility, null, "\t") + ",", (err) =>{
          if (err) throw err;
       })
    })

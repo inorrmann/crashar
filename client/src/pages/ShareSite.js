@@ -28,29 +28,27 @@ function ShareSite() {
         park: "",
         state: "",
         campsite: "",
-        loop: '',
+        loop: "",
         people: 0,
         tents: 0,
         cars: 0,
         arrival: {},
         departure: {},
         cost: 0,
-        about: '',
+        about: "",
         children: false,
         party: false,
         pets: false,
         smokers: false,
         drinkers: false,
         image: "",
-        maxPeople: 0,
-        maxCars: 0,
-        maxCarLength: 0,
         accessible: false,
         createdBy: userID,
     });
     const [searchCampground, setSearchCampground] = useState("");
     const [searchPark, setSearchPark] = useState("");
-    const [facilities, setFacilities] = useState([])
+    const [facilities, setFacilities] = useState([]);
+    const [campsites, setCampsites] = useState([]);
     const [campgrounds, setCampgrounds] = useState([]);
     const [parks, setParks] = useState([]);
     const [searchState, setSearchState] = useState([]);
@@ -73,6 +71,16 @@ function ShareSite() {
 
             })
             .catch(err => console.log(err));
+
+// FINISH THE API CALL TO GET ALL THE CAMPSITES AT THE BEGINNING OF THE LOADING
+// THIS MEANS ON THE SERVER SIDE AND ALSO IN UTILS > API ROUTE
+// THEN INCORPORATE THE LOGIC SO THE SITE NUMBER AND LOOP ARE AUTOPOPULATED (CHANGE TO FORMSCONTROLLIST)
+
+        API.getAllCampsites()
+            .then(res => {
+                setCampsites(res.data)
+            })
+            .catch(err => console.log(err))
     }, []);
 
     // const history = useHistory()
@@ -88,7 +96,7 @@ function ShareSite() {
 
 
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.maxPeople, createSite.maxCars, createSite.maxCarLength, createSite.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.accessible, createSite.createdBy)
             .then(res => {
                 // HOW DO I GET THE ID?? res.data.id
                 // history.replace(`/sites/${res.data.id}`)

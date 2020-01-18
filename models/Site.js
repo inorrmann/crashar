@@ -72,15 +72,6 @@ const SiteSchema = new Schema({
     image: {
         type: String
     },
-    maxPeople: {
-        type: Number
-    },
-    maxCars: {
-        type: Number
-    },
-    maxCarLength: {
-        type: Number
-    },
     accessible: {
         type: Boolean
     },
