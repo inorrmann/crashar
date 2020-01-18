@@ -13,7 +13,6 @@ import FormText from "../components/FormText/index";
 import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import FormCheck from "../components/FormCheck/index";
-import loading from "./images/Fire.gif"
 
 
 function ShareSite() {
@@ -45,16 +44,22 @@ function ShareSite() {
         accessible: false,
         createdBy: userID,
     });
-    const [searchCampground, setSearchCampground] = useState("");
-    const [searchPark, setSearchPark] = useState("");
+    // array of campground objects imported from DB
     const [facilities, setFacilities] = useState([]);
+    // array of campsite objects imported from DB
     const [campsites, setCampsites] = useState([]);
+    // array of campground names taken from facilities
     const [campgrounds, setCampgrounds] = useState([]);
+    const [searchCampground, setSearchCampground] = useState("");
+    // const [searchPark, setSearchPark] = useState("");
+    // const [searchState, setSearchState] = useState([]);
+    // const [selectedCampground, setSelectedCampground] = useState([])
     const [parks, setParks] = useState([]);
-    const [searchState, setSearchState] = useState([]);
+    const [siteNumbers, setSiteNumbers] = useState([]);
+    const [loops, setLoops] = useState([]);
 
 
-    // On load query database to access all facilities stored
+    // On load query database to access all facilities & campsites stored
     useEffect(() => {
         API.getAllFacilities()
             .then(res => {
@@ -68,32 +73,32 @@ function ShareSite() {
                 });
                 setCampgrounds(namesArr);
                 setIsLoading(false)
-
             })
             .catch(err => console.log(err));
-
-// FINISH THE API CALL TO GET ALL THE CAMPSITES AT THE BEGINNING OF THE LOADING
-// THIS MEANS ON THE SERVER SIDE AND ALSO IN UTILS > API ROUTE
-// THEN INCORPORATE THE LOGIC SO THE SITE NUMBER AND LOOP ARE AUTOPOPULATED (CHANGE TO FORMSCONTROLLIST)
-
         API.getAllCampsites()
             .then(res => {
-                setCampsites(res.data)
+                setCampsites(res.data);
             })
             .catch(err => console.log(err))
     }, []);
 
+
     // const history = useHistory()
+
 
     const handleFormSubmit = event => {
         event.preventDefault();
         setIsLoading(true)
+        // add the state of the facility to createSite.state 
+        let parkChosen = facilities.find(element => element.park === createSite.park)
+        setCreateSite({
+            ...createSite,
+            state: parkChosen.state
+        });
 
-        
 
-        // ajax call to get information from recreation.gov for the missing items in the Site model
-
-
+        // add image to createSite object
+        // add accessibility to createSite object
 
         // this posts the data from the campground to the DB˜
         API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.accessible, createSite.createdBy)
@@ -115,7 +120,9 @@ function ShareSite() {
         setSearchCampground(event.target.value);
         setCreateSite({
             ...createSite,
-            campground: event.target.value
+            campground: event.target.value,
+            park: "",
+            state: ""
         });
         let parkArr = []
         facilities.map(facility => {
@@ -124,20 +131,32 @@ function ShareSite() {
             }
         });
         setParks(parkArr);
-        setSearchPark("");
-        setSearchState("");
-        console.log(createSite)
     };
 
     // ****** PARK ******
     const handleParkChange = event => {
-        setSearchPark(event.target.value);
         setCreateSite({
             ...createSite,
             park: event.target.value
         });
-        console.log(createSite)
+        // populate the campsites from the campground and park info
+        var campID;
+        facilities.filter((facility) => {
+            if (facility.name === createSite.campground && facility.park === event.target.value) {
+                campID = facility.campgroundID;
+                return campID;
+            }
+        })
+        let campNumber = [];
+        campsites.filter((site) => {
+            if (site.campgroundID === campID) {
+                campNumber.push(site.number);
+            }
+        })
+        campNumber.sort((a, b) => (a > b) ? 1 : -1);
+        setSiteNumbers(campNumber);
     };
+
 
     // ****** CAMPSITE ******
     const handleCampsiteInput = event => {
@@ -145,14 +164,27 @@ function ShareSite() {
             ...createSite,
             campsite: event.target.value
         });
-        // add the state of the facility to createSite.state 
-        let parkChosen = facilities.find(element => element.park === createSite.park)
-        setSearchState(parkChosen.state);
-        setCreateSite({
-            ...createSite,
-            state: searchState
-        });
+
+        var campID;
+        facilities.filter((facility) => {
+            if (facility.name === createSite.campground && facility.park === createSite.park) {
+                campID = facility.campgroundID;
+                return campID;
+            }
+        })
+        let loopName = [];
+        campsites.filter((site) => {
+            if (site.campgroundID === campID && site.number === event.target.value) {
+                // avoid loop duplicates from the loop array
+                const sameName = (nameLoop) => { return nameLoop === site.loop }
+                    if (!loopName.some(sameName)) {
+                        loopName.push(site.loop);
+                    }
+            }
+        })
+        setLoops(loopName);
         console.log(createSite)
+        console.log(loopName);
     };
 
     // ****** OTHER ELEMENTS ******
@@ -181,7 +213,7 @@ function ShareSite() {
     // 
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .3)", textShadow: "0 0 10px #302C26" }
     const styleBrand = { color: "#EBC023" }
-    const styleText = { fontFamily: "Barlow", fontSize: "1rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }
+    // const styleText = { fontFamily: "Barlow", fontSize: "1rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }
     const styleTextSm = { fontFamily: "Barlow", fontSize: "0.9rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
     const stylePreferences = { fontFamily: "Roboto", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
@@ -194,7 +226,6 @@ function ShareSite() {
         return (
             <div className="loading">
                 <h2 className="text-center text-light font-weight-bold m-5 p-5">LOADING...</h2>
-                {/* <img src={loading} alt="loading"></img> */}
             </div>
         )
     }
@@ -209,7 +240,7 @@ function ShareSite() {
             <Forms onSubmit={handleFormSubmit}>
                 {/* *************** CAMPGROUND SEARCH *************** */}
                 <FormGroup>
-                    <FormControlList placeholder="Campground *" name="campground" list="campground-data" type="text" value={searchCampground} onChange={handleCampgroundChange} required/>
+                    <FormControlList placeholder="Campground *" name="campground" list="campground-data" type="text" value={searchCampground} onChange={handleCampgroundChange} required />
                     <datalist id="campground-data">
                         {campgrounds.map(campground => (
                             <option value={campground} key={campground} />
@@ -218,23 +249,42 @@ function ShareSite() {
                 </FormGroup>
                 {/* *************** NPS RECREATION AREA SEARCH *************** */}
                 <FormGroup>
-                    <FormControlList placeholder="NPS Recreation Area *" name="park" type="text" list="park-data" value={searchPark} onChange={handleParkChange} required/>
-                    <datalist id="park-data">
+                    <select className="custom-select" name="park" onChange={handleParkChange}>
+                        <option value="null">NPS Recreation Area *</option>
                         {parks.map(park => (
-                            <option value={park} key={park} />
+                            <option value={park} key={park}>{park}</option>
                         ))}
-                    </datalist>
+                    </select>
                 </FormGroup>
                 {/* *************** CAMPSITE AND LOOP INPUT FIELDS *************** */}
                 <FormRow>
                     <Col xs={7}>
                         <FormGroup>
-                            <FormControl placeholder="Campsite Number *" name="campsite" type="text" onChange={handleCampsiteInput} required />
+                            {/* <FormControl placeholder="Campsite Number *" name="campsite" type="text" onChange={handleCampsiteInput} required /> */}
+
+                            <select className="custom-select" name="campsite" onChange={handleCampsiteInput}>
+                                <option value="null">Campsite *</option>
+                                {siteNumbers.map(site => (
+                                    <option value={site} key={site}>{site}</option>
+                                ))}
+                            </select>
+
+
                         </FormGroup>
                     </Col>
                     <Col>
                         <FormGroup>
-                            <FormControl placeholder="Loop" name="loop" type="text" onChange={handleChange} />
+                            {/* <FormControl placeholder="Loop" name="loop" type="text" onChange={handleChange} /> */}
+
+
+                            <select className="custom-select" name="loop" onChange={handleChange}>
+                                <option value="null">Loop</option>
+                                {loops.map(loop => (
+                                    <option value={loop} key={loop}>{loop}</option>
+                                ))}
+                            </select>
+
+
                         </FormGroup>
                     </Col>
                 </FormRow>
@@ -242,12 +292,12 @@ function ShareSite() {
                 <FormRow>
                     <Col>
                         <FormGroup>
-                            <FormControl placeholder="# People *" name="people" type="number" onChange={handleChange} required/>
+                            <FormControl placeholder="# People *" name="people" type="number" onChange={handleChange} required />
                         </FormGroup>
                     </Col>
                     <Col>
                         <FormGroup>
-                            <FormControl placeholder="# Tents *" name="tents" type="number" onChange={handleChange} required/>
+                            <FormControl placeholder="# Tents *" name="tents" type="number" onChange={handleChange} required />
                         </FormGroup>
                     </Col>
                     <Col>
@@ -260,22 +310,22 @@ function ShareSite() {
                 <FormRow>
                     <Col>
                         <FormGroup>
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white border-right-0">Arrival Date *</span>
-                        </div>
-                            <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required/>
-                    </div>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white border-right-0">Arrival Date *</span>
+                                </div>
+                                <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
+                            </div>
                         </FormGroup>
                     </Col>
                     <Col>
                         <FormGroup>
-                        <div className="input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white border-right-0">Departure Date *</span>
-                        </div>
-                            <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required/>
-                        </div>
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white border-right-0">Departure Date *</span>
+                                </div>
+                                <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
+                            </div>
                         </FormGroup>
                     </Col>
                 </FormRow>
@@ -285,7 +335,7 @@ function ShareSite() {
                         <div className="input-group-prepend">
                             <span className="input-group-text bg-white border-right-0">Cost per night <span>&emsp;&emsp;</span> $</span>
                         </div>
-                        <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required/>
+                        <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required />
                     </div>
                     <FormText style={styleTextSm} text="Do not ask for more than what you paid per night" />
                 </FormGroup>

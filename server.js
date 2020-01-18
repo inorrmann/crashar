@@ -54,21 +54,21 @@ app.post('/api/signup', (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
-// // SHARE A SITE ROUTE
-// app.post('/api/sites', (req, res) => {
-//   console.log(req.body)
-//   db.Site.create(req.body)
-//   .then(data => res.json(data))
-//   .catch(err => res.status(400).json(err));
-// });
-
-// SEED FACILITIES ROUTE
-app.post('/api/facilities', (req, res) => {
+// SHARE A SITE ROUTE
+app.post('/api/sites', (req, res) => {
   console.log(req.body)
-  db.Facility.create(req.body)
-     .then(data => res.json(data))
-     .catch(err => res.status(400).json(err));
+  db.Site.create(req.body)
+  .then(data => res.json(data))
+  .catch(err => res.status(400).json(err));
 });
+
+// // SEED FACILITIES ROUTE
+// app.post('/api/facilities', (req, res) => {
+//   console.log(req.body)
+//   db.Facility.create(req.body)
+//      .then(data => res.json(data))
+//      .catch(err => res.status(400).json(err));
+// });
 
 // GET ALL FACILITIES
 app.get('/api/facilities', (req, res) => {
@@ -78,6 +78,18 @@ app.get('/api/facilities', (req, res) => {
       res.json(data);
     } else {
       res.status(404).send({success: false, message: "No campgrounds found"});
+    }
+  }).catch(err => res.status(400).send(err))
+});
+
+// GET ALL CAMPSITES
+app.get('/api/campsites', (req, res) => {
+  db.Campsite.find()
+  .then(data => {
+    if(data) {
+      res.json(data);
+    } else {
+      res.status(404).send({success: false, message: "No campsites found"});
     }
   }).catch(err => res.status(400).send(err))
 });

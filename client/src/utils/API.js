@@ -12,12 +12,13 @@ export default {
   shareNewSite: (campground, park, state, campsite, loop, people, tents, cars, arrival, departure, cost, about, children, party, pets, smokers, drinkers, image, accessible, createdBy) => {
     return axios.post('/api/sites', { campground, park, state, campsite, loop, people, tents, cars, arrival, departure, cost, about, children, party, pets, smokers, drinkers, image, accessible, createdBy });
   },
-  
-  // 
-  // WILL THIS GET ME ALL THE FACILITIES????
-  // 
+  // get all seeded facilities
   getAllFacilities: () => {
     return axios.get('/api/facilities');
+  },
+  // get all seeded campsites
+  getAllCampsites: () => {
+    return axios.get('/api/campsites');
   }
 };
 

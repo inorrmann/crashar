@@ -4,14 +4,17 @@ const Schema = mongoose.Schema;
 const CampsiteSchema = new Schema({
     campgroundID: {
         type: String,
+        uppercase: true,
         trim: true
     },
     number: {
         type: String,
+        uppercase: true,
         trim: true
     },
     loop: {
         type: String,
+        uppercase: true,
         trim: true
     },
     accessible: {
