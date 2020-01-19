@@ -9,7 +9,7 @@
 }
 
 
-.home, .login, .signup, .menu, .shareSite {
+.home, .login, .signup, .menu, .shareSite, .preview-site {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -112,3 +112,10 @@
 .shareSite::after {
     background-image: url("./images/vertical-single-tent-yellow-trees.jpg")
 }
+
+/* PREVIEW SHARED SITE */
+.topImage {
+    height: 40%;
+    background-size: cover;
+}
+

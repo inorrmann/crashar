@@ -11,7 +11,7 @@ car
 <i className="fas fa-car-alt"></i>
 
 wheelchair
-<i class="fas fa-wheelchair"></i>
+<i className="fas fa-wheelchair"></i>
 
 taupe #574F44
 dark taupe #302C26 (48, 44, 38)

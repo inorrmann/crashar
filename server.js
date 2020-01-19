@@ -58,8 +58,8 @@ app.post('/api/signup', (req, res) => {
 app.post('/api/sites', (req, res) => {
   console.log(req.body)
   db.Site.create(req.body)
-  .then(data => res.json(data))
-  .catch(err => res.status(400).json(err));
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
 });
 
 // // SEED FACILITIES ROUTE
@@ -73,38 +73,40 @@ app.post('/api/sites', (req, res) => {
 // GET ALL FACILITIES
 app.get('/api/facilities', (req, res) => {
   db.Facility.find()
-  .then(data => {
-    if(data) {
-      res.json(data);
-    } else {
-      res.status(404).send({success: false, message: "No campgrounds found"});
-    }
-  }).catch(err => res.status(400).send(err))
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "No campgrounds found" });
+      }
+    }).catch(err => res.status(400).send(err))
 });
 
 // GET ALL CAMPSITES
 app.get('/api/campsites', (req, res) => {
   db.Campsite.find()
-  .then(data => {
-    if(data) {
-      res.json(data);
-    } else {
-      res.status(404).send({success: false, message: "No campsites found"});
-    }
-  }).catch(err => res.status(400).send(err))
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "No campsites found" });
+      }
+    }).catch(err => res.status(400).send(err))
 });
 
 // GET A SHARED SITE BY ID
 app.get("/api/sites/:id", (req, res) => {
-  db.Site.findById(req.params.id)
-  .then(data => {
-    if (data) {
-      res.json(data);
-    } else {
-      res.status(404).send({success: false, message: "No shared site found"});
-    }
-  })
-  .catch(err => res.status(400).send(err))
+  console.log(req.params.id)
+  db.Site.findById({ "id": req.params.id })
+    // db.Site.findById(req.params.id)
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "No shared site found" });
+      }
+    })
+    .catch(err => res.status(400).send(err))
 });
 
 // Any route with isAuthenticated is protected and you need a valid token
@@ -115,10 +117,10 @@ app.get('/api/user/:id', isAuthenticated, (req, res) => {
   req.user.id === req.params.id
 
   db.User.findById(req.params.id).then(data => {
-    if(data) {
+    if (data) {
       res.json(data);
     } else {
-      res.status(404).send({success: false, message: 'No user found'});
+      res.status(404).send({ success: false, message: 'No user found' });
     }
   }).catch(err => res.status(400).send(err));
 });
@@ -144,10 +146,10 @@ app.use(function (err, req, res, next) {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

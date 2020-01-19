@@ -20,9 +20,9 @@ export default {
   getAllCampsites: () => {
     return axios.get('/api/campsites');
   },
-  // get a shared site by if
-  getSharedSite: () => {
-    return axios.get("/api/sites/:id");
+  // get a shared site by id
+  getSharedSite: (id) => {
+    return axios.get(`/api/sites/${id}`);
   }
 };
 

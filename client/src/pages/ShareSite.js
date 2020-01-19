@@ -67,6 +67,7 @@ function ShareSite() {
                     if (!namesArr.some(sameName)) {
                         return namesArr.push(result.name);
                     }
+                    else return result
                 });
                 setCampgrounds(namesArr);
                 setIsLoading(false)
@@ -98,10 +99,10 @@ function ShareSite() {
         extraInfo.image = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).image
         // find the accessibility status of the campsite
         extraInfo.accessible = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).accessible
-        console.log(extraInfo.accessible)
         // this posts the data from the campground to the DB˜
         API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
             .then(res => {
+                console.log(res.data._id);
                 history.replace(`/sites/preview/${res.data._id}`)
                 setIsLoading(false)
             })
@@ -127,6 +128,7 @@ function ShareSite() {
             if (facility.name === event.target.value) {
                 return parkArr.push(facility.park)
             }
+            else return facility;
         });
         setParks(parkArr);
     };
@@ -144,13 +146,15 @@ function ShareSite() {
                 campID = facility.campgroundID;
                 return campID;
             }
+            else return facility
         })
         setCampsiteID(campID);
         let campNumber = [];
         campsites.filter((site) => {
             if (site.campgroundID === campID) {
-                campNumber.push(site.number);
+                return campNumber.push(site.number);
             }
+            else return site
         })
         campNumber.sort((a, b) => (a > b) ? 1 : -1);
         setSiteNumbers(campNumber);
@@ -170,9 +174,11 @@ function ShareSite() {
                 // avoid loop duplicates from the loop array
                 const sameName = (nameLoop) => { return nameLoop === site.loop }
                 if (!loopName.some(sameName)) {
-                    loopName.push(site.loop);
+                    return loopName.push(site.loop);
                 }
+                else return site
             }
+            else return site
         })
         setLoops(loopName);
     };
@@ -331,7 +337,7 @@ function ShareSite() {
                     <h5 className="text-center" style={stylePreferences}>PREFERENCES</h5>
                     <div className=" ml-5 px-5">
                         <FormCheck id="children-switch" name="children" label="CHILDREN" onClick={onCheckClick} />
-                        <FormCheck id="party-switch" name="party" label="PARTY PEOPLE" onClick={onCheckClick} />
+                        <FormCheck id="party-switch" name="party" label="PARTIERS" onClick={onCheckClick} />
                         <FormCheck id="pets-switch" name="pets" label="PETS" onClick={onCheckClick} />
                         <FormCheck id="smokers-switch" name="smokers" label="SMOKERS" onClick={onCheckClick} />
                         <FormCheck id="drinkers-switch" name="drinkers" label="DRINKERS" onClick={onCheckClick} />
