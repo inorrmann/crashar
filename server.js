@@ -97,13 +97,13 @@ app.get('/api/campsites', (req, res) => {
 // GET A SHARED SITE BY ID
 app.get("/api/sites/:id", (req, res) => {
   console.log(req.params.id)
-  db.Site.findById({ "id": req.params.id })
-    // db.Site.findById(req.params.id)
+    db.Site.findById(req.params.id)
+    .then(data => console.log(data))
     .then(data => {
       if (data) {
         res.json(data);
       } else {
-        res.status(404).send({ success: false, message: "No shared site found" });
+        res.status(404).send({ success: false, message: "Shared site not found" });
       }
     })
     .catch(err => res.status(400).send(err))
@@ -150,6 +150,9 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function () {
+// app.listen(PORT, function () {
+
+// '0.0.0.0' added because of proxy error (localhost:3000 wasn't able to communicate with localhost:3001)
+app.listen(PORT, '0.0.0.0', function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

@@ -14,17 +14,18 @@ function PreviewSite() {
     const [isLoading, setIsLoading] = useState(false);
     const [sharedSite, setSharedSite] = useState({})
 
-    // const { pathname } = useLocation();
-    const { id } = useParams();
-    // let id = pathname.split("/")[3]
-    console.log(id)
+    const { pathname } = useLocation();
+    // const { id } = useParams();
+    let id = pathname.split("/")[3]
+    // console.log(id)
 
     useEffect(() => {
-        console.log(id)
+        // console.log(id)
         API.getSharedSite(id)
             .then(res => {
-                setSharedSite(res.data);
-                setIsLoading(false)
+                console.log(res)
+                // setSharedSite(res);
+                // setIsLoading(false)
             })
             .catch(err => console.log(err))
     })
