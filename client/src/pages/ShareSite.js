@@ -40,7 +40,7 @@ function ShareSite() {
         pets: false,
         smokers: false,
         drinkers: false,
-        image: "",
+        // image: "",
         accessible: false,
         createdBy: userID,
     });
@@ -50,6 +50,8 @@ function ShareSite() {
     const [campsites, setCampsites] = useState([]);
     // array of campground names taken from facilities
     const [campgrounds, setCampgrounds] = useState([]);
+    // ID of the campground selected
+    const [campsiteID, setCampsiteID] = useState("")
     const [searchCampground, setSearchCampground] = useState("");
     const [parks, setParks] = useState([]);
     const [siteNumbers, setSiteNumbers] = useState([]);
@@ -95,11 +97,14 @@ function ShareSite() {
         // find the state of the facility 
          extraInfo.state = facilities.find(element => element.park === createSite.park).state
         // find the image of the campsite
+        extraInfo.image = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).image
+
+
 
         // find the accessibility status of the campsite
 
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, createSite.accessible, createSite.createdBy)
             .then(res => {
                 console.log(res)
                 // HOW DO I GET THE ID?? res.data.id
@@ -146,6 +151,7 @@ function ShareSite() {
                 return campID;
             }
         })
+        setCampsiteID(campID);
         let campNumber = [];
         campsites.filter((site) => {
             if (site.campgroundID === campID) {
@@ -164,16 +170,9 @@ function ShareSite() {
             campsite: event.target.value
         });
         // populate the loops from the campsite, campground and park info
-        var campID;
-        facilities.filter((facility) => {
-            if (facility.name === createSite.campground && facility.park === createSite.park) {
-                campID = facility.campgroundID;
-                return campID;
-            }
-        })
         let loopName = [];
         campsites.filter((site) => {
-            if (site.campgroundID === campID && site.number === event.target.value) {
+            if (site.campgroundID === campsiteID && site.number === event.target.value) {
                 // avoid loop duplicates from the loop array
                 const sameName = (nameLoop) => { return nameLoop === site.loop }
                 if (!loopName.some(sameName)) {
