@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import Menu from './pages/Menu';
 import Landing from './pages/Landing';
 import ShareSite from './pages/ShareSite';
+import PreviewSite from "./pages/PreviewSite";
 // import Home from './pages/Home';
 
 // Here is if we have an id_token in localStorage
@@ -61,8 +62,11 @@ function App() {
             <ProtectedRoute exact path="/sites/new">
               <ShareSite />
             </ProtectedRoute>
-            <ProtectedRoute path="/sites/:id">
+            <ProtectedRoute path="/sites/all/:id">
               {/* <SeeMySites /> */}
+            </ProtectedRoute>
+            <ProtectedRoute path="/sites/preview/:id">
+              <PreviewSite />
             </ProtectedRoute>
             <Route exact path="/home">
               <Landing />
@@ -72,7 +76,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </Router> 
+      </Router>
     </AuthProvider>
   );
 }

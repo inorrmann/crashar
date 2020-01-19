@@ -94,6 +94,19 @@ app.get('/api/campsites', (req, res) => {
   }).catch(err => res.status(400).send(err))
 });
 
+// GET A SHARED SITE BY ID
+app.get("/api/sites/:id", (req, res) => {
+  db.Site.findById(req.params.id)
+  .then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({success: false, message: "No shared site found"});
+    }
+  })
+  .catch(err => res.status(400).send(err))
+});
+
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {

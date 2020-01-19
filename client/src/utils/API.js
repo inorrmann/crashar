@@ -19,6 +19,10 @@ export default {
   // get all seeded campsites
   getAllCampsites: () => {
     return axios.get('/api/campsites');
+  },
+  // get a shared site by if
+  getSharedSite: () => {
+    return axios.get("/api/sites/:id");
   }
 };
 

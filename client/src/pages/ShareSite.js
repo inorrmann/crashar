@@ -13,6 +13,7 @@ import FormText from "../components/FormText/index";
 import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import FormCheck from "../components/FormCheck/index";
+import Loading from "../components/Loading/index";
 
 
 function ShareSite() {
@@ -25,7 +26,6 @@ function ShareSite() {
     const [createSite, setCreateSite] = useState({
         campground: "",
         park: "",
-        // state: "",
         campsite: "",
         loop: "",
         people: 0,
@@ -40,8 +40,6 @@ function ShareSite() {
         pets: false,
         smokers: false,
         drinkers: false,
-        // image: "",
-        accessible: false,
         createdBy: userID,
     });
     // array of campground objects imported from DB
@@ -82,7 +80,7 @@ function ShareSite() {
     }, []);
 
 
-    // const history = useHistory()
+    const history = useHistory()
 
 
     const handleFormSubmit = event => {
@@ -95,20 +93,16 @@ function ShareSite() {
             accessible: false
         }
         // find the state of the facility 
-         extraInfo.state = facilities.find(element => element.park === createSite.park).state
+        extraInfo.state = facilities.find(element => element.park === createSite.park).state
         // find the image of the campsite
         extraInfo.image = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).image
-
-
-
         // find the accessibility status of the campsite
-
+        extraInfo.accessible = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).accessible
+        console.log(extraInfo.accessible)
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, createSite.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
             .then(res => {
-                console.log(res)
-                // HOW DO I GET THE ID?? res.data.id
-                // history.replace(`/sites/${res.data.id}`)
+                history.replace(`/sites/preview/${res.data._id}`)
                 setIsLoading(false)
             })
             .catch(err => alert(err));
@@ -217,11 +211,7 @@ function ShareSite() {
     // **************************** RENDERED COMPONENTS ****************************
     // 
     if (isLoading) {
-        return (
-            <div className="loading">
-                <h2 className="text-center text-light font-weight-bold m-5 p-5">LOADING...</h2>
-            </div>
-        )
+        return <Loading />
     }
 
     return (
@@ -243,19 +233,20 @@ function ShareSite() {
                 </FormGroup>
                 {/* *************** NPS RECREATION AREA SEARCH *************** */}
                 <FormGroup>
-                    <select className="custom-select" name="park" onChange={handleParkChange}>
-                        <option value="null">NPS Recreation Area *</option>
-                        {parks.map(park => (
-                            <option value={park} key={park}>{park}</option>
-                        ))}
-                    </select>
+
+                        <select className="custom-select select" name="park" onChange={handleParkChange} required>
+                            <option value="">NPS Recreation Area *</option>
+                            {parks.map(park => (
+                                <option value={park} key={park}>{park}</option>
+                            ))}
+                        </select>
                 </FormGroup>
                 {/* *************** CAMPSITE AND LOOP INPUT FIELDS *************** */}
                 <FormRow>
                     <Col xs={7}>
                         <FormGroup>
-                            <select className="custom-select" name="campsite" onChange={handleCampsiteInput}>
-                                <option value="null">Campsite *</option>
+                            <select className="custom-select" name="campsite" onChange={handleCampsiteInput} required={true}>
+                                <option value="">Campsite *</option>
                                 {siteNumbers.map(site => (
                                     <option value={site} key={site}>{site}</option>
                                 ))}
