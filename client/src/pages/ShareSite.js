@@ -199,7 +199,6 @@ function ShareSite() {
             ...createSite,
             [name]: checked
         })
-        console.log(createSite);
     };
 
 
