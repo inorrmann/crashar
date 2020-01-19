@@ -25,7 +25,7 @@ function ShareSite() {
     const [createSite, setCreateSite] = useState({
         campground: "",
         park: "",
-        state: "",
+        // state: "",
         campsite: "",
         loop: "",
         people: 0,
@@ -51,9 +51,6 @@ function ShareSite() {
     // array of campground names taken from facilities
     const [campgrounds, setCampgrounds] = useState([]);
     const [searchCampground, setSearchCampground] = useState("");
-    // const [searchPark, setSearchPark] = useState("");
-    // const [searchState, setSearchState] = useState([]);
-    // const [selectedCampground, setSelectedCampground] = useState([])
     const [parks, setParks] = useState([]);
     const [siteNumbers, setSiteNumbers] = useState([]);
     const [loops, setLoops] = useState([]);
@@ -89,20 +86,22 @@ function ShareSite() {
     const handleFormSubmit = event => {
         event.preventDefault();
         setIsLoading(true)
-        // add the state of the facility to createSite.state 
-        let parkChosen = facilities.find(element => element.park === createSite.park)
-        setCreateSite({
-            ...createSite,
-            state: parkChosen.state
-        });
 
+        let extraInfo = {
+            state: "",
+            image: "",
+            accessible: false
+        }
+        // find the state of the facility 
+         extraInfo.state = facilities.find(element => element.park === createSite.park).state
+        // find the image of the campsite
 
-        // add image to createSite object
-        // add accessibility to createSite object
+        // find the accessibility status of the campsite
 
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, createSite.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, createSite.image, createSite.accessible, createSite.createdBy)
             .then(res => {
+                console.log(res)
                 // HOW DO I GET THE ID?? res.data.id
                 // history.replace(`/sites/${res.data.id}`)
                 setIsLoading(false)
@@ -164,7 +163,7 @@ function ShareSite() {
             ...createSite,
             campsite: event.target.value
         });
-
+        // populate the loops from the campsite, campground and park info
         var campID;
         facilities.filter((facility) => {
             if (facility.name === createSite.campground && facility.park === createSite.park) {
@@ -177,14 +176,12 @@ function ShareSite() {
             if (site.campgroundID === campID && site.number === event.target.value) {
                 // avoid loop duplicates from the loop array
                 const sameName = (nameLoop) => { return nameLoop === site.loop }
-                    if (!loopName.some(sameName)) {
-                        loopName.push(site.loop);
-                    }
+                if (!loopName.some(sameName)) {
+                    loopName.push(site.loop);
+                }
             }
         })
         setLoops(loopName);
-        console.log(createSite)
-        console.log(loopName);
     };
 
     // ****** OTHER ELEMENTS ******
@@ -194,7 +191,6 @@ function ShareSite() {
             ...createSite,
             [name]: value
         });
-        console.log(createSite)
     };
 
     // ****** SWITCHES ******
@@ -213,7 +209,6 @@ function ShareSite() {
     // 
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .3)", textShadow: "0 0 10px #302C26" }
     const styleBrand = { color: "#EBC023" }
-    // const styleText = { fontFamily: "Barlow", fontSize: "1rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }
     const styleTextSm = { fontFamily: "Barlow", fontSize: "0.9rem", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
     const stylePreferences = { fontFamily: "Roboto", fontWeight: "bold", color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
@@ -260,31 +255,22 @@ function ShareSite() {
                 <FormRow>
                     <Col xs={7}>
                         <FormGroup>
-                            {/* <FormControl placeholder="Campsite Number *" name="campsite" type="text" onChange={handleCampsiteInput} required /> */}
-
                             <select className="custom-select" name="campsite" onChange={handleCampsiteInput}>
                                 <option value="null">Campsite *</option>
                                 {siteNumbers.map(site => (
                                     <option value={site} key={site}>{site}</option>
                                 ))}
                             </select>
-
-
                         </FormGroup>
                     </Col>
                     <Col>
                         <FormGroup>
-                            {/* <FormControl placeholder="Loop" name="loop" type="text" onChange={handleChange} /> */}
-
-
                             <select className="custom-select" name="loop" onChange={handleChange}>
                                 <option value="null">Loop</option>
                                 {loops.map(loop => (
                                     <option value={loop} key={loop}>{loop}</option>
                                 ))}
                             </select>
-
-
                         </FormGroup>
                     </Col>
                 </FormRow>
@@ -368,7 +354,6 @@ function ShareSite() {
             </Forms>
         </div>
     )
-
 }
 
 
