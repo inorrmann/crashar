@@ -98,7 +98,10 @@ app.get('/api/campsites', (req, res) => {
 app.get("/api/sites/:id", (req, res) => {
   console.log(req.params.id)
     db.Site.findById(req.params.id)
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      return data;
+    })
     .then(data => {
       if (data) {
         res.json(data);

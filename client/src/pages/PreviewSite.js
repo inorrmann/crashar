@@ -10,8 +10,8 @@ import picture from "./images/single-tent-blue.jpg";
 
 
 function PreviewSite() {
-    // const [isLoading, setIsLoading] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(false);
     const [sharedSite, setSharedSite] = useState({})
 
     const { pathname } = useLocation();
@@ -23,9 +23,9 @@ function PreviewSite() {
         // console.log(id)
         API.getSharedSite(id)
             .then(res => {
-                console.log(res)
-                // setSharedSite(res);
-                // setIsLoading(false)
+                console.log(res.data)
+                setSharedSite(res.data);
+                setIsLoading(false)
             })
             .catch(err => console.log(err))
     })
