@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import API from "../utils/API";
 import Card from "react-bootstrap/Card";
+import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import NavLogin from "../components/NavbarLogin/index";
@@ -34,7 +35,9 @@ function MySites() {
                 let future = [];
 
                 res.data.map(post => {
+                    // extra formatted date to compare with current date for active/expired sites
                     let date = post.arrival.slice(0, 10)
+                    // reformat dates for display on cards
                     let arrivalPretty = `${post.arrival.slice(5, 7)}/${post.arrival.slice(8, 10)}/${post.arrival.slice(0, 4)}`
                     let departurePretty = `${post.departure.slice(5, 7)}/${post.departure.slice(8, 10)}/${post.departure.slice(0, 4)}`
                     if (date > currentDate) {
@@ -56,11 +59,11 @@ function MySites() {
     }, []);
 
 
-    const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
-    const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px #302C26" }
+    const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
+    const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     // const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .1)" }
     const styleLogin = { color: "#EBC023" }
-    const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px #302C26" }
+    const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
 
 
     if (isLoading) {
@@ -76,26 +79,49 @@ function MySites() {
                     </div>
                 </Navbar>
                 <br></br>
-                <h3 className="font-weight-bold ml-3" style={headers}>Active Sites</h3>
+                {/* render header only if there are active sites */}
+                {futureSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Active Sites</h3>}
 
                 <div className="d-flex justify-content-center">
-
-                    {/* <Card > */}
-                    <Card className="mt-3" style={{ width: '18rem' }}>
-                        <Card.Body className="p-3">
-                            <Card.Title>{futureSites[0].campground}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{futureSites[0].park}</Card.Subtitle>
-                            <Card.Text style={{ fontSize: "0.9rem" }}>
-                                From: {futureSites[0].arrival} <span>&emsp;</span>To: {futureSites[0].departure}
-                            </Card.Text>
-                            <Card.Link><Link to={`/sites/preview/${futureSites[0]._id}`}> Preview </Link></Card.Link>
-                            <Card.Link>Another Link</Card.Link>
-                        </Card.Body>
-                    </Card>
+                    <CardColumns>
+                        {futureSites.map(future => (
+                                <Card className="mt-3" style={{ width: '18rem' }}>
+                                <Card.Body className="p-3">
+                                    <Card.Title>{future.campground}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{future.park}</Card.Subtitle>
+                                    <Card.Text style={{ fontSize: "0.9rem" }}>
+                                        From: {future.arrival} <span>&emsp;</span>To: {future.departure}
+                                    </Card.Text>
+                                    <div className="d-flex flex-row justify-content-between">
+                                        <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/preview/${future._id}`}> Preview </Link></Card.Text>
+                                        <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/edit/${future._id}`}> Edit Post </Link></Card.Text>
+                                        <Card.Text className="d-inline mb-0"><Link className="text-danger" to={""}> Delete </Link></Card.Text>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        ))}
+                    </CardColumns>
                 </div>
 
                 <hr></hr>
-                <h3 className="font-weight-bold ml-3" style={headers}>Expired Sites</h3>
+                {/* render header only if there are expired sites */}
+                {pastSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Expired Sites</h3>}
+
+                <div className="d-flex justify-content-center">
+                    <CardColumns>
+                        {pastSites.map(past => (
+                            <Card className="mt-3" style={{ width: '18rem' }}>
+                                <Card.Body className="p-3">
+                                    <Card.Title>{past.campground}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{past.park}</Card.Subtitle>
+                                    <Card.Text style={{ fontSize: "0.9rem" }}>
+                                        From: {past.arrival} <span>&emsp;</span>To: {past.departure}
+                                    </Card.Text>
+                                    <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/preview/${past._id}`}> Preview </Link></Card.Text>
+                                </Card.Body>
+                            </Card>))}
+                    </CardColumns>
+                </div>
             </div>
 
         )

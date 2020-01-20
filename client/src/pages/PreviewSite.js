@@ -181,7 +181,7 @@ function PreviewSite() {
 
                 <h6 className="mt-4 text-center" style={{ fontSize: "1.1rem" }}>PREFERENCES:</h6>
                 <div className="d-flex flex-row justify-content-between mx-4">
-                    <h6 className="text-center d-inline3">{children} Children</h6>
+                    <h6 className="text-center d-inline">{children} Children</h6>
                     <h6 className="text-center d-inline">{partiers} Partiers</h6>
                     <h6 className="text-center d-inline">{pets} Pets</h6>
                     <h6 className="text-center d-inline">{smokers} Smokers</h6>
