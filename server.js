@@ -120,6 +120,15 @@ app.get("/api/sites/user/:id", (req, res) => {
     .catch(err => res.status(400).send(err))
 })
 
+// DELETE A SITE BY ID
+app.delete("/api/sites/:id", (req,res) => {
+  db.Site.findById(req.params.id)
+    .then(data => data.remove())
+    .then(data => res.json(data))
+    .catch(err => res.status(422).json(err))
+})
+
+
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {

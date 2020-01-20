@@ -27,6 +27,10 @@ export default {
   // get all shared sites by user ir
   getAllSharedSites: (id) => {
     return axios.get(`/api/sites/user/${id}`);
+  },
+  // delete shared site by id
+  deleteSite: (id) => {
+    return axios.delete(`/api/sites/${id}`)
   }
 };
 

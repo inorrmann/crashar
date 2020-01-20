@@ -12,7 +12,8 @@ import CardBody from "../components/CardBody/index";
 import CardTitle from "../components/CardTitle/index";
 import CardSubtitle from "../components/CardSubtitle/index";
 import CardDate from "../components/CardDate/index";
-import CardLink from "../components/CardLink/index"
+import CardLink from "../components/CardLink/index";
+import CardDelete from "../components/CardDelete/index";
 
 
 function MySites() {
@@ -33,6 +34,10 @@ function MySites() {
     // console.log(currentDate)
 
     useEffect(() => {
+        loadSites(id);
+    }, []);
+
+    function loadSites(id) {
         API.getAllSharedSites(id)
             .then(res => {
                 // setAllSites(res.data)
@@ -62,7 +67,13 @@ function MySites() {
                 setIsLoading(false);
             })
             .catch(err => console.log(err))
-    }, []);
+    }
+
+    function deleteSite(siteId) {
+        API.deleteSite(siteId)
+            .then(res => loadSites(id))
+            .catch(err => console.log(err))
+    }
 
 
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
@@ -70,7 +81,7 @@ function MySites() {
     const styleLogin = { color: "#EBC023" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
-    const styleDel = {backgroundColor: "#9E273A", color: "#FFEAC9"}
+    const styleDel = { backgroundColor: "#9E273A", color: "#FFEAC9" }
 
     if (isLoading) {
         return <Loading />
@@ -98,8 +109,8 @@ function MySites() {
                                     <CardDate arrival={future.arrival} departure={future.departure} />
                                     <div className="d-flex flex-row justify-content-between">
                                         <CardLink styleBtn={styleBtn} to={`/sites/preview/${future._id}`} label="Preview" />
-                                        <CardLink styleBtn={styleBtn} to={`/sites/edit/${future._id}`} label="Edit Post" />
-                                        <CardLink styleBtn={styleDel} to={""} label="Delete" />
+                                        {/* <CardLink styleBtn={styleBtn} to={`/sites/edit/${future._id}`} label="Edit Post" /> */}
+                                        <CardDelete styleBtn={styleDel} label="Delete" onClick={() => deleteSite(future._id)}/>
                                     </div>
                                 </CardBody>
                             </Cards>
