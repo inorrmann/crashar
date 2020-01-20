@@ -7,6 +7,12 @@ import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
+import Cards from "../components/Card/index";
+import CardBody from "../components/CardBody/index";
+import CardTitle from "../components/CardTitle/index";
+import CardSubtitle from "../components/CardSubtitle/index";
+import CardDate from "../components/CardDate/index";
+import CardLink from "../components/CardLink/index"
 
 
 function MySites() {
@@ -61,10 +67,10 @@ function MySites() {
 
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
-    // const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .1)" }
     const styleLogin = { color: "#EBC023" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
-
+    const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
+    const styleDel = {backgroundColor: "#9E273A", color: "#FFEAC9"}
 
     if (isLoading) {
         return <Loading />
@@ -85,20 +91,18 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {futureSites.map(future => (
-                                <Card className="mt-3" style={{ width: '18rem' }}>
-                                <Card.Body className="p-3">
-                                    <Card.Title>{future.campground}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{future.park}</Card.Subtitle>
-                                    <Card.Text style={{ fontSize: "0.9rem" }}>
-                                        From: {future.arrival} <span>&emsp;</span>To: {future.departure}
-                                    </Card.Text>
+                            <Cards>
+                                <CardBody>
+                                    <CardTitle title={future.campground} />
+                                    <CardSubtitle subtitle={future.park} />
+                                    <CardDate arrival={future.arrival} departure={future.departure} />
                                     <div className="d-flex flex-row justify-content-between">
-                                        <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/preview/${future._id}`}> Preview </Link></Card.Text>
-                                        <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/edit/${future._id}`}> Edit Post </Link></Card.Text>
-                                        <Card.Text className="d-inline mb-0"><Link className="text-danger" to={""}> Delete </Link></Card.Text>
+                                        <CardLink styleBtn={styleBtn} to={`/sites/preview/${future._id}`} label="Preview" />
+                                        <CardLink styleBtn={styleBtn} to={`/sites/edit/${future._id}`} label="Edit Post" />
+                                        <CardLink styleBtn={styleDel} to={""} label="Delete" />
                                     </div>
-                                </Card.Body>
-                            </Card>
+                                </CardBody>
+                            </Cards>
                         ))}
                     </CardColumns>
                 </div>
@@ -110,19 +114,18 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {pastSites.map(past => (
-                            <Card className="mt-3" style={{ width: '18rem' }}>
-                                <Card.Body className="p-3">
-                                    <Card.Title>{past.campground}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{past.park}</Card.Subtitle>
-                                    <Card.Text style={{ fontSize: "0.9rem" }}>
-                                        From: {past.arrival} <span>&emsp;</span>To: {past.departure}
-                                    </Card.Text>
-                                    <Card.Text className="d-inline mb-0"><Link className="text-dark" to={`/sites/preview/${past._id}`}> Preview </Link></Card.Text>
-                                </Card.Body>
-                            </Card>))}
+                            <Cards>
+                                <CardBody>
+                                    <CardTitle title={past.campground} />
+                                    <CardSubtitle subtitle={past.park} />
+                                    <CardDate arrival={past.arrival} departure={past.departure} />
+                                    <CardLink styleBtn={styleBtn} to={`/sites/preview/${past._id}`} label="Preview" />
+                                </CardBody>
+                            </Cards>
+                        ))}
                     </CardColumns>
-                </div>
-            </div>
+                </div >
+            </div >
 
         )
     }
