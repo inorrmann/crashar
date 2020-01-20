@@ -15,10 +15,11 @@ import Login from './pages/Login';
 import Messages from './pages/Messages';
 import Signup from './pages/Signup';
 import Menu from './pages/Menu';
-import Landing from './pages/Landing';
+import Home from './pages/Home';
 import ShareSite from './pages/ShareSite';
 import PreviewSite from "./pages/PreviewSite";
-// import Home from './pages/Home';
+import MySites from "./pages/MySites";
+
 
 // Here is if we have an id_token in localStorage
 if (localStorage.getItem('id_token')) {
@@ -63,17 +64,17 @@ function App() {
               <ShareSite />
             </ProtectedRoute>
             <ProtectedRoute path="/sites/all/:id">
-              {/* <SeeMySites /> */}
+              <MySites />
             </ProtectedRoute>
             <ProtectedRoute path="/sites/preview/:id">
               <PreviewSite />
             </ProtectedRoute>
             <Route exact path="/home">
-              <Landing />
+              <Home />
             </Route>
-            <Route exact path="/sites/search">
+            <ProtectedRoute exact path="/sites/search">
               {/* <SearchSites /> */}
-            </Route>
+            </ProtectedRoute>
           </Switch>
         </div>
       </Router>

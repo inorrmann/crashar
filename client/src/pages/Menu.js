@@ -9,10 +9,11 @@ import "./style.css"
 
 function Menu() {
   const { user } = useAuth();
+  console.log(user.id)
   // const { user, logout } = useAuth();
   // const history = useHistory();
 
-  // const goToEditProfsile = () => history.push('/profile');
+  // const goToEditProfile = () => history.push('/profile');
 
   const styleLogin = { color: "#EBC023" }
   const styleLink = { color: "#EBC023", fontSize: "2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
@@ -44,7 +45,7 @@ function Menu() {
         <div className="text-center my-2">
           <Button
             style={styleButton}
-            link="/sites/:id"
+            link={`/sites/all/${user.id}`}
             styleLink={styleButtonLink}
             name="SEE MY SHARED SITES"
           />

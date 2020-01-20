@@ -11,7 +11,7 @@ const styleButton = { backgroundColor: "#EBC023" }
 const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .3)" }
 const classNavbar = "shadow"
 
-function Landing() {
+function Home() {
     return (
         <div className="home">
             <Navbar class={classNavbar} style={styleNavbar}>
@@ -32,4 +32,4 @@ function Landing() {
     );
 }
 
-export default Landing;
+export default Home;

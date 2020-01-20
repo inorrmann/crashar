@@ -23,6 +23,10 @@ export default {
   // get a shared site by id
   getSharedSite: (id) => {
     return axios.get(`/api/sites/${id}`);
+  },
+  // get all shared sites by user ir
+  getAllSharedSites: (id) => {
+    return axios.get(`/api/sites/user/${id}`);
   }
 };
 

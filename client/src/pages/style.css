@@ -9,7 +9,7 @@
 }
 
 
-.home, .login, .signup, .menu, .shareSite, .preview-site {
+.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -19,7 +19,7 @@
     font-family: "Roboto", sans-serif; 
 }
 
-.home::after, .login::after, .signup::after, .shareSite::after, .loading::after {
+.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after {
     content: "";
     position: fixed;
     top: 0px;
@@ -59,7 +59,6 @@
 
 
 /* MENU PAGE */
-
 .menuTop {
     position: fixed;
     top: 0px;
@@ -115,7 +114,12 @@
 
 /* PREVIEW SHARED SITE */
 .topImage {
-    height: 40%;
+    height: 35%;
     background-size: cover;
+}
+
+/* MY SITES */
+.my-sites::after {
+    background-image: url("./images/tents-in-sunset.jpg")
 }
 

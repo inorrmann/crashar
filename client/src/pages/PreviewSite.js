@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../utils/auth"
 import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import ButtonLink from "../components/ButtonLink/index";
+import placeholder from "../pages/images/camping-placeholder.png";
 
 
 function PreviewSite() {
@@ -40,15 +42,19 @@ function PreviewSite() {
     const [pets, setPets] = useState("NO");
     const [drinkers, setDrinkers] = useState("NO");
     const [smokers, setSmokers] = useState("NO");
+    const [arrival, setArrival] = useState("");
+    const [departure, setDeparture] = useState("");
+    const [image, setImage] = useState("");
+
+    const { user } = useAuth();
+    const userID = user.id
 
 
     const { pathname } = useLocation();
     // const { id } = useParams();
     let id = pathname.split("/")[3]
-    // console.log(id)
 
     useEffect(() => {
-        // console.log(id)
         API.getSharedSite(id)
             .then(res => {
                 console.log(res.data)
@@ -66,6 +72,12 @@ function PreviewSite() {
                 //     createdBy: res.data.createdBy
                 // });
                 setSharedSite(res.data)
+                if (res.data.image === "") {
+                    setImage(placeholder)
+                }
+                else if (res.data.image !== "") {
+                    setImage(res.data.image)
+                }
                 if (res.data.loop !== "") {
                     setLoop(`, Loop ${res.data.loop}`)
                     // setSharedSite({
@@ -92,6 +104,21 @@ function PreviewSite() {
                 if (res.data.pets) setPets("YES")
                 if (res.data.smokers) setSmokers("YES")
                 if (res.data.drinkers) setDrinkers("YES")
+
+                // reorganize the arrival date
+                let yearArr = res.data.arrival.split("-")[0]
+                let monthArr = res.data.arrival.split("-")[1]
+                let dayArr = res.data.arrival.split("-")[2].slice(0, 2)
+                let arrival = `${monthArr}/${dayArr}/${yearArr}`
+                setArrival(arrival);
+
+                // reorganize the departure date
+                let yearDep = res.data.departure.split("-")[0]
+                let monthDep = res.data.departure.split("-")[1]
+                let dayDep = res.data.departure.split("-")[2].slice(0, 2)
+                let departure = `${monthDep}/${dayDep}/${yearDep}`
+                setDeparture(departure);
+
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
@@ -103,7 +130,8 @@ function PreviewSite() {
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .4)" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
-    const textshadow = { color: "#EBC023", textShadow: "0 0 10px #302C26", backgroundColor: "rgba(15, 14, 12, .4)" }
+    const textshadow = { color: "#EBC023", textShadow: "0 0 10px black" }
+    const textshadow1 = { color: "#EBC023", textShadow: "0 0 10px #302C26", backgroundColor: "rgba(15, 14, 12, .4)" }
 
 
     if (isLoading) {
@@ -116,15 +144,24 @@ function PreviewSite() {
             <Navbar style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">
-                    <NavLink link="/signup" styleLink={styleLink} name="Return to Spots" />
+                    <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="Return to Spots" />
                 </div>
             </Navbar>
-            <div className="topImage" style={{ backgroundImage: `url(${sharedSite.image})` }}>
-                <div className="py-5">
+            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                {/* <div className="py-5"> */}
+                <div className="mt-5 mx-3" style={textshadow1}>
                     <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
+                    <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
+                    <h5 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
+                    {/* <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
                     <h6 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
                     <br></br>
-                    <h5 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
+                    <h5 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5> */}
                 </div>
             </div>
             <div className="text-light text-center">
@@ -138,8 +175,8 @@ function PreviewSite() {
                 </div>
 
                 <div className="d-flex flex-row justify-content-between m-4">
-                    <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: 01/26/2020</h5>
-                    <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: 01/28/2020</h5>
+                    <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: {arrival}</h5>
+                    <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: {departure}</h5>
                 </div>
 
                 <h6 className="mt-4 text-center" style={{ fontSize: "1.1rem" }}>PREFERENCES:</h6>
@@ -157,7 +194,7 @@ function PreviewSite() {
             <div className="text-center mt-4">
                 <ButtonLink style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
                 <hr></hr>
-                <p className="text-muted mb-3">Data Source: ridb.recreation.gov</p>
+                <p className="text-muted mb-2">Data Source: ridb.recreation.gov</p>
             </div>
         </div>
 

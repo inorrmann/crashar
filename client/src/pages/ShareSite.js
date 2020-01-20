@@ -314,7 +314,7 @@ function ShareSite() {
                 <FormGroup>
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text bg-white border-right-0">Cost per night <span>&emsp;&emsp;</span> $</span>
+                            <span className="input-group-text bg-white border-right-0">Cost per night * <span>&emsp;&emsp;</span> $</span>
                         </div>
                         <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required />
                     </div>
