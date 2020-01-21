@@ -21,6 +21,7 @@ import PreviewSite from "./pages/PreviewSite";
 import MySites from "./pages/MySites";
 import FindSites from "./pages/FindSites";
 import Results from "./pages/Results";
+import SeeSite from "./pages/SeeSite";
 
 
 // Here is if we have an id_token in localStorage
@@ -70,6 +71,9 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute path="/sites/preview/:id">
               <PreviewSite />
+            </ProtectedRoute>
+            <ProtectedRoute path="/sites/detail/:id">
+              <SeeSite />
             </ProtectedRoute>
             <Route exact path="/home">
               <Home />

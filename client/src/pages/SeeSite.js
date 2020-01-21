@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../utils/auth"
 import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
@@ -10,31 +9,9 @@ import ButtonLink from "../components/ButtonLink/index";
 import placeholder from "../pages/images/camping-placeholder.png";
 
 
-function PreviewSite() {
+function SeeSite() {
     const [isLoading, setIsLoading] = useState(true);
     const [sharedSite, setSharedSite] = useState({})
-    // const [sharedSite, setSharedSite] = useState({
-    //     campground: "",
-    //     park: "",
-    //     state: "",
-    //     campsite: "",
-    //     loop: "",
-    //     people: 0,
-    //     tents: 0,
-    //     cars: 0,
-    //     arrival: "01/01/2020",
-    //     departure: "01/01/2020",
-    //     cost: 0,
-    //     about: "",
-    //     children: "",
-    //     party: "",
-    //     pets: "",
-    //     smokers: "",
-    //     drinkers: "",
-    //     image: "",
-    //     accessible: "",
-    //     createdBy: ""
-    // })
     const [loop, setLoop] = useState("");
     const [accessible, setAccessible] = useState("?");
     const [children, setChildren] = useState("NO");
@@ -46,31 +23,13 @@ function PreviewSite() {
     const [departure, setDeparture] = useState("");
     const [image, setImage] = useState("");
 
-    const { user } = useAuth();
-    const userID = user.id
-
 
     const { pathname } = useLocation();
-    // const { id } = useParams();
     let id = pathname.split("/")[3]
 
     useEffect(() => {
         API.getSharedSite(id)
-            .then(res => {
-                console.log(res.data)
-                // setSharedSite({
-                //     ...sharedSite,
-                //     campground: res.data.campground,
-                //     park: res.data.park,
-                //     state: res.data.state,
-                //     campsite: res.data.campsite,
-                //     people: res.data.people,
-                //     tents: res.data.tents,
-                //     cost: res.data.cost,
-                //     about: res.data.about,
-                //     image: res.data.image,
-                //     createdBy: res.data.createdBy
-                // });
+            .then(res => {            
                 setSharedSite(res.data)
                 if (res.data.image === "") {
                     setImage(placeholder)
@@ -80,24 +39,12 @@ function PreviewSite() {
                 }
                 if (res.data.loop !== "") {
                     setLoop(`, Loop ${res.data.loop}`)
-                    // setSharedSite({
-                    //     ...sharedSite,
-                    //     accessible: "YES"
-                    // })
                 }
                 if (res.data.accessible) {
                     setAccessible("YES")
-                    // setSharedSite({
-                    //     ...sharedSite,
-                    //     accessible: "YES"
-                    // })
                 }
                 if (!res.data.accessible) {
                     setAccessible("NO")
-                    //     setSharedSite({
-                    //         ...sharedSite,
-                    //         accessible: "YES"
-                    //     })
                 }
                 if (res.data.children) setChildren("YES")
                 if (res.data.pary) setPartiers("YES")
@@ -125,8 +72,6 @@ function PreviewSite() {
     }, []);
 
 
-
-
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .4)" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
@@ -144,7 +89,7 @@ function PreviewSite() {
             <Navbar style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">
-                    <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="Return to Campsites" />
+                    <NavLink link={`/sites/results/`} styleLink={styleLink} name="Return to Results" />
                 </div>
             </Navbar>
             <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
@@ -153,15 +98,10 @@ function PreviewSite() {
                 <br></br>
                 <br></br>
                 <br></br>
-                {/* <div className="py-5"> */}
                 <div className="mt-5 mx-3" style={textshadow1}>
                     <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
                     <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
                     <h5 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
-                    {/* <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
-                    <h6 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
-                    <br></br>
-                    <h5 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5> */}
                 </div>
             </div>
             <div className="text-light text-center">
@@ -192,7 +132,7 @@ function PreviewSite() {
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
             <div className="text-center mt-4">
-                <ButtonLink style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
+                <ButtonLink style={styleButton} styleLink={styleButton} to={`/messages/?`}name="CONTACT CAMPERS" />
                 <hr></hr>
                 <p className="text-muted mb-2">Data Source: ridb.recreation.gov</p>
             </div>
@@ -201,4 +141,4 @@ function PreviewSite() {
     )
 }
 
-export default PreviewSite;
+export default SeeSite;
