@@ -12,6 +12,7 @@ import FormControl from "../components/FormControl/index";
 import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import Loading from "../components/Loading/index";
+import FormText from "../components/FormText/index"
 import InputPrepend from "../components/InputPrepend"
 
 function FindSites() {
@@ -33,8 +34,6 @@ function FindSites() {
     const [parks, setParks] = useState([]);
     const [campgrounds, setCampgrounds] = useState([]);
 
-
-    // useEffect to import states and parks for populated search terms
 
     useEffect(() => {
         API.getAllFacilities()
@@ -78,7 +77,6 @@ function FindSites() {
         });
         parksArr.sort((a, b) => (a > b) ? 1 : -1);
         setParks(parksArr);
-        console.log(findSite);
     };
 
     // ****** SEARCH NPS REC AREA ******
@@ -87,7 +85,7 @@ function FindSites() {
             ...findSite,
             park: event.target.value
         });
-        // populate the campground from park & state info
+        // // populate the campground from park & state info
         var campground = [];
         facilities.filter((facility) => {
             if (facility.state === findSite.state && facility.park === event.target.value) {
@@ -98,7 +96,6 @@ function FindSites() {
         })
         campground.sort((a, b) => (a > b) ? 1 : -1);
         setCampgrounds(campground);
-        console.log(campground)
     };
 
     // ****** OTHER ELEMENTS ******
@@ -112,19 +109,11 @@ function FindSites() {
     };
 
 
+    const history = useHistory()
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        setIsLoading(true)
-
-        // get open campsites with the given parameters
-        // API.findSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         history.push(`/sites/preview/${findSite.state}${findSite.park}${findSite.campground}${findSite.arrival}${findSite.departure}${findSite.people}`)
-        //         setIsLoading(false)
-        //     })
-        //     .catch(err => alert(err));
+        history.push(`/sites/results/${findSite.state}&${findSite.park}&${findSite.campground}&${findSite.arrival}&${findSite.departure}&${findSite.people}`)
     }
 
 
@@ -133,6 +122,7 @@ function FindSites() {
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     const styleLogin = { color: "#EBC023" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+    const styleText = { align: "left", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
 
 
 
@@ -158,10 +148,12 @@ function FindSites() {
             <br></br>
 
             <Forms onSubmit={handleFormSubmit}>
+                <FormText style={styleText} text="All fields are required" />
+
                 {/* *************** STATE SEARCH *************** */}
                 <FormGroup>
                     <div className="input-group">
-                        <InputPrepend prepend="State *" />
+                        <InputPrepend prepend="State" />
                         <FormControlList placeholder="CA" name="state" list="state-data" type="text" value={searchState} onChange={handleStateChange} required />
                         <datalist id="state-data">
                             {states.map(state => (
@@ -172,7 +164,7 @@ function FindSites() {
                 </FormGroup>
                 {/* *************** NPS RECREATION AREA SEARCH *************** */}
                 <FormGroup>
-                    <select className="custom-select select" name="park" onChange={handleParkChange}>
+                    <select className="custom-select select" name="park" onChange={handleParkChange} required={true}>
                         <option value="">NPS Recreation Area</option>
                         {parks.map(park => (
                             <option value={park} key={park}>{park}</option>
@@ -193,7 +185,7 @@ function FindSites() {
                     <Col>
                         <FormGroup>
                             <div className="input-group">
-                                <InputPrepend prepend="Arrival Date *" />
+                                <InputPrepend prepend="Arrival Date" />
                                 <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
                             </div>
                         </FormGroup>
@@ -201,7 +193,7 @@ function FindSites() {
                     <Col>
                         <FormGroup>
                             <div className="input-group">
-                                <InputPrepend prepend="Departure Date *" />
+                                <InputPrepend prepend="Departure Date" />
                                 <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
                             </div>
                         </FormGroup>

@@ -77,7 +77,7 @@ function App() {
             <ProtectedRoute exact path="/sites/search">
               <FindSites />
             </ProtectedRoute>
-            <ProtectedRoute path="/sites/results/:state:park:campground:arrival:departure:people">
+            <ProtectedRoute path="/sites/results/:state&:park&:campground&:arrival&:departure&:people">
               <Results />
             </ProtectedRoute>
           </Switch>
