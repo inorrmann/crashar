@@ -115,8 +115,9 @@ function FindSites() {
         event.preventDefault();
         let search = []
         for (let [key, value] of Object.entries(findSite)) {
-            search.push(`${key}=${value}`)
+            search.push(encodeURI(`${key}=${value}`))
         }
+        console.log(search)
         history.push(`/sites/results?${search.join("&")}`)
     }
 

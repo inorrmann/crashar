@@ -130,7 +130,7 @@ app.delete("/api/sites/:id", (req, res) => {
 
 // GET ALL OPEN SITES BY PARAMS
 app.get("/api/sites", (req, res) => {
-  // console.log(req.query)
+  console.log(req.query)
   db.Site.find({
     "state": req.query.state,
     "park": req.query.park,

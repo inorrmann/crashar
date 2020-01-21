@@ -1349,11 +1349,17 @@ const facilitiesSeed = [{
 	state: "WA",
 	campgroundID: "232510"
 }
-];
+]
 
 module.exports = () => db.Facility
 	.remove({})
-	.then(() => db.Facility.collection.insertMany(facilitiesSeed))
+	.then(() => facilitiesSeed.map(facility => {
+		return {
+			...facility,
+			park: facility.park.replace(/\&/g, "and")
+		}
+	}))
+	.then(cleanData => db.Facility.collection.insertMany(cleanData))
 	.then(data => {
 		console.log(data.result.n + " facilities inserted!");
 	})

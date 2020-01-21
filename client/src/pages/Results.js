@@ -36,6 +36,7 @@ function Results() {
         query[key] = value
     }
 
+    console.log(query)
     useEffect(() => {
         API.findOpenSites(query)
             .then(res => {
