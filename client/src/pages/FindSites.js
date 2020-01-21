@@ -113,7 +113,11 @@ function FindSites() {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        history.push(`/sites/results/${findSite.state}&${findSite.park}&${findSite.campground}&${findSite.arrival}&${findSite.departure}&${findSite.people}`)
+        let search = []
+        for (let [key, value] of Object.entries(findSite)) {
+            search.push(`${key}=${value}`)
+        }
+        history.push(`/sites/results?${search.join("&")}`)
     }
 
 

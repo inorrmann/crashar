@@ -129,11 +129,19 @@ app.delete("/api/sites/:id", (req, res) => {
 })
 
 // GET ALL OPEN SITES BY PARAMS
-app.get("/api/sites/search/:state/park/:park", (req, res) => {
-  // console.log(req.params)
-  db.Site.find({ "state": req.params.state, "park": req.params.park })
+app.get("/api/sites", (req, res) => {
+  // console.log(req.query)
+  db.Site.find({
+    "state": req.query.state,
+    "park": req.query.park,
+    "arrival": { $lte: req.query.arrival },
+    "departure": { $gte: req.query.departure },
+    "people": { $gte: parseInt(req.query.people) }
+  })
     .then(data => {
-      if (data) {
+      // console.log(data)
+      if (data.length > 0) {
+        console.log(data)
         res.json(data);
       } else {
         res.status(404).send({ success: false, message: "No open campsites found" });
@@ -183,9 +191,9 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// app.listen(PORT, function () {
+app.listen(PORT, function () {
 
-// '0.0.0.0' added because of proxy error (localhost:3000 wasn't able to communicate with localhost:3001)
-app.listen(PORT, '0.0.0.0', function () {
+  // '0.0.0.0' added because of proxy error (localhost:3000 wasn't able to communicate with localhost:3001)
+  // app.listen(PORT, '0.0.0.0', function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

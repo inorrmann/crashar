@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useQuery } from "react-router-dom";
 import API from "../utils/API";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
@@ -25,24 +25,24 @@ function Results() {
     const [otherCamps, setOtherCamps] = useState([])
 
     // extract the parameters from the browser
-    const { pathname } = useLocation();
-    let path = pathname.split("/")[3].replace(/%20/g, " ")
-    let query = {
-        state: path.split("&")[0],
-        park: path.split("&")[1],
-        campground: path.split("&")[2],
-        arrival: path.split("&")[3],
-        departure: path.split("&")[4],
-        people: parseInt(path.split("&")[5])
+    const {search}  = useLocation();
+    
+    // get urls search params object
+    const queryParams = new URLSearchParams(search)
+    // create a plain object to pass to api util
+    // transform arrival date so it looks like what's stored in mongoose
+    const query = {}
+    for (let [key, value] of queryParams.entries()) {
+        query[key] = value
     }
 
-    // useEffect(() => {
-    //     API.findOpenSites(query)
-    //         .then(res => {
-    //             console.log(res)
-    //         })
-    //         .catch(err => console.log(err))
-    // }, [])
+    useEffect(() => {
+        API.findOpenSites(query)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
 
 
 

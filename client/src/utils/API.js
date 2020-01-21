@@ -34,7 +34,9 @@ export default {
   },
   // find results of open sites by params
   findOpenSites: (query) => {
-    return axios.get(`/api/sites/${query.state}/park/${query.park}`)
+
+
+    return axios.get(`/api/sites`, { params: query })
   } 
 };
 
