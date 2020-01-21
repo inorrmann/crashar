@@ -9,7 +9,7 @@ import "./style.css"
 
 function Menu() {
   const { user } = useAuth();
-  console.log(user.id)
+
   // const { user, logout } = useAuth();
   // const history = useHistory();
 
@@ -18,7 +18,7 @@ function Menu() {
   const styleLogin = { color: "#EBC023" }
   const styleLink = { color: "#EBC023", fontSize: "2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .4)" }
-  const styleButton = { backgroundColor: "#574F44", width: "60%" }
+  const styleButton = { backgroundColor: "#574F44", width: "70%" }
   const styleButtonLink = { color: "#EBC023", fontWeight: "bold" }
 
   return (
@@ -39,7 +39,7 @@ function Menu() {
             style={styleButton}
             link="/sites/new"
             styleLink={styleButtonLink}
-            name="SHARE A SITE"
+            name="SHARE A CAMPSITE"
           />
         </div>
         <div className="text-center my-2">
@@ -47,7 +47,7 @@ function Menu() {
             style={styleButton}
             link={`/sites/all/${user.id}`}
             styleLink={styleButtonLink}
-            name="SEE MY SHARED SITES"
+            name="SEE MY SHARED CAMPSITES"
           />
         </div>
       </div>
@@ -61,7 +61,7 @@ function Menu() {
             style={styleButton}
             link="/sites/search"
             styleLink={styleButtonLink}
-            name="FIND AN OPEN SITE"
+            name="FIND OPEN CAMPSITES"
           />
         </div>
       </div>

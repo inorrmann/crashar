@@ -19,6 +19,8 @@ import Home from './pages/Home';
 import ShareSite from './pages/ShareSite';
 import PreviewSite from "./pages/PreviewSite";
 import MySites from "./pages/MySites";
+import FindSites from "./pages/FindSites";
+import Results from "./pages/Results";
 
 
 // Here is if we have an id_token in localStorage
@@ -73,7 +75,10 @@ function App() {
               <Home />
             </Route>
             <ProtectedRoute exact path="/sites/search">
-              {/* <SearchSites /> */}
+              <FindSites />
+            </ProtectedRoute>
+            <ProtectedRoute path="/sites/results/:state:park:campground:arrival:departure:people">
+              <Results />
             </ProtectedRoute>
           </Switch>
         </div>

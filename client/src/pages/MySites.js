@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import API from "../utils/API";
-import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
@@ -18,7 +17,6 @@ import CardDelete from "../components/CardDelete/index";
 
 function MySites() {
     const [isLoading, setIsLoading] = useState(true);
-    // const [allSites, setAllSites] = useState([]);
     const [pastSites, setPastSites] = useState([]);
     const [futureSites, setFutureSites] = useState([]);
 
@@ -31,7 +29,6 @@ function MySites() {
     var date = new Date();
     let month = `0${date.getMonth() + 1}`.slice(-2)
     var currentDate = `${date.getFullYear()}-${month}-${date.getDate()}`
-    // console.log(currentDate)
 
     useEffect(() => {
         loadSites(id);
@@ -40,8 +37,6 @@ function MySites() {
     function loadSites(id) {
         API.getAllSharedSites(id)
             .then(res => {
-                // setAllSites(res.data)
-                console.log(res.data)
                 let past = [];
                 let future = [];
 
@@ -97,7 +92,7 @@ function MySites() {
                 </Navbar>
                 <br></br>
                 {/* render header only if there are active sites */}
-                {futureSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Active Sites</h3>}
+                {futureSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Active Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
                     <CardColumns>
@@ -120,7 +115,7 @@ function MySites() {
 
                 <hr></hr>
                 {/* render header only if there are expired sites */}
-                {pastSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Expired Sites</h3>}
+                {pastSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Expired Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
                     <CardColumns>

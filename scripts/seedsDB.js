@@ -11,7 +11,7 @@ mongoose.connect(
 const facilitiesSeed = [{
 	name: "Station Camp Campground",
 	park: "Big South Fork National River & Recreation Area",
-	state: "TENNESSEE",
+	state: "TN",
 	campgroundID: "10004358"
 }, {
 	name: "Ocean View House",
@@ -36,17 +36,17 @@ const facilitiesSeed = [{
 }, {
 	name: "Joe Thompson Cabin",
 	park: "Lake Clark National Park & Preserve",
-	state: "",
+	state: "AK",
 	campgroundID: "10006208"
 }, {
 	name: "Gorge Lake Campground",
 	park: "North Cascades National Park",
-	state: "WASHINGTON",
+	state: "WA",
 	campgroundID: "10004932"
 }, {
 	name: "Steel Creek Campground",
 	park: "Buffalo National River",
-	state: "",
+	state: "AR",
 	campgroundID: "10001451"
 }, {
 	name: "Cabin Camp 3",
@@ -66,7 +66,7 @@ const facilitiesSeed = [{
 }, {
 	name: "Saguaro National Park Wilderness Permits",
 	park: "Saguaro National Park",
-	state: "ARIZONA",
+	state: "AZ",
 	campgroundID: "10028678"
 }, {
 	name: "Loft Mountain Campground",
@@ -431,7 +431,7 @@ const facilitiesSeed = [{
 }, {
 	name: "BLACKWOODS CAMPGROUND",
 	park: "Acadia National Park",
-	state: "",
+	state: "ME",
 	campgroundID: "232508"
 }, {
 	name: "ASSATEAGUE ISLAND NATIONAL SEASHORE CAMPGROUND",
@@ -841,7 +841,7 @@ const facilitiesSeed = [{
 }, {
 	name: "SEAWALL CAMPGROUND",
 	park: "Acadia National Park",
-	state: "",
+	state: "ME",
 	campgroundID: "234674"
 }, {
 	name: "SPENCE CABIN",
@@ -916,7 +916,7 @@ const facilitiesSeed = [{
 }, {
 	name: "Little Beaver Campground",
 	park: "Pictured Rocks National Lakeshore",
-	state: "",
+	state: "MI",
 	campgroundID: "246856"
 }, {
 	name: "Burns Lake Campground",
@@ -946,7 +946,7 @@ const facilitiesSeed = [{
 }, {
 	name: "Hurricane River Campground",
 	park: "Pictured Rocks National Lakeshore",
-	state: "",
+	state: "MI",
 	campgroundID: "247603"
 }, {
 	name: "OWENS CREEK CAMPGROUND",
@@ -1056,12 +1056,12 @@ const facilitiesSeed = [{
 }, {
 	name: "Marsden Tract Group Campsite",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "251544"
 }, {
 	name: "Carderock Recreation Area Pavilion",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "251545"
 }, {
 	name: "Alosa Campsites",
@@ -1161,7 +1161,7 @@ const facilitiesSeed = [{
 }, {
 	name: "Spring Gap Campground",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "252967"
 }, {
 	name: "Fifteen Mile Creek Campsite",
@@ -1171,17 +1171,17 @@ const facilitiesSeed = [{
 }, {
 	name: "McCoy's Ferry Campground",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "252969"
 }, {
 	name: "Paw Paw Tunnel Campsite",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "252971"
 }, {
 	name: "Antietam Creek Campsite",
 	park: "Chesapeake & Ohio Canal National Historical Park",
-	state: "",
+	state: "MD",
 	campgroundID: "252970"
 }, {
 	name: "Cumberland Island National Seashore Camping Permits",

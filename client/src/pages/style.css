@@ -9,7 +9,7 @@
 }
 
 
-.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites {
+.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites, .find-sites {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -19,7 +19,7 @@
     font-family: "Roboto", sans-serif; 
 }
 
-.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after {
+.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after, .find-sites::after {
     content: "";
     position: fixed;
     top: 0px;
@@ -123,3 +123,7 @@
     background-image: url("./images/tents-on-beach.jpg")
 }
 
+/* FIND SITES */
+.find-sites::after {
+    background-image: url("./images/many-tents-night.jpg")
+}

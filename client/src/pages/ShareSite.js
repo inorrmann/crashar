@@ -14,6 +14,7 @@ import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import FormCheck from "../components/FormCheck/index";
 import Loading from "../components/Loading/index";
+import InputPrepend from '../components/InputPrepend/index';
 
 
 function ShareSite() {
@@ -225,7 +226,7 @@ function ShareSite() {
                 <NavBrand style={styleBrand} />
             </Navbar>
             <br></br>
-            <h3 className="display-4 text-center" style={{ fontWeight: "bold", color: "#302C26", textShadow: "0 0 20px #FFF8D5" }}>Share a Site</h3>
+            <h1 className="text-center" style={{ fontWeight: "bold", color: "#302C26", textShadow: "0 0 20px #FFF8D5" }}>Share a Campsite</h1>
             <Forms onSubmit={handleFormSubmit}>
                 {/* *************** CAMPGROUND SEARCH *************** */}
                 <FormGroup>
@@ -239,12 +240,12 @@ function ShareSite() {
                 {/* *************** NPS RECREATION AREA SEARCH *************** */}
                 <FormGroup>
 
-                        <select className="custom-select select" name="park" onChange={handleParkChange} required>
-                            <option value="">NPS Recreation Area *</option>
-                            {parks.map(park => (
-                                <option value={park} key={park}>{park}</option>
-                            ))}
-                        </select>
+                    <select className="custom-select select" name="park" onChange={handleParkChange} required>
+                        <option value="">NPS Recreation Area *</option>
+                        {parks.map(park => (
+                            <option value={park} key={park}>{park}</option>
+                        ))}
+                    </select>
                 </FormGroup>
                 {/* *************** CAMPSITE AND LOOP INPUT FIELDS *************** */}
                 <FormRow>
@@ -292,9 +293,7 @@ function ShareSite() {
                     <Col>
                         <FormGroup>
                             <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text bg-white border-right-0">Arrival Date *</span>
-                                </div>
+                                <InputPrepend prepend="Arrival Date *" />
                                 <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
                             </div>
                         </FormGroup>
@@ -302,9 +301,7 @@ function ShareSite() {
                     <Col>
                         <FormGroup>
                             <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text bg-white border-right-0">Departure Date *</span>
-                                </div>
+                                <InputPrepend prepend="Departure Date *" />
                                 <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
                             </div>
                         </FormGroup>
@@ -313,9 +310,8 @@ function ShareSite() {
                 {/* *************** COST PER NIGHT INPUT FIELD *************** */}
                 <FormGroup>
                     <div className="input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white border-right-0">Cost per night * <span>&emsp;&emsp;</span> $</span>
-                        </div>
+                        <InputPrepend prepend="Cost per night *  $" />
+                        {/* <InputPrepend prepend={`Cost per night * ${<span>&emsp;&emsp;</span>} $`} /> */}
                         <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required />
                     </div>
                     <FormText style={styleTextSm} text="Do not ask for more than what you paid per night" />
