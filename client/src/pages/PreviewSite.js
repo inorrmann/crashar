@@ -57,7 +57,6 @@ function PreviewSite() {
     useEffect(() => {
         API.getSharedSite(id)
             .then(res => {
-                console.log(res.data)
                 // setSharedSite({
                 //     ...sharedSite,
                 //     campground: res.data.campground,
@@ -144,24 +143,19 @@ function PreviewSite() {
             <Navbar style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">
-                    <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="Return to Campsites" />
+                    <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="My Campsites" />
                 </div>
             </Navbar>
             <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
                 <br></br>
+                <div className="mx-5" style={textshadow1}>
+                    <h4 className="text-center font-weight-bold mx-3 text-wrap text-light" style={textshadow}>CAMPSITE PREVIEW</h4>
+                </div>
                 <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                {/* <div className="py-5"> */}
-                <div className="mt-5 mx-3" style={textshadow1}>
-                    <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
+                <div className="mx-3" style={textshadow1}>
+                    <h4 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
                     <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
                     <h5 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
-                    {/* <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
-                    <h6 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
-                    <br></br>
-                    <h5 className="text-center font-weight-bold m-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5> */}
                 </div>
             </div>
             <div className="text-light text-center">

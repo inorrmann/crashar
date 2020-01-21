@@ -19,14 +19,14 @@ import CardSite from "../components/CardSite";
 
 
 function Results() {
-    // const [isLoading, setIsLoading] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(false);
     const [selectedCamp, setSelectedCamp] = useState([])
     const [otherCamps, setOtherCamps] = useState([])
 
     // extract the parameters from the browser
-    const {search}  = useLocation();
-    
+    const { search } = useLocation();
+
     // get urls search params object
     const queryParams = new URLSearchParams(search)
     // create a plain object to pass to api util
@@ -36,17 +36,31 @@ function Results() {
         query[key] = value
     }
 
-    console.log(query)
     useEffect(() => {
         API.findOpenSites(query)
             .then(res => {
                 console.log(res.data)
+                let selected = [];
+                let others = []
+                res.data.map(site => {
+                    let arrivalPretty = `${site.arrival.slice(5, 7)}/${site.arrival.slice(8, 10)}/${site.arrival.slice(0, 4)}`
+                    site.arrival = arrivalPretty
+                    let departurePretty = `${site.departure.slice(5, 7)}/${site.departure.slice(8, 10)}/${site.departure.slice(0, 4)}`
+                    site.departure = departurePretty
+                    if (site.campground === query.campground) {
+                        selected.push(site)
+                    }
+                    else { others.push(site) }
+                })
+                setSelectedCamp(selected);
+                setOtherCamps(others);
+                setIsLoading(false);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                alert("No open campsites were found with those parameters")
+                console.log(err)})
+
     }, [])
-
-
-
 
 
     const styleLink = { color: "#302C26", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #FFF8D5" }
@@ -55,7 +69,6 @@ function Results() {
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
-
 
 
     if (isLoading) {
@@ -75,43 +88,43 @@ function Results() {
             <br />
             <br />
             {/* render header only if there are active sites */}
-            {/* {selectedCamp[0] && <h3 className="font-weight-bold ml-3" style={headers}>{query.campground}</h3>} */}
-            {<h3 className="font-weight-bold text-center" style={headers}>Potwisha Campground</h3>}
+            {selectedCamp[0] && <h3 className="font-weight-bold ml-3" style={headers}>{query.campground}</h3>}
+            {/* {<h3 className="font-weight-bold text-center" style={headers}>Potwisha Campground</h3>} */}
 
             <div className="d-flex justify-content-center">
                 <CardColumns>
-                    {/* {selectedCamp.map(selected => ( */}
+                    {selectedCamp.map(selected => (
                     <Cards>
                         <CardBody>
-                            <CardTitle title="Potwisha Campground" />
-                            <CardSubDate arrival="01/30/2020" departure="02/05/2020" />
+                            <CardTitle title={selected.campground} />
+                            <CardSubDate arrival={selected.arrival} departure={selected.departure} />
                             <div className="d-flex flex-row justify-content-between">
-                                <CardSite people="2" tents="1" cars="0" />
-                                <CardLink styleBtn={styleBtn} to={`/message/:userId`} label="See More" />
+                                <CardSite people={selected.people} tents={selected.tents} cars={selected.cars} />
+                                <CardLink styleBtn={styleBtn} to={`/sites/detail/${selected._id}`} label="See More" />
                             </div>
                         </CardBody>
                     </Cards>
-                    {/* ))} */}
+                    ))}
                 </CardColumns>
             </div>
 
             <hr></hr>
-            {<h3 className="font-weight-bold text-center pt-3" style={headers}>Other Campgrounds</h3>}
+            {otherCamps[0] && <h3 className="font-weight-bold text-center pt-3" style={headers}>Other Campgrounds</h3>}
 
-            <div className="d-flex justify-content-center">
+            <div className="d-flex mb-4 justify-content-center">
                 <CardColumns>
-                    {/* {selectedCamp.map(selected => ( */}
+                    {otherCamps.map(other => (
                     <Cards>
                         <CardBody>
-                            <CardTitle title="Lodgepole Campground" />
-                            <CardSubDate arrival="01/30/2020" departure="02/05/2020" />
+                            <CardTitle title={other.campground} />
+                            <CardSubDate arrival={other.arrival} departure={other.departure} />
                             <div className="d-flex flex-row justify-content-between">
-                                <CardSite people="2" tents="1" cars="0" />
-                                <CardLink styleBtn={styleBtn} to={`/message/:userId`} label="See More" />
+                                <CardSite people={other.people} tents={other.tents} cars={other.cars} />
+                                <CardLink styleBtn={styleBtn} to={`/sites/detail/${other._id}`} label="See More" />
                             </div>
                         </CardBody>
                     </Cards>
-                    {/* ))} */}
+                    ))}
                 </CardColumns>
             </div>
 
