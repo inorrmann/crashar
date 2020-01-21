@@ -101,7 +101,7 @@ app.get("/api/sites/:id", (req, res) => {
       if (data) {
         res.json(data);
       } else {
-        res.status(404).send({ success: false, message: "Shared site not found" });
+        res.status(404).send({ success: false, message: "Shared campsite not found" });
       }
     })
     .catch(err => res.status(400).send(err))
@@ -114,20 +114,33 @@ app.get("/api/sites/user/:id", (req, res) => {
       if (data) {
         res.json(data);
       } else {
-        res.status(404).send({ success: false, message: "No shared sites found" });
+        res.status(404).send({ success: false, message: "No shared campsites found" });
       }
     })
     .catch(err => res.status(400).send(err))
 })
 
 // DELETE A SITE BY ID
-app.delete("/api/sites/:id", (req,res) => {
+app.delete("/api/sites/:id", (req, res) => {
   db.Site.findById(req.params.id)
     .then(data => data.remove())
     .then(data => res.json(data))
     .catch(err => res.status(422).json(err))
 })
 
+// GET ALL OPEN SITES BY PARAMS
+app.get("/api/sites/search/:state/park/:park", (req, res) => {
+  // console.log(req.params)
+  db.Site.find({ "state": req.params.state, "park": req.params.park })
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "No open campsites found" });
+      }
+    })
+    .catch(err => res.status(400).send(err))
+})
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access

@@ -9,7 +9,7 @@
 }
 
 
-.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites, .find-sites {
+.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites, .find-sites, .results {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -19,7 +19,7 @@
     font-family: "Roboto", sans-serif; 
 }
 
-.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after, .find-sites::after {
+.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after, .find-sites::after, .results::after {
     content: "";
     position: fixed;
     top: 0px;
@@ -126,4 +126,9 @@
 /* FIND SITES */
 .find-sites::after {
     background-image: url("./images/many-tents-night.jpg")
+}
+
+/* RESULTS PAGE */
+.results::after {
+    background-image: url("./images/single-green-tent-clouds.jpg")
 }

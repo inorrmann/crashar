@@ -31,6 +31,10 @@ export default {
   // delete shared site by id
   deleteSite: (id) => {
     return axios.delete(`/api/sites/${id}`)
-  }
+  },
+  // find results of open sites by params
+  findOpenSites: (query) => {
+    return axios.get(`/api/sites/${query.state}/park/${query.park}`)
+  } 
 };
 

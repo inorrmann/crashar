@@ -171,7 +171,7 @@ function PreviewSite() {
                     <h4 className="text-justify d-inline">{sharedSite.people} <i className="fas fa-user"></i></h4>
                     <h4 className="text-justify d-inline">{sharedSite.tents} <i className="fas fa-campground"></i></h4>
                     <h4 className="text-justify d-inline">{sharedSite.cars} <i className="fas fa-car-alt"></i></h4>
-                    <h4 className="text-justify d-inline align-baseline">{accessible} <i className="fas fa-wheelchair"></i></h4>
+                    <h4 className="text-justify d-inline">{accessible} <i className="fas fa-wheelchair"></i></h4>
                 </div>
 
                 <div className="d-flex flex-row justify-content-between m-4">
