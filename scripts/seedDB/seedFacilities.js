@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require("../models");
+const db = require("../../models");
 
 // This file empties the Facilities collection and inserts the entries below
 
@@ -1351,15 +1351,9 @@ const facilitiesSeed = [{
 }
 ];
 
-
-db.Facility
+module.exports = () => db.Facility
 	.remove({})
 	.then(() => db.Facility.collection.insertMany(facilitiesSeed))
 	.then(data => {
-		console.log(data.result.n + " records inserted!");
-		process.exit(0);
+		console.log(data.result.n + " facilities inserted!");
 	})
-	.catch(err => {
-		console.error(err);
-		process.exit(1);
-	});
