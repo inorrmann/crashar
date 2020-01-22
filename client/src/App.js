@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider, useAuth } from './utils/auth'
 
 import Login from './pages/Login';
-import Messages from './pages/Messages';
 import Signup from './pages/Signup';
 import Menu from './pages/Menu';
 import Home from './pages/Home';
@@ -22,6 +21,9 @@ import MySites from "./pages/MySites";
 import FindSites from "./pages/FindSites";
 import Results from "./pages/Results";
 import SeeSite from "./pages/SeeSite";
+import Message from "./pages/Message";
+import MessageBoard from "./pages/MessageBoard";
+
 
 
 // Here is if we have an id_token in localStorage
@@ -60,9 +62,6 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
-            <ProtectedRoute path="/messages/:id">
-              <Messages />
-            </ProtectedRoute>
             <ProtectedRoute exact path="/sites/new">
               <ShareSite />
             </ProtectedRoute>
@@ -83,6 +82,12 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute path="/sites/results">
               <Results />
+            </ProtectedRoute>
+            <ProtectedRoute path="/messages/all/:id">
+              <MessageBoard />
+            </ProtectedRoute>
+            <ProtectedRoute path="/messages/:id">
+              <Message />
             </ProtectedRoute>
           </Switch>
         </div>

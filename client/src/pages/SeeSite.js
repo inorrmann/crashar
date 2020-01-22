@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import { useLocation } from "react-router-dom";
+import { useAuth } from "../utils/auth";
+import { useLocation, useHistory } from "react-router-dom";
 import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-import ButtonLink from "../components/ButtonLink/index";
 import placeholder from "../pages/images/camping-placeholder.png";
+import NavButton from "../components/NavButton";
+import ButtonOnClick from "../components/ButtonOnClick"
 
 
 function SeeSite() {
+    // retrieve userID to embed it to the message 
+    const { user } = useAuth();
+    const userID = user.id
+
     const [isLoading, setIsLoading] = useState(true);
     const [sharedSite, setSharedSite] = useState({})
     const [loop, setLoop] = useState("");
@@ -22,6 +28,10 @@ function SeeSite() {
     const [arrival, setArrival] = useState("");
     const [departure, setDeparture] = useState("");
     const [image, setImage] = useState("");
+    const [names, setNames] = useState({
+        owner: "",
+        guest: user.name
+    })
 
 
     const { pathname } = useLocation();
@@ -29,7 +39,7 @@ function SeeSite() {
 
     useEffect(() => {
         API.getSharedSite(id)
-            .then(res => {            
+            .then(res => {
                 setSharedSite(res.data)
                 if (res.data.image === "") {
                     setImage(placeholder)
@@ -67,9 +77,47 @@ function SeeSite() {
                 setDeparture(departure);
 
                 setIsLoading(false)
+                return res;
             })
             .catch(err => console.log(err))
+            .then(res => {
+                API.getUser(res.data.createdBy)
+                    .then(res => {
+                        setNames({
+                            ...names,
+                            owner: res.data.firstName,
+                        })
+                    })
+                    .catch(err => console.log(err))
+            })
     }, []);
+
+
+    const history = useHistory()
+
+    const goBack = event => {
+        event.preventDefault();
+        history.goBack()
+    }
+
+
+    function contactCamper() {
+
+        // API.findMessage(sharedSite.createdBy, userID, userID._id)
+console.log(names)
+
+        // if 404 response: 
+        // create new message POST request
+        API.createMessage(sharedSite.createdBy, names.owner, userID, names.guest, sharedSite._id, sharedSite.people, sharedSite.tents, sharedSite.cars, sharedSite.campground, sharedSite.arrival, sharedSite.departure, userID, "")
+            .then(res => {
+                history.push(`/messages/${res.data._id}`)
+                setIsLoading(false)
+            })
+            .catch(err => alert(err))
+
+        // else use the response to go to the current view for the messages 
+
+    }
 
 
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
@@ -86,10 +134,10 @@ function SeeSite() {
     return (
         <div className="preview-site overflow-auto">
 
-            <Navbar style={styleNavbar}>
+            <Navbar class="py-3" style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">
-                    <NavLink link={`/sites/results/`} styleLink={styleLink} name="Return to Results" />
+                    <NavButton onClick={goBack} styleNavBtn={styleLink} btnName="Return to Results" />
                 </div>
             </Navbar>
             <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
@@ -132,7 +180,7 @@ function SeeSite() {
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
             <div className="text-center mt-4">
-                <ButtonLink style={styleButton} styleLink={styleButton} to={`/messages/?`}name="CONTACT CAMPERS" />
+                <ButtonOnClick style={styleButton} onClick={contactCamper} submitName="CONTACT CAMPERS" />
                 <hr></hr>
                 <p className="text-muted mb-2">Data Source: ridb.recreation.gov</p>
             </div>

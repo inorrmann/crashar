@@ -48,7 +48,6 @@ app.post('/api/login', (req, res) => {
 
 // SIGNUP ROUTE
 app.post('/api/signup', (req, res) => {
-  console.log(req.body)
   db.User.create(req.body)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
@@ -56,7 +55,6 @@ app.post('/api/signup', (req, res) => {
 
 // SHARE A SITE ROUTE
 app.post('/api/sites', (req, res) => {
-  console.log(req.body)
   db.Site.create(req.body)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
@@ -64,7 +62,6 @@ app.post('/api/sites', (req, res) => {
 
 // // SEED FACILITIES ROUTE
 // app.post('/api/facilities', (req, res) => {
-//   console.log(req.body)
 //   db.Facility.create(req.body)
 //      .then(data => res.json(data))
 //      .catch(err => res.status(400).json(err));
@@ -130,7 +127,6 @@ app.delete("/api/sites/:id", (req, res) => {
 
 // GET ALL OPEN SITES BY PARAMS
 app.get("/api/sites", (req, res) => {
-  console.log(req.query)
   db.Site.find({
     "state": req.query.state,
     "park": req.query.park,
@@ -139,9 +135,7 @@ app.get("/api/sites", (req, res) => {
     "people": { $gte: parseInt(req.query.people) }
   })
     .then(data => {
-      // console.log(data)
       if (data.length > 0) {
-        console.log(data)
         res.json(data);
       } else {
         res.status(404).send({ success: false, message: "No open campsites found" });
@@ -149,6 +143,39 @@ app.get("/api/sites", (req, res) => {
     })
     .catch(err => res.status(400).send(err))
 })
+
+// CREATE A NEW MESSAGE
+app.post('/api/messages', (req, res) => {
+  console.log(req.body)
+  const { message, ...rest } = req.body
+  db.Message.create({ ...rest, messages: [message] })
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
+});
+
+// FIND MESSAGE BY SITEOWNER, SITEGUEST, AND SITE
+
+
+// FIND MESSAGE BY ID
+app.get("/api/messages/id/:id", (req, res) => {
+  db.Message.findById(req.params.id)
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "Message not found" });
+      }
+    })
+    .catch(err => res.status(400).send(err))
+});
+
+// FIND ALL MESSAGES BY USERID
+
+
+
+
+// findByAndUpdate $push
+
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access

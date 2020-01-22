@@ -22,7 +22,7 @@ function Menu() {
   const styleButtonLink = { color: "#EBC023", fontWeight: "bold" }
 
   return (
-    <div className="menu">
+    <div className="menu overflow-auto">
       <div className="menuTop">
 
         <Navbar style={styleNavbar}>
@@ -65,23 +65,6 @@ function Menu() {
           />
         </div>
       </div>
-
-      {/* <p className="App-intro">
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={goToEditProfile}
-        >
-          Go to Profile
-        </button>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => logout()}
-        >
-          Logout
-        </button>
-      </p> */}
     </div>
   );
 }

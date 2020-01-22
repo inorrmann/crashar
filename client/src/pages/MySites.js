@@ -97,8 +97,8 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {futureSites.map(future => (
-                            <Cards>
-                                <CardBody>
+                            <Cards className="mt-3 shadow">
+                                <CardBody className="p-3">
                                     <CardTitle title={future.campground} />
                                     <CardSubtitle subtitle={future.park} />
                                     <CardDate arrival={future.arrival} departure={future.departure} />
@@ -120,8 +120,8 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {pastSites.map(past => (
-                            <Cards>
-                                <CardBody>
+                            <Cards className="mt-3 shadow">
+                                <CardBody className="p-3">
                                     <CardTitle title={past.campground} />
                                     <CardSubtitle subtitle={past.park} />
                                     <CardDate arrival={past.arrival} departure={past.departure} />

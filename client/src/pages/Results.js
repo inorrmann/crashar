@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useQuery } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import API from "../utils/API";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-import NavLogin from "../components/NavbarLogin/index";
+// import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
 import Cards from "../components/Card/index";
 import CardBody from "../components/CardBody/index";
@@ -12,7 +12,7 @@ import CardTitle from "../components/CardTitle/index";
 // import CardSubtitle from "../components/CardSubtitle/index";
 // import CardDate from "../components/CardDate/index";
 import CardLink from "../components/CardLink/index";
-import CardDelete from "../components/CardDelete/index";
+// import CardDelete from "../components/CardDelete/index";
 import CardSubDate from "../components/CardSubDate";
 import CardSite from "../components/CardSite";
 
@@ -20,7 +20,6 @@ import CardSite from "../components/CardSite";
 
 function Results() {
     const [isLoading, setIsLoading] = useState(true);
-    // const [isLoading, setIsLoading] = useState(false);
     const [selectedCamp, setSelectedCamp] = useState([])
     const [otherCamps, setOtherCamps] = useState([])
 
@@ -65,8 +64,8 @@ function Results() {
 
     const styleLink = { color: "#302C26", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #FFF8D5" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px #FFF8D5", backgroundColor: "rgba(255, 248, 213, .3)" }
-    const styleText = { align: "left", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
-    const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
+    // const styleText = { align: "left", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
+    // const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
 
@@ -89,13 +88,12 @@ function Results() {
             <br />
             {/* render header only if there are active sites */}
             {selectedCamp[0] && <h3 className="font-weight-bold ml-3" style={headers}>{query.campground}</h3>}
-            {/* {<h3 className="font-weight-bold text-center" style={headers}>Potwisha Campground</h3>} */}
 
             <div className="d-flex justify-content-center">
                 <CardColumns>
                     {selectedCamp.map(selected => (
-                    <Cards>
-                        <CardBody>
+                    <Cards className="mt-3 shadow">
+                        <CardBody className="p-3">
                             <CardTitle title={selected.campground} />
                             <CardSubDate arrival={selected.arrival} departure={selected.departure} />
                             <div className="d-flex flex-row justify-content-between">
@@ -114,8 +112,8 @@ function Results() {
             <div className="d-flex mb-4 justify-content-center">
                 <CardColumns>
                     {otherCamps.map(other => (
-                    <Cards>
-                        <CardBody>
+                    <Cards className="mt-3 shadow">
+                        <CardBody className="p-3">
                             <CardTitle title={other.campground} />
                             <CardSubDate arrival={other.arrival} departure={other.departure} />
                             <div className="d-flex flex-row justify-content-between">

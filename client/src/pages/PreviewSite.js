@@ -140,7 +140,7 @@ function PreviewSite() {
     return (
         <div className="preview-site overflow-auto">
 
-            <Navbar style={styleNavbar}>
+            <Navbar class="py-3" style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">
                     <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="My Campsites" />
