@@ -138,9 +138,6 @@ function SeeSite() {
             <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
                 <br></br>
                 <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
                 <div className="mt-5 mx-3" style={textshadow1}>
                     <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
                     <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>

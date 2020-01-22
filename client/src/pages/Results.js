@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../utils/auth";
 import API from "../utils/API";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-// import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
 import Cards from "../components/Card/index";
 import CardBody from "../components/CardBody/index";
 import CardTitle from "../components/CardTitle/index";
-// import CardSubtitle from "../components/CardSubtitle/index";
-// import CardDate from "../components/CardDate/index";
 import CardLink from "../components/CardLink/index";
-// import CardDelete from "../components/CardDelete/index";
 import CardSubDate from "../components/CardSubDate";
 import CardSite from "../components/CardSite";
 
 
 
 function Results() {
+    const { user } = useAuth()
+
     const [isLoading, setIsLoading] = useState(true);
     const [selectedCamp, setSelectedCamp] = useState([])
     const [otherCamps, setOtherCamps] = useState([])
@@ -45,10 +44,12 @@ function Results() {
                     site.arrival = arrivalPretty
                     let departurePretty = `${site.departure.slice(5, 7)}/${site.departure.slice(8, 10)}/${site.departure.slice(0, 4)}`
                     site.departure = departurePretty
-                    if (site.campground === query.campground) {
-                        selected.push(site)
+                    if (site.createdBy !== user.id) {
+                        if (site.campground === query.campground) {
+                            selected.push(site)
+                        }
+                        else { others.push(site) }
                     }
-                    else { others.push(site) }
                 })
                 setSelectedCamp(selected);
                 setOtherCamps(others);
@@ -56,7 +57,8 @@ function Results() {
             })
             .catch(err => {
                 alert("No open campsites were found with those parameters")
-                console.log(err)})
+                console.log(err)
+            })
 
     }, [])
 
@@ -91,16 +93,16 @@ function Results() {
             <div className="d-flex justify-content-center">
                 <CardColumns>
                     {selectedCamp.map(selected => (
-                    <Cards className="mt-3 shadow">
-                        <CardBody className="p-3">
-                            <CardTitle title={selected.campground} />
-                            <CardSubDate arrival={selected.arrival} departure={selected.departure} />
-                            <div className="d-flex flex-row justify-content-between">
-                                <CardSite people={selected.people} tents={selected.tents} cars={selected.cars} />
-                                <CardLink styleBtn={styleBtn} to={`/sites/detail/${selected._id}`} label="See More" />
-                            </div>
-                        </CardBody>
-                    </Cards>
+                        <Cards className="mt-3 shadow">
+                            <CardBody className="p-3">
+                                <CardTitle title={selected.campground} />
+                                <CardSubDate arrival={selected.arrival} departure={selected.departure} />
+                                <div className="d-flex flex-row justify-content-between">
+                                    <CardSite people={selected.people} tents={selected.tents} cars={selected.cars} />
+                                    <CardLink styleBtn={styleBtn} to={`/sites/detail/${selected._id}`} label="See More" />
+                                </div>
+                            </CardBody>
+                        </Cards>
                     ))}
                 </CardColumns>
             </div>
@@ -111,16 +113,16 @@ function Results() {
             <div className="d-flex mb-4 justify-content-center">
                 <CardColumns>
                     {otherCamps.map(other => (
-                    <Cards className="mt-3 shadow">
-                        <CardBody className="p-3">
-                            <CardTitle title={other.campground} />
-                            <CardSubDate arrival={other.arrival} departure={other.departure} />
-                            <div className="d-flex flex-row justify-content-between">
-                                <CardSite people={other.people} tents={other.tents} cars={other.cars} />
-                                <CardLink styleBtn={styleBtn} to={`/sites/detail/${other._id}`} label="See More" />
-                            </div>
-                        </CardBody>
-                    </Cards>
+                        <Cards className="mt-3 shadow">
+                            <CardBody className="p-3">
+                                <CardTitle title={other.campground} />
+                                <CardSubDate arrival={other.arrival} departure={other.departure} />
+                                <div className="d-flex flex-row justify-content-between">
+                                    <CardSite people={other.people} tents={other.tents} cars={other.cars} />
+                                    <CardLink styleBtn={styleBtn} to={`/sites/detail/${other._id}`} label="See More" />
+                                </div>
+                            </CardBody>
+                        </Cards>
                     ))}
                 </CardColumns>
             </div>

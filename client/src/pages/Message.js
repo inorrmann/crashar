@@ -17,30 +17,36 @@ function Message() {
   const { user } = useAuth();
   const userID = user.id
 
-  // const [isLoading, setIsLoading] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-
-  const [messages, setMessages] = useState({});
-  const [campsiteInfo, setCampsiteInfo] = useState({});
+  const [conversation, setConversation] = useState({});
+  const [dates, setDates] = useState({
+    arrival: "",
+    departure: ""
+  })
   const [newMessage, setNewMessage] = useState({
     author: userID,
     text: ""
   })
 
   const { pathname } = useLocation();
-    let id = pathname.split("/")[2]
-    // console.log(pathname)
-    // console.log(id)
+  let id = pathname.split("/")[2]
 
   useEffect(() => {
     API.findMessageById(id)
       .then(res => {
         console.log(res.data)
-        setMessages(res.data);
+        setConversation(res.data);
+        // reformat dates for display on cards
+        let arrival = `${res.data.arrival.slice(5, 7)}/${res.data.arrival.slice(8, 10)}/${res.data.arrival.slice(0, 4)}`
+        let departure = `${res.data.departure.slice(5, 7)}/${res.data.departure.slice(8, 10)}/${res.data.departure.slice(0, 4)}`
+        setDates({
+          ...conversation,
+          arrival: arrival,
+          departure: departure
+        })
         setIsLoading(false)
       })
       .catch(err => console.log(err))
-
   }, []);
 
 
@@ -96,43 +102,58 @@ function Message() {
       <Navbar class="py-3" style={styleNavbar}>
         <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
         <div className="ml-auto">
-          <NavLink link={`/messages/all/${userID}`} styleLink={styleLink} name="See All Messages" />
+          <NavLink link={`/messages/all/${userID}`} styleLink={styleLink} name="See All Conversations" />
         </div>
       </Navbar>
       <br />
-      <h3 className="text-center text-wrap fint-weight-bold mx-3" style={textshadow}>Campground Name Goes Here</h3>
+      <h3 className="text-center text-wrap fint-weight-bold mx-3" style={textshadow}>{conversation.campground}</h3>
 
       <div className="d-flex flex-row justify-content-between mx-4 mt-3" style={textYellow}>
-        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: 01/01/2020</h5>
-        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: 01/02/2020</h5>
+        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: {dates.arrival}</h5>
+        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: {dates.departure}</h5>
       </div>
 
       <div className="d-flex flex-row justify-content-between px-5 mx-5" style={textYellow}>
-        <h4 className="text-justify d-inline">2 <i className="fas fa-user"></i></h4>
-        <h4 className="text-justify d-inline">1 <i className="fas fa-campground"></i></h4>
-        <h4 className="text-justify d-inline">0 <i className="fas fa-car-alt"></i></h4>
+        <h4 className="text-justify d-inline">{conversation.people} <i className="fas fa-user"></i></h4>
+        <h4 className="text-justify d-inline">{conversation.tents} <i className="fas fa-campground"></i></h4>
+        <h4 className="text-justify d-inline">{conversation.cars} <i className="fas fa-car-alt"></i></h4>
       </div>
       <hr />
 
       {/* ******************** MESSAGES BETWEEN CAMPERS ******************** */}
       <div className="d-flex justify-content-center">
         <CardColumns>
-          {/* {messages.map(msg => ( */}
-          {/* if condition to determine who sent the message and the color of the background */}
-          <p className="text-light py-0 mb-0 text-right">Me - Send 01/01/01 3pm</p>
-          <Cards className="mb-3 shadow">
-            <CardBody styleBody={styleSent}>
-              <CardText styleText={styleText} text="Message from sender will go here!" />
-            </CardBody>
-          </Cards>
 
-          <p className="text-light py-0 mb-0">Other Camper - Send 01/01/01 4pm</p>
-          <Cards className="mb-3 shadow">
-            <CardBody styleBody={styleReceived}>
-              <CardText styleText={styleText} text="Message from the other person will go here!" />
-            </CardBody>
-          </Cards>
-          {/* ))} */}
+          {conversation.messages.map(msg => {
+            if (msg.text !== "") {
+              if (msg.authorId === userID) {
+                let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
+                return (
+                  <>
+                    <p className="text-light py-0 mb-0 text-right">{msg.AuthorName} - Sent: {date}</p>
+                    <Cards className="mb-3 shadow">
+                      <CardBody styleBody={styleSent}>
+                        <CardText styleText={styleText} text={msg.text} />
+                      </CardBody>
+                    </Cards>
+                  </>
+                )
+              } else {
+                let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
+                return (
+                  <>
+                    <p className="text-light py-0 mb-0">{msg.AuthorName} - Sent: {date}</p>
+                    <Cards className="mb-3 shadow">
+                      <CardBody styleBody={styleReceived}>
+                        <CardText styleText={styleText} text={msg.text} />
+                      </CardBody>
+                    </Cards>
+                  </>
+                )
+              }
+            }
+          })}
+
         </CardColumns>
       </div>
       <br />

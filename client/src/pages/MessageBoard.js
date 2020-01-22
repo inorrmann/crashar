@@ -31,23 +31,24 @@ function MessageBoard() {
 
     useEffect(() => {
         API.findAllMessages(id)
-        .then(res => {
-            let share = [];
-            let crash = [];
+            .then(res => {
+                let share = [];
+                let crash = [];
 
-            res.data.map(message => {
-                if (message.siteOwner === userID) {
-                    share.push(message)
-                } else if (message.siteOwner !== userID) {
-                    crash.push(message)
-                }
+                res.data.map(message => {
+                    if (message.siteOwner === userID) {
+                        share.push(message)
+                    } else if (message.siteOwner !== userID) {
+                        crash.push(message)
+                    }
+                })
+                setSharingSites(share);
+                setCrashingSites(crash);
+
+                setIsLoading(false);
             })
-            setSharingSites(share);
-            setCrashingSites(crash);
-
-            setIsLoading(false);
-        })
-        .catch(err => console.log(err))    }, []);
+            .catch(err => console.log(err))
+    }, []);
 
 
     const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
@@ -80,7 +81,7 @@ function MessageBoard() {
                                 <CardBody className="p-3">
                                     <CardTitle title={share.campground} />
                                     <CardSubDate arrival={share.arrival} departure={share.departure} />
-                                    <CardText text="figure out how to get the name of the sender"/>
+                                    <CardText text="figure out how to get the name of the sender" />
                                     <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
                                 </CardBody>
                             </Cards>
@@ -97,8 +98,8 @@ function MessageBoard() {
                                 <CardBody className="p-3">
                                     <CardTitle title={crash.campground} />
                                     <CardSubDate arrival={crash.arrival} departure={crash.departure} />
-                                    <CardText text="figure out how to get the name of the sender"/>
-                                        <CardLink styleBtn={styleBtn} to={`/messages/${crash._id}`} label="Preview" />
+                                    <CardText text="figure out how to get the name of the sender" />
+                                    <CardLink styleBtn={styleBtn} to={`/messages/${crash._id}`} label="Preview" />
                                 </CardBody>
                             </Cards>
                         ))}
@@ -106,7 +107,7 @@ function MessageBoard() {
                 </div>
 
                 <hr></hr>
-                
+
             </div >
 
         )

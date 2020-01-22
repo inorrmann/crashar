@@ -54,9 +54,9 @@ export default {
   findMessageById: (id) => {
     return axios.get(`/api/messages/id/${id}`)
   },
-  // // get all messages by user id
-  // findAllMessages: (id) => {
-  //   return axios.get(`/api/messages/all/${id}`)
-  // }
+  // get all messages by user id
+  findAllMessages: (id) => {
+    return axios.get(`/api/messages/all/${id}`)
+  }
 };
 

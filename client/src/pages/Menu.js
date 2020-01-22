@@ -26,7 +26,7 @@ function Menu() {
       <div className="menuTop">
 
         <Navbar style={styleNavbar}>
-          <NavLink link="/messages/:id" styleLink={styleLink} name={<i className="fas fa-envelope"></i>} />
+          <NavLink link={`/messages/all/${user.id}`} styleLink={styleLink} name={<i className="fas fa-envelope"></i>} />
           <div className="ml-auto">
             <NavLogin style={styleLogin} />
           </div>
