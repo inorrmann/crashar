@@ -54,9 +54,22 @@ export default {
   findMessageById: (id) => {
     return axios.get(`/api/messages/id/${id}`)
   },
-  // get all messages by user id
-  findAllMessages: (id) => {
-    return axios.get(`/api/messages/all/${id}`)
+  // // get all share messages by user id
+  findShareMessages: (id) => {
+    return axios.get(`/api/messages/owner/${id}`)
+  },
+  // get all crash messages by user id
+  findCrashMessages: (id) => {
+    return axios.get(`/api/messages/guest/${id}`)
+  },
+  // post a message
+  sendMessage: (_id, authorId, authorName, text) => {
+    let message = {
+      authorId: authorId,
+      authorName: authorName,
+      text: text
+    }
+    return axios.put("/api/messages/", { _id, message })
   }
 };
 

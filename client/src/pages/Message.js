@@ -24,7 +24,8 @@ function Message() {
     departure: ""
   })
   const [newMessage, setNewMessage] = useState({
-    author: userID,
+    authorId: userID,
+    authorName: user.name,
     text: ""
   })
 
@@ -32,6 +33,11 @@ function Message() {
   let id = pathname.split("/")[2]
 
   useEffect(() => {
+    loadmessage();
+  }, []);
+
+
+  function loadmessage() {
     API.findMessageById(id)
       .then(res => {
         console.log(res.data)
@@ -47,8 +53,7 @@ function Message() {
         setIsLoading(false)
       })
       .catch(err => console.log(err))
-  }, []);
-
+  }
 
   const handleChange = event => {
     setNewMessage({
@@ -59,27 +64,12 @@ function Message() {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    // setIsLoading(true)
-
-    // let extraInfo = {
-    //     state: "",
-    //     image: "",
-    //     accessible: false
-    // }
-    // // find the state of the facility 
-    // extraInfo.state = facilities.find(element => element.park === createSite.park).state
-    // // find the image of the campsite
-    // extraInfo.image = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).image
-    // // find the accessibility status of the campsite
-    // extraInfo.accessible = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).accessible
-    // // this posts the data from the campground to the DB˜
-    // API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
-    //     .then(res => {
-    //         console.log(res.data._id);
-    //         history.push(`/sites/preview/${res.data._id}`)
-    //         setIsLoading(false)
-    //     })
-    //     .catch(err => alert(err));
+    setIsLoading(true)
+    API.sendMessage(conversation._id, newMessage.authorId, newMessage.authorName, newMessage.text)
+        .then(res => {
+            loadmessage();
+          })
+        .catch(err => alert(err));
   }
 
 
@@ -130,7 +120,7 @@ function Message() {
                 let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
                 return (
                   <>
-                    <p className="text-light py-0 mb-0 text-right">{msg.AuthorName} - Sent: {date}</p>
+                    <p className="text-light py-0 mb-0 text-right">{msg.authorName} - Sent: {date}</p>
                     <Cards className="mb-3 shadow">
                       <CardBody styleBody={styleSent}>
                         <CardText styleText={styleText} text={msg.text} />
@@ -142,7 +132,7 @@ function Message() {
                 let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
                 return (
                   <>
-                    <p className="text-light py-0 mb-0">{msg.AuthorName} - Sent: {date}</p>
+                    <p className="text-light py-0 mb-0">{msg.authorName} - Sent: {date}</p>
                     <Cards className="mb-3 shadow">
                       <CardBody styleBody={styleReceived}>
                         <CardText styleText={styleText} text={msg.text} />

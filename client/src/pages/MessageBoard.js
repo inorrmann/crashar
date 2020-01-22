@@ -12,7 +12,6 @@ import CardBody from "../components/CardBody/index";
 import CardTitle from "../components/CardTitle/index";
 import CardSubDate from "../components/CardSubDate";
 import CardLink from "../components/CardLink/index";
-import CardDelete from "../components/CardDelete/index";
 import CardText from "../components/CardText";
 
 
@@ -30,24 +29,17 @@ function MessageBoard() {
     const userID = user.id
 
     useEffect(() => {
-        API.findAllMessages(id)
+        API.findCrashMessages(userID)
             .then(res => {
-                let share = [];
-                let crash = [];
-
-                res.data.map(message => {
-                    if (message.siteOwner === userID) {
-                        share.push(message)
-                    } else if (message.siteOwner !== userID) {
-                        crash.push(message)
-                    }
-                })
-                setSharingSites(share);
-                setCrashingSites(crash);
-
-                setIsLoading(false);
+                setCrashingSites(res.data)
             })
             .catch(err => console.log(err))
+            .then(res =>
+                API.findShareMessages(userID)
+                    .then(res => setSharingSites(res.data))
+                    .catch(err => console.log(err)))
+            .then(res =>
+                setIsLoading(false))
     }, []);
 
 
@@ -61,57 +53,57 @@ function MessageBoard() {
     if (isLoading) {
         return <Loading />
     }
-    else {
-        return (
-            <div className="my-sites overflow-auto">
-                <Navbar style={styleNavbar}>
-                    <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
-                    <div className="ml-auto">
-                        <NavLogin style={styleLogin} />
-                    </div>
-                </Navbar>
-                <br></br>
-
-                {/* render header only if there are messages for shared sites */}
-                {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}
-                <div className="d-flex justify-content-center">
-                    <CardColumns>
-                        {sharingSites.map(share => (
-                            <Cards className="mt-3 shadow">
-                                <CardBody className="p-3">
-                                    <CardTitle title={share.campground} />
-                                    <CardSubDate arrival={share.arrival} departure={share.departure} />
-                                    <CardText text="figure out how to get the name of the sender" />
-                                    <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
-                                </CardBody>
-                            </Cards>
-                        ))}
-                    </CardColumns>
-                </div >
-
-                {/* render header only if there are active sites */}
-                {crashingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Crashed Campsites</h3>}
-                <div className="d-flex justify-content-center">
-                    <CardColumns>
-                        {crashingSites.map(crash => (
-                            <Cards className="mt-3 shadow">
-                                <CardBody className="p-3">
-                                    <CardTitle title={crash.campground} />
-                                    <CardSubDate arrival={crash.arrival} departure={crash.departure} />
-                                    <CardText text="figure out how to get the name of the sender" />
-                                    <CardLink styleBtn={styleBtn} to={`/messages/${crash._id}`} label="Preview" />
-                                </CardBody>
-                            </Cards>
-                        ))}
-                    </CardColumns>
+    // else {
+    return (
+        <div className="message-board overflow-auto">
+            <Navbar style={styleNavbar}>
+                <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                <div className="ml-auto">
+                    <NavLogin style={styleLogin} />
                 </div>
+            </Navbar>
+            <br></br>
 
-                <hr></hr>
-
+            {/* render header only if there are messages for shared sites */}
+            {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}
+            <div className="d-flex justify-content-center">
+                <CardColumns>
+                    {sharingSites.map(share => (
+                        <Cards className="mt-3 shadow">
+                            <CardBody className="p-3">
+                                <CardTitle title={share.campground} />
+                                <CardSubDate arrival={share.arrival} departure={share.departure} />
+                                <CardText text="figure out how to get the name of the sender" />
+                                <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
+                            </CardBody>
+                        </Cards>
+                    ))}
+                </CardColumns>
             </div >
 
-        )
-    }
+            {/* render header only if there are active sites */}
+            {crashingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Crashed Campsites</h3>}
+            <div className="d-flex justify-content-center">
+                <CardColumns>
+                    {crashingSites.map(crash => (
+                        <Cards className="mt-3 shadow">
+                            <CardBody className="p-3">
+                                <CardTitle title={crash.campground} />
+                                <CardSubDate arrival={crash.arrival} departure={crash.departure} />
+                                <CardText text="figure out how to get the name of the sender" />
+                                <CardLink styleBtn={styleBtn} to={`/messages/${crash._id}`} label="Preview" />
+                            </CardBody>
+                        </Cards>
+                    ))}
+                </CardColumns>
+            </div>
+
+            <hr></hr>
+
+        </div >
+
+    )
 }
+// }
 
 export default MessageBoard;

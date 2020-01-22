@@ -9,7 +9,7 @@
 }
 
 
-.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites, .find-sites, .results, .message {
+.home, .login, .signup, .menu, .shareSite, .preview-site, .my-sites, .find-sites, .results, .message, .message-board {
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -19,7 +19,7 @@
     font-family: "Roboto", sans-serif; 
 }
 
-.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after, .find-sites::after, .results::after, .message::after {
+.home::after, .login::after, .signup::after, .shareSite::after, .loading::after,  .my-sites::after, .find-sites::after, .results::after, .message::after, .message-board::after {
     content: "";
     position: fixed;
     top: 0px;
@@ -136,4 +136,9 @@
 /* MESSAGE PAGE */
 .message::after {
     background-image: url("./images/tents-in-sunset.jpg")
+}
+
+/* MESSAGE BOARD PAGE */
+.message-board::after {
+    background-image: url("./images/yellow-tent-person.jpg")
 }

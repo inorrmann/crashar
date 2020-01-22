@@ -183,12 +183,44 @@ app.get("/api/messages/id/:id", (req, res) => {
     .catch(err => res.status(400).send(err))
 });
 
-// FIND ALL MESSAGES BY USERID
+// // FIND ALL SHARE MESSAGES BY USERID
+app.get("/api/messages/owner/:id", (req, res) => {
+  db.Message.find({ "siteOwner": req.params.id })
+    .then(data => {
+      if (data) {
+        res.json(data)
+      } else {
+        res.status(404).send(err)
+      }
+    })
+    .catch(err => res.status(400).send(err))
+})
 
+// FIND ALL CRASH MESSAGES BY USERID
+app.get("/api/messages/guest/:id", (req, res) => {
+  console.log(req.params.id)
+  db.Message.find({ "siteGuest": req.params.id })
+    .then(data => {
+      if (data) {
+        res.json(data)
+      } else {
+        res.status(404).send(err)
+      }
+    })
+    .catch(err => res.status(400).send(err))
+})
 
+// ADD A MESSAGE TO AN EXISTING CONVERSATION
+app.put("/api/messages/", (req, res) => {
+  const { _id, message } = req.body
+  db.Message.findByIdAndUpdate(
+    _id,
+    { $push: { "messages": [message] } }
+  )
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
+})
 
-
-// findByAndUpdate $push
 
 
 // Any route with isAuthenticated is protected and you need a valid token
