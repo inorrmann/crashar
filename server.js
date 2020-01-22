@@ -125,7 +125,7 @@ app.delete("/api/sites/:id", (req, res) => {
     .catch(err => res.status(422).json(err))
 })
 
-// GET ALL OPEN SITES BY PARAMS
+// GET ALL OPEN SITES BY QUERY
 app.get("/api/sites", (req, res) => {
   db.Site.find({
     "state": req.query.state,
@@ -154,7 +154,21 @@ app.post('/api/messages', (req, res) => {
 });
 
 // FIND MESSAGE BY SITEOWNER, SITEGUEST, AND SITE
-
+app.get("/api/messages", (req, res) => {
+  db.Message.find({
+    "siteOwner": req.query.siteOwner,
+    "siteGuest": req.query.siteGuest,
+    "siteId": req.query.siteId
+  })
+    .then(data => {
+      if (data.length > 0) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: "No messages found" });
+      }
+    })
+    .catch(err => res.status(400).send(err))
+});
 
 // FIND MESSAGE BY ID
 app.get("/api/messages/id/:id", (req, res) => {

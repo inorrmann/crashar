@@ -29,7 +29,8 @@ function Message() {
 
   const { pathname } = useLocation();
     let id = pathname.split("/")[2]
-    console.log(id)
+    // console.log(pathname)
+    // console.log(id)
 
   useEffect(() => {
     API.findMessageById(id)

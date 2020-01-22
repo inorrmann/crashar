@@ -29,7 +29,6 @@ function Results() {
     // get urls search params object
     const queryParams = new URLSearchParams(search)
     // create a plain object to pass to api util
-    // transform arrival date so it looks like what's stored in mongoose
     const query = {}
     for (let [key, value] of queryParams.entries()) {
         query[key] = value

@@ -6,15 +6,7 @@ const MessageSchema = new Schema({
         type: String,
         trim: true,
     },
-    ownerName: {
-        type: String,
-        trim: true,
-    },
     siteGuest: {
-        type: String,
-        trim: true,
-    },
-    guestName: {
         type: String,
         trim: true,
     },
@@ -43,7 +35,11 @@ const MessageSchema = new Schema({
     },
     messages: [
         {
-            author: {
+            authorId: {
+                type: String,
+                trim: true,
+            },
+            authorName: {
                 type: String,
                 trim: true,
             },

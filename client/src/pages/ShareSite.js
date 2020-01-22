@@ -103,7 +103,6 @@ function ShareSite() {
         // this posts the data from the campground to the DB˜
         API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
             .then(res => {
-                console.log(res.data._id);
                 history.push(`/sites/preview/${res.data._id}`)
                 setIsLoading(false)
             })

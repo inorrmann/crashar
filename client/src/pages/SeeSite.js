@@ -28,10 +28,6 @@ function SeeSite() {
     const [arrival, setArrival] = useState("");
     const [departure, setDeparture] = useState("");
     const [image, setImage] = useState("");
-    const [names, setNames] = useState({
-        owner: "",
-        guest: user.name
-    })
 
 
     const { pathname } = useLocation();
@@ -80,16 +76,6 @@ function SeeSite() {
                 return res;
             })
             .catch(err => console.log(err))
-            .then(res => {
-                API.getUser(res.data.createdBy)
-                    .then(res => {
-                        setNames({
-                            ...names,
-                            owner: res.data.firstName,
-                        })
-                    })
-                    .catch(err => console.log(err))
-            })
     }, []);
 
 
@@ -101,22 +87,31 @@ function SeeSite() {
     }
 
 
+
     function contactCamper() {
+        setIsLoading(true);
 
-        // API.findMessage(sharedSite.createdBy, userID, userID._id)
-console.log(names)
+        const query = {
+            siteOwner: sharedSite.createdBy,
+            siteGuest: userID,
+            siteId: sharedSite._id
+        }
 
-        // if 404 response: 
-        // create new message POST request
-        API.createMessage(sharedSite.createdBy, names.owner, userID, names.guest, sharedSite._id, sharedSite.people, sharedSite.tents, sharedSite.cars, sharedSite.campground, sharedSite.arrival, sharedSite.departure, userID, "")
+        API.findMessage(query)
             .then(res => {
-                history.push(`/messages/${res.data._id}`)
-                setIsLoading(false)
+                history.push(`/messages/${res.data[0]._id}`);
+                setIsLoading(false);
             })
-            .catch(err => alert(err))
-
-        // else use the response to go to the current view for the messages 
-
+            .catch(err => {
+                console.log(err)
+                // create a new message between the owner and the guest
+                API.createMessage(sharedSite.createdBy, userID, sharedSite._id, sharedSite.people, sharedSite.tents, sharedSite.cars, sharedSite.campground, sharedSite.arrival, sharedSite.departure, userID, user.name, "")
+                    .then(res => {
+                        history.push(`/messages/${res.data._id}`)
+                        setIsLoading(false);
+                    })
+                    .catch(err => alert(err))
+            })
     }
 
 

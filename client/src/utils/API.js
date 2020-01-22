@@ -32,23 +32,24 @@ export default {
   deleteSite: (id) => {
     return axios.delete(`/api/sites/${id}`)
   },
-  // find results of open sites by params
+  // find results of open sites by query
   findOpenSites: (query) => {
     return axios.get(`/api/sites`, { params: query })
   },
   // post a message to a camper
-  createMessage: (siteOwner, ownerName, siteGuest, guestName, siteId, people, tents, cars, campground, arrival, departure, author, text) => {
+  createMessage: (siteOwner, siteGuest, siteId, people, tents, cars, campground, arrival, departure, authorId, authorName, text) => {
     let message = {
-      author: author,
+      authorId: authorId,
+      authorName: authorName,
       text: text
     }
     console.log(message)
-    return axios.post('/api/messages', { siteOwner, ownerName, siteGuest, guestName, siteId, people, tents, cars, campground, arrival, departure, message});
+    return axios.post('/api/messages', { siteOwner, siteGuest, siteId, people, tents, cars, campground, arrival, departure, message });
   },
-  // // get a message by siteOwner, siteGuest, and site
-  // findMessage: (query) => {
-  //   return axios.get(`/api/messages/`, {params: query})
-  // },
+  // get a message by siteOwner, siteGuest, and siteId
+  findMessage: (query) => {
+    return axios.get(`/api/messages/`, { params: query })
+  },
   // get a message by id
   findMessageById: (id) => {
     return axios.get(`/api/messages/id/${id}`)
