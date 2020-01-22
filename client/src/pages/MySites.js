@@ -97,7 +97,7 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {futureSites.map(future => (
-                            <Cards className="mt-3 shadow">
+                            <Cards className="mt-3 shadow" key={future._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={future.campground} />
                                     <CardSubtitle subtitle={future.park} />
@@ -120,7 +120,7 @@ function MySites() {
                 <div className="d-flex justify-content-center">
                     <CardColumns>
                         {pastSites.map(past => (
-                            <Cards className="mt-3 shadow">
+                            <Cards className="mt-3 shadow" key={past._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={past.campground} />
                                     <CardSubtitle subtitle={past.park} />

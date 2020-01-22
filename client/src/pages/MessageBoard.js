@@ -64,12 +64,14 @@ function MessageBoard() {
             </Navbar>
             <br></br>
 
+            {!sharingSites[0] && !crashingSites[0] &&<h3 className="font-weight-bold ml-3" style={headers}>You have no messages</h3>}
+
             {/* render header only if there are messages for shared sites */}
             {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}
             <div className="d-flex justify-content-center">
                 <CardColumns>
                     {sharingSites.map(share => (
-                        <Cards className="mt-3 shadow">
+                        <Cards className="mt-3 shadow" key={share._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={share.campground} />
                                 <CardSubDate arrival={share.arrival} departure={share.departure} />
@@ -86,7 +88,7 @@ function MessageBoard() {
             <div className="d-flex justify-content-center">
                 <CardColumns>
                     {crashingSites.map(crash => (
-                        <Cards className="mt-3 shadow">
+                        <Cards className="mt-3 shadow" key={crash._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={crash.campground} />
                                 <CardSubDate arrival={crash.arrival} departure={crash.departure} />

@@ -27,17 +27,19 @@
     width: 100%;
     height: 100%;
     background-size: cover;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     z-index: -1;
 }
 
 /* LOADING PAGE */
 .loading::after {
+    opacity: 0.8;
     background-image: url("./images/Fire-left.gif");
 }
 
 /* HOME PAGE */
 .home::after {
+    opacity: 0.8;
     background-image: url("./images/lighted-tents-night-sky.jpg");
 }
 
@@ -48,12 +50,14 @@
 
 /* LOGIN PAGE */
 .login::after {
+    opacity: 0.8;
     background-image: url("./images/single-tent-desert.jpg");
 }
 
 
 /* SIGNUP PAGE */
 .signup::after {
+    opacity: 0.8;
     background-image: url("./images/solo-tent-sunset.jpg")
 }
 
@@ -109,6 +113,7 @@
 
 /* SHARE SITE */
 .shareSite::after {
+    opacity: 0.8;
     background-image: url("./images/vertical-single-tent-yellow-trees.jpg")
 }
 
@@ -120,25 +125,30 @@
 
 /* MY SITES */
 .my-sites::after {
+    opacity: 0.8;
     background-image: url("./images/tents-on-beach.jpg")
 }
 
 /* FIND SITES */
 .find-sites::after {
+    opacity: 0.8;
     background-image: url("./images/many-tents-night.jpg")
 }
 
 /* RESULTS PAGE */
 .results::after {
+    opacity: 0.5;
     background-image: url("./images/single-green-tent-clouds.jpg")
 }
 
 /* MESSAGE PAGE */
 .message::after {
+    opacity: 0.8;
     background-image: url("./images/tents-in-sunset.jpg")
 }
 
 /* MESSAGE BOARD PAGE */
 .message-board::after {
+    opacity: 0.8;
     background-image: url("./images/yellow-tent-person.jpg")
 }

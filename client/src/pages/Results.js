@@ -12,6 +12,7 @@ import CardTitle from "../components/CardTitle/index";
 import CardLink from "../components/CardLink/index";
 import CardSubDate from "../components/CardSubDate";
 import CardSite from "../components/CardSite";
+import ButtonLink from "../components/ButtonLink";
 
 
 
@@ -56,7 +57,8 @@ function Results() {
                 setIsLoading(false);
             })
             .catch(err => {
-                alert("No open campsites were found with those parameters")
+                setIsLoading(false);
+                // alert("No open campsites were found with those parameters")
                 console.log(err)
             })
 
@@ -69,6 +71,8 @@ function Results() {
     // const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
+    const styleButtonLink = { color: "#EBC023", fontWeight: "bold" }
+    const styleButton = { backgroundColor: "#574F44", width: "70%" }
 
 
     if (isLoading) {
@@ -84,16 +88,28 @@ function Results() {
                 </div>
             </Navbar>
             <br />
-            <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Open Campsites</h1>
+            {selectedCamp[0] || otherCamps[0] && <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Open Campsites</h1>}
+            {!selectedCamp[0] && !otherCamps[0] &&
+                <>
+                <br />
+                <br />
+                    <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites were found with those parameters</h1>
+                    <br />
+                    <br />
+                    <div className="text-center">
+                        <ButtonLink link="/sites/search" style={styleButton} styleLink={styleButtonLink} name="NEW SEARCH" />
+                    </div>
+                </>}
             <br />
             <br />
             {/* render header only if there are active sites */}
-            {selectedCamp[0] && <h3 className="font-weight-bold ml-3" style={headers}>{query.campground}</h3>}
+            {selectedCamp[0] && <h3 className="font-weight-bold ml-3 text-center" style={headers}>{query.campground}</h3>}
+            {!selectedCamp[0] && otherCamps[0] && <h3 className="font-weight-bold ml-3 text-center" style={headers}>No open sites found at {query.campground}</h3>}
 
             <div className="d-flex justify-content-center">
                 <CardColumns>
                     {selectedCamp.map(selected => (
-                        <Cards className="mt-3 shadow">
+                        <Cards className="mt-3 shadow" key={selected._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={selected.campground} />
                                 <CardSubDate arrival={selected.arrival} departure={selected.departure} />
@@ -113,7 +129,7 @@ function Results() {
             <div className="d-flex mb-4 justify-content-center">
                 <CardColumns>
                     {otherCamps.map(other => (
-                        <Cards className="mt-3 shadow">
+                        <Cards className="mt-3 shadow" key={other._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={other.campground} />
                                 <CardSubDate arrival={other.arrival} departure={other.departure} />
