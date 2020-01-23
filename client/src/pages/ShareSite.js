@@ -186,6 +186,7 @@ function ShareSite() {
     // ****** OTHER ELEMENTS ******
     const handleChange = event => {
         const { name, value } = event.target;
+        console.log({name, value})
         setCreateSite({
             ...createSite,
             [name]: value
