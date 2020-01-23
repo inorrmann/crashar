@@ -6,7 +6,7 @@ import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-import placeholder from "../pages/images/camping-placeholder.png";
+import placeholder from "../pages/images/camping-placeholder.svg";
 import NavButton from "../components/NavButton";
 import ButtonOnClick from "../components/ButtonOnClick"
 
@@ -135,7 +135,7 @@ function SeeSite() {
                     <NavButton onClick={goBack} styleNavBtn={styleLink} btnName="Return to Results" />
                 </div>
             </Navbar>
-            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
+            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat" }}>
                 <br></br>
                 <br></br>
                 <div className="mt-5 mx-3" style={textshadow1}>
@@ -174,10 +174,12 @@ function SeeSite() {
             <div className="text-center mt-4">
                 <ButtonOnClick style={styleButton} onClick={contactCamper} submitName="CONTACT CAMPERS" />
                 <hr></hr>
-                <p className="text-muted mb-2">Data Source: ridb.recreation.gov</p>
+                <h6 className="text-center text-light">For more information on this campground
+                <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{ color: "white" }}> click here</a>
+                </h6>
+                <p className="text-light text-center mb-2">Data Source: ridb.recreation.gov</p>
             </div>
         </div>
-
     )
 }
 

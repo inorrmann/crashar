@@ -1,15 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
-import Jumbotron from "../components/Jumbotron/index";
 import NavLogin from "../components/NavbarLogin/index";
 import Button from "../components/ButtonLink/index"
 import "./style.css";
+import logo from "./images/logo-yellow-white.png";
+// import logo from "./images/logo-yellow.png";
 
-const styleLogin = { color: "#EBC023" }
-const styleLink = { color: "#302C26", fontWeight: "bold" }
+const styleLogin = { color: "#EBC023", textShadow: "0 0 10px #0F0E0C" }
+const styleLink = { fontFamily: "Roboto", color: "#302C26", fontWeight: "bold", paddingRight: "2rem", paddingLeft: "2rem" }
 const styleButton = { backgroundColor: "#EBC023" }
 const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .3)" }
 const classNavbar = "shadow"
+const textShadow = { textShadow: "0 0 10px #0F0E0C" }
 
 function Home() {
     return (
@@ -19,15 +21,25 @@ function Home() {
                     <NavLogin style={styleLogin} />
                 </div>
             </Navbar>
-            <Jumbotron />
             <div style={{ fontFamily: "Barlow" }}>
-                <h6 className="text-center text-white px-5 homeText">Have a campground reservation with extra spots you won't use?</h6>
-                <h6 className="text-center text-white px-5 homeText my-3">Have a National Park in mind to go camping, but all campsites are already full?</h6>
-                <h5 className="text-center text-white px-5 homeText">Find like-minded people to share a campsite with!</h5>
+                <br />
+                <br />
+                <img src={logo} className="img-fluid px-5" />
+                <h4 className="text-center" style={styleLogin}>Building a camping community one stake at a time</h4>
+                <div className="text-center mt-5">
+                    <Button link="/signup" name="START NOW" style={styleButton} styleLink={styleLink} />
+                </div>
+                <br />
+                <br />
+                <div className="py-2 mx-3" style={{ backgroundColor: "rgba(15, 14, 12, .3)" }}>
+                    <h5 className="text-center text-white px-5 homeText" style={textShadow}>Have a campground reservation with room for extra people?</h5>
+                    <h5 className="text-center text-white px-5 homeText my-3" style={textShadow}>Want to go camping to a National Park, but all campsites are already full?</h5>
+                    <h3 className="text-center text-white px-5 homeText mt-4" style={textShadow}>Find like-minded people to share a campsite with!</h3>
+                </div>
             </div>
-            <div className="text-center mt-5">
-                <Button link="/signup" name="START NOW" style={styleButton} styleLink={styleLink} />
-            </div>
+            {/* <div className="text-center mt-3">
+                <Button link="/signup" name="SIGN UP" style={styleButton} styleLink={styleLink} />
+            </div> */}
         </div>
     );
 }

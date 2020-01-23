@@ -101,7 +101,7 @@ function ShareSite() {
         // find the accessibility status of the campsite
         extraInfo.accessible = campsites.find(element => element.campgroundID === campsiteID && element.number === createSite.campsite && element.loop === createSite.loop).accessible
         // this posts the data from the campground to the DB˜
-        API.shareNewSite(createSite.campground, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
+        API.shareNewSite(createSite.campground, campsiteID, createSite.park, extraInfo.state, createSite.campsite, createSite.loop, createSite.people, createSite.tents, createSite.cars, createSite.arrival, createSite.departure, createSite.cost, createSite.about, createSite.children, createSite.party, createSite.pets, createSite.smokers, createSite.drinkers, extraInfo.image, extraInfo.accessible, createSite.createdBy)
             .then(res => {
                 history.push(`/sites/preview/${res.data._id}`)
                 setIsLoading(false)

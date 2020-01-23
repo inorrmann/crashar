@@ -7,6 +7,11 @@ const SiteSchema = new Schema({
         required: true,
         trim: true
     },
+    campgroundId: {
+        type: String,
+        required: true,
+        trim: true
+    },
     park: {
         type: String,
         trim: true

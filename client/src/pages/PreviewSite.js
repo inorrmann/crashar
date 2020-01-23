@@ -6,35 +6,13 @@ import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-import ButtonLink from "../components/ButtonLink/index";
-import placeholder from "../pages/images/camping-placeholder.png";
+import ButtonDisabled from "../components/ButtonDisabled";
+import placeholder from "../pages/images/camping-placeholder.svg";
 
 
 function PreviewSite() {
     const [isLoading, setIsLoading] = useState(true);
     const [sharedSite, setSharedSite] = useState({})
-    // const [sharedSite, setSharedSite] = useState({
-    //     campground: "",
-    //     park: "",
-    //     state: "",
-    //     campsite: "",
-    //     loop: "",
-    //     people: 0,
-    //     tents: 0,
-    //     cars: 0,
-    //     arrival: "01/01/2020",
-    //     departure: "01/01/2020",
-    //     cost: 0,
-    //     about: "",
-    //     children: "",
-    //     party: "",
-    //     pets: "",
-    //     smokers: "",
-    //     drinkers: "",
-    //     image: "",
-    //     accessible: "",
-    //     createdBy: ""
-    // })
     const [loop, setLoop] = useState("");
     const [accessible, setAccessible] = useState("?");
     const [children, setChildren] = useState("NO");
@@ -51,25 +29,11 @@ function PreviewSite() {
 
 
     const { pathname } = useLocation();
-    // const { id } = useParams();
     let id = pathname.split("/")[3]
 
     useEffect(() => {
         API.getSharedSite(id)
             .then(res => {
-                // setSharedSite({
-                //     ...sharedSite,
-                //     campground: res.data.campground,
-                //     park: res.data.park,
-                //     state: res.data.state,
-                //     campsite: res.data.campsite,
-                //     people: res.data.people,
-                //     tents: res.data.tents,
-                //     cost: res.data.cost,
-                //     about: res.data.about,
-                //     image: res.data.image,
-                //     createdBy: res.data.createdBy
-                // });
                 setSharedSite(res.data)
                 if (res.data.image === "") {
                     setImage(placeholder)
@@ -79,24 +43,12 @@ function PreviewSite() {
                 }
                 if (res.data.loop !== "") {
                     setLoop(`, Loop ${res.data.loop}`)
-                    // setSharedSite({
-                    //     ...sharedSite,
-                    //     accessible: "YES"
-                    // })
                 }
                 if (res.data.accessible) {
                     setAccessible("YES")
-                    // setSharedSite({
-                    //     ...sharedSite,
-                    //     accessible: "YES"
-                    // })
                 }
                 if (!res.data.accessible) {
                     setAccessible("NO")
-                    //     setSharedSite({
-                    //         ...sharedSite,
-                    //         accessible: "YES"
-                    //     })
                 }
                 if (res.data.children) setChildren("YES")
                 if (res.data.pary) setPartiers("YES")
@@ -146,7 +98,7 @@ function PreviewSite() {
                     <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="My Campsites" />
                 </div>
             </Navbar>
-            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
+            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat" }}>
                 <br></br>
                 <div className="mx-5" style={textshadow1}>
                     <h4 className="text-center font-weight-bold mx-3 text-wrap text-light" style={textshadow}>CAMPSITE PREVIEW</h4>
@@ -186,9 +138,13 @@ function PreviewSite() {
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
             <div className="text-center mt-4">
-                <ButtonLink style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
+                <ButtonDisabled style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
                 <hr></hr>
-                <p className="text-muted mb-2">Data Source: ridb.recreation.gov</p>
+                <h6 className="text-center text-light">For more information on this campground<span>&ensp;</span>
+                <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{color: "#EBC023"}}>click here</a>
+                </h6>
+                <p className="text-center text-light mb-2">Data Source: ridb.recreation.gov</p>
+
             </div>
         </div>
 

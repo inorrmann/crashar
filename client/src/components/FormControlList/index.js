@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 function FormControlList({name, ...rest}) {
     return (
         <Form.Control
-            className="shadow"
+            className="shadow rounded-right"
             name={name}
             id={name}
             {...rest}

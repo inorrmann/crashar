@@ -93,7 +93,7 @@ function Results() {
                 <>
                 <br />
                 <br />
-                    <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites were found with those parameters</h1>
+                    <h1 className="text-center mx-4" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites were found with those parameters</h1>
                     <br />
                     <br />
                     <div className="text-center">
