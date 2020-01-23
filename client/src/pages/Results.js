@@ -37,7 +37,6 @@ function Results() {
     useEffect(() => {
         API.findOpenSites(query)
             .then(res => {
-                console.log(res.data)
                 let selected = [];
                 let others = []
                 res.data.map(site => {
@@ -57,8 +56,9 @@ function Results() {
                 setIsLoading(false);
             })
             .catch(err => {
-                setIsLoading(false);
-                // alert("No open campsites were found with those parameters")
+                if (err.response.status === 404) {
+                    setIsLoading(false);
+                }
                 console.log(err)
             })
 
@@ -67,8 +67,6 @@ function Results() {
 
     const styleLink = { color: "#302C26", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #FFF8D5" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px #FFF8D5", backgroundColor: "rgba(255, 248, 213, .3)" }
-    // const styleText = { align: "left", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
-    // const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
     const styleButtonLink = { color: "#302C26", fontSize: "1.2rem" }
@@ -91,9 +89,9 @@ function Results() {
             {(selectedCamp[0] || otherCamps[0]) && <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Open Campsites</h1>}
             {!selectedCamp[0] && !otherCamps[0] &&
                 <>
-                <br />
-                <br />
-                    <h2 className="text-center mx-5" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites fit those parameters</h2>
+                    <br />
+                    <br />
+                    <h2 className="text-center mx-5" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no campsites matched your search criteria</h2>
                     <br />
                     <br />
                     <div className="text-center">
@@ -112,7 +110,7 @@ function Results() {
                         <Cards className="mt-3 shadow" key={selected._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={selected.campground} />
-                                <CardSubDate arrival={selected.arrival} departure={selected.departure} />
+                                <CardSubDate className="mb-4 text-muted" arrival={selected.arrival} departure={selected.departure} />
                                 <div className="d-flex flex-row justify-content-between">
                                     <CardSite people={selected.people} tents={selected.tents} cars={selected.cars} />
                                     <CardLink styleBtn={styleBtn} to={`/sites/detail/${selected._id}`} label="See More" />
@@ -132,7 +130,7 @@ function Results() {
                         <Cards className="mt-3 shadow" key={other._id}>
                             <CardBody className="p-3">
                                 <CardTitle title={other.campground} />
-                                <CardSubDate arrival={other.arrival} departure={other.departure} />
+                                <CardSubDate className="mb-4 text-muted" arrival={other.arrival} departure={other.departure} />
                                 <div className="d-flex flex-row justify-content-between">
                                     <CardSite people={other.people} tents={other.tents} cars={other.cars} />
                                     <CardLink styleBtn={styleBtn} to={`/sites/detail/${other._id}`} label="See More" />

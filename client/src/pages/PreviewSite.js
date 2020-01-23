@@ -135,7 +135,7 @@ function PreviewSite() {
                     <h6 className="text-center d-inline">{drinkers} Drinkers</h6>
                 </div>
 
-                <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>
+                {(sharedSite.about !== "") && <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>}
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
             <div className="text-center mt-4">

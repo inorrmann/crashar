@@ -40,7 +40,6 @@ function Message() {
   function loadmessage() {
     API.findMessageById(id)
       .then(res => {
-        console.log(res.data)
         setConversation(res.data);
         // reformat dates for display on cards
         let arrival = `${res.data.arrival.slice(5, 7)}/${res.data.arrival.slice(8, 10)}/${res.data.arrival.slice(0, 4)}`

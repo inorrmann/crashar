@@ -105,12 +105,14 @@ function SeeSite() {
             .catch(err => {
                 console.log(err)
                 // create a new message between the owner and the guest
-                API.createMessage(sharedSite.createdBy, userID, sharedSite._id, sharedSite.people, sharedSite.tents, sharedSite.cars, sharedSite.campground, sharedSite.arrival, sharedSite.departure, userID, user.name, "")
-                    .then(res => {
-                        history.push(`/messages/${res.data._id}`)
-                        setIsLoading(false);
-                    })
-                    .catch(err => alert(err))
+                if (err.response.status === 404) {
+                    API.createMessage(sharedSite.createdBy, userID, sharedSite._id, sharedSite.people, sharedSite.tents, sharedSite.cars, sharedSite.campground, sharedSite.arrival, sharedSite.departure, userID, user.name, "")
+                        .then(res => {
+                            history.push(`/messages/${res.data._id}`)
+                            setIsLoading(false);
+                        })
+                        .catch(err => alert(err))
+                }
             })
     }
 
@@ -168,7 +170,7 @@ function SeeSite() {
                     <h6 className="text-center d-inline">{drinkers} Drinkers</h6>
                 </div>
 
-                <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>
+                {(sharedSite.about !== "") && <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>}
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
             <div className="text-center mt-4">

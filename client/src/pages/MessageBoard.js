@@ -82,7 +82,6 @@ function MessageBoard() {
             {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}
             <div className="d-flex justify-content-center">
                 <CardColumns>
-                    {/* {sharingSites.map(share => ( */}
                     {sharingSites.map(share => {
                         let arrival = `${share.arrival.slice(5, 7)}/${share.arrival.slice(8, 10)}/${share.arrival.slice(0, 4)}`
                         let departure = `${share.departure.slice(5, 7)}/${share.departure.slice(8, 10)}/${share.departure.slice(0, 4)}`
@@ -96,17 +95,15 @@ function MessageBoard() {
                             <Cards className="mt-3 shadow" key={share._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={share.campground} />
-                                    <CardSubDate arrival={arrival} departure={departure} />
+                                    <CardSubDate className="mb-2 text-muted" arrival={arrival} departure={departure} />
                                     <CardText text={`Crasher: ${name}`} />
-                                    <div className="ml-auto">
+                                    <div className="d-flex justify-content-end">
                                         <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
                                     </div>
                                 </CardBody>
                             </Cards>
                         )
                     })}
-                    {/* // ))} */}
-                    {/* // })} */}
                 </CardColumns>
             </div >
 
@@ -114,23 +111,27 @@ function MessageBoard() {
             {crashingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Crashed Campsites</h3>}
             <div className="d-flex justify-content-center">
                 <CardColumns>
-                    {crashingSites.map(crash => {
-                        crash.messages.filter(msg => {
-                            let name = "Waiting for a reply";
+                    {crashingSites.map(share => {
+                        let arrival = `${share.arrival.slice(5, 7)}/${share.arrival.slice(8, 10)}/${share.arrival.slice(0, 4)}`
+                        let departure = `${share.departure.slice(5, 7)}/${share.departure.slice(8, 10)}/${share.departure.slice(0, 4)}`
+                        let name = "Waiting for a reply";
+                        share.messages.map(msg => {
                             if (msg.authorName !== user.name) {
-                                name = msg.authorName
+                                return name = msg.authorName
                             }
-                            return (
-                                <Cards className="mt-3 shadow" key={crash._id}>
-                                    <CardBody className="p-3">
-                                        <CardTitle title={crash.campground} />
-                                        <CardSubDate arrival={crash.arrival} departure={crash.departure} />
-                                        <CardText text={name} />
-                                        <CardLink styleBtn={styleBtn} to={`/messages/${crash._id}`} label="Preview" />
-                                    </CardBody>
-                                </Cards>
-                            )
                         })
+                        return (
+                            <Cards className="mt-3 shadow" key={share._id}>
+                                <CardBody className="p-3">
+                                    <CardTitle title={share.campground} />
+                                    <CardSubDate className="mb-2 text-center" arrival={arrival} departure={departure} />
+                                    <CardText text={`Crasher: ${name}`} />
+                                    <div className="d-flex justify-content-end">
+                                        <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
+                                    </div>
+                                </CardBody>
+                            </Cards>
+                        )
                     })}
                 </CardColumns>
             </div>
