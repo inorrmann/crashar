@@ -13,6 +13,7 @@ import CardTitle from "../components/CardTitle/index";
 import CardSubDate from "../components/CardSubDate";
 import CardLink from "../components/CardLink/index";
 import CardText from "../components/CardText";
+import ButtonLink from "../components/ButtonLink";
 
 
 function MessageBoard() {
@@ -47,8 +48,11 @@ function MessageBoard() {
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     const styleLogin = { color: "#EBC023" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
+    const noMsgHeader = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .3)" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
     const styleDel = { backgroundColor: "#9E273A", color: "#FFEAC9" }
+    const styleLinkBtn = { color: "#302C26", fontSize: "1.2rem" }
+
 
     if (isLoading) {
         return <Loading />
@@ -64,7 +68,15 @@ function MessageBoard() {
             </Navbar>
             <br></br>
 
-            {!sharingSites[0] && !crashingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>You have no messages</h3>}
+            {!sharingSites[0] && !crashingSites[0] &&
+                <>
+                    <br />
+                    <h3 className="text-center font-weight-bold m-4 py-3" style={noMsgHeader}>You have no messages</h3>
+                    <br />
+                    <div className="text-center mb-4">
+                        <ButtonLink link="/signup" style={styleBtn} styleLink={styleLinkBtn} name="GO BACK" />
+                    </div>
+                </>}
 
             {/* render header only if there are messages for shared sites */}
             {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}

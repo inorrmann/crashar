@@ -6,7 +6,7 @@ import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
-import placeholder from "../pages/images/camping-placeholder.svg";
+import placeholder from "../pages/images/tent-placeholder.png";
 import NavButton from "../components/NavButton";
 import ButtonOnClick from "../components/ButtonOnClick"
 

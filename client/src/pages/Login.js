@@ -32,7 +32,7 @@ function Login() {
 
 
   return (
-    <div className="login">
+    <div className="login overflow-auto">
       <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />
         <div className="ml-auto" >

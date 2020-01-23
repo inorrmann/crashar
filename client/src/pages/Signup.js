@@ -50,7 +50,7 @@ function Signup() {
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem" }
 
   return (
-    <div className="signup">
+    <div className="signup overflow-auto">
       
       <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />

@@ -71,8 +71,8 @@ function Results() {
     // const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
-    const styleButtonLink = { color: "#EBC023", fontWeight: "bold" }
-    const styleButton = { backgroundColor: "#574F44", width: "70%" }
+    const styleButtonLink = { color: "#302C26", fontSize: "1.2rem" }
+    const styleButton = { backgroundColor: "#EBC023", color: "#302C26" }
 
 
     if (isLoading) {
@@ -88,12 +88,12 @@ function Results() {
                 </div>
             </Navbar>
             <br />
-            {selectedCamp[0] || otherCamps[0] && <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Open Campsites</h1>}
+            {(selectedCamp[0] || otherCamps[0]) && <h1 className="text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Open Campsites</h1>}
             {!selectedCamp[0] && !otherCamps[0] &&
                 <>
                 <br />
                 <br />
-                    <h1 className="text-center mx-4" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites were found with those parameters</h1>
+                    <h2 className="text-center mx-5" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Sorry, no open campsites fit those parameters</h2>
                     <br />
                     <br />
                     <div className="text-center">

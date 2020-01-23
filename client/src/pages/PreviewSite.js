@@ -7,7 +7,7 @@ import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import ButtonDisabled from "../components/ButtonDisabled";
-import placeholder from "../pages/images/camping-placeholder.svg";
+import placeholder from "../pages/images/tent-placeholder.png";
 
 
 function PreviewSite() {
@@ -23,6 +23,7 @@ function PreviewSite() {
     const [arrival, setArrival] = useState("");
     const [departure, setDeparture] = useState("");
     const [image, setImage] = useState("");
+    
 
     const { user } = useAuth();
     const userID = user.id

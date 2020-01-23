@@ -137,7 +137,7 @@ function FindSites() {
     }
 
     return (
-        <div className="find-sites">
+        <div className="find-sites overflow-auto">
             <Navbar style={styleNavbar}>
                 <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
                 <div className="ml-auto">

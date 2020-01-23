@@ -13,6 +13,7 @@ import CardSubtitle from "../components/CardSubtitle/index";
 import CardDate from "../components/CardDate/index";
 import CardLink from "../components/CardLink/index";
 import CardDelete from "../components/CardDelete/index";
+import ButtonLink from "../components/ButtonLink";
 
 
 function MySites() {
@@ -75,8 +76,10 @@ function MySites() {
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     const styleLogin = { color: "#EBC023" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
+    const notSharedMsg = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .3)"}
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
     const styleDel = { backgroundColor: "#9E273A", color: "#FFEAC9" }
+    const styleLinkBtn = { color: "#302C26", fontSize: "1.2rem" }
 
     if (isLoading) {
         return <Loading />
@@ -91,8 +94,17 @@ function MySites() {
                     </div>
                 </Navbar>
                 <br></br>
+                {!futureSites[0] && !pastSites[0] &&
+                    <>
+                        <br />
+                        <h3 className="font-weight-bold mx-4 text-center p-3" style={notSharedMsg}>You have not shared any campsites yet</h3>
+                        <br/>
+                        <div className="text-center mb-4">
+                        <ButtonLink link="/signup" style={styleBtn} styleLink={styleLinkBtn} name="GO BACK" />
+                        </div>
+                    </>}
                 {/* render header only if there are active sites */}
-                {futureSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Active Campsites</h3>}
+                {futureSites[0] && <h3 className="text-center font-weight-bold ml-3" style={headers}>Active Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
                     <CardColumns>
@@ -105,7 +117,7 @@ function MySites() {
                                     <div className="d-flex flex-row justify-content-between">
                                         <CardLink styleBtn={styleBtn} to={`/sites/preview/${future._id}`} label="Preview" />
                                         {/* <CardLink styleBtn={styleBtn} to={`/sites/edit/${future._id}`} label="Edit Post" /> */}
-                                        <CardDelete styleBtn={styleDel} label="Delete" onClick={() => deleteSite(future._id)}/>
+                                        <CardDelete styleBtn={styleDel} label="Delete" onClick={() => deleteSite(future._id)} />
                                     </div>
                                 </CardBody>
                             </Cards>
@@ -115,7 +127,7 @@ function MySites() {
 
                 <hr></hr>
                 {/* render header only if there are expired sites */}
-                {pastSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Expired Campsites</h3>}
+                {pastSites[0] && <h3 className="text-center font-weight-bold ml-3" style={headers}>Expired Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
                     <CardColumns>
