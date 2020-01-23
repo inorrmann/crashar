@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
+import Modal from "react-bootstrap/Modal"
 import Navbar from "../components/Navbar/Navbar";
 import NavBrand from "../components/NavbarBrand/index";
 import Button from "../components/ButtonSubmit/index";
@@ -10,6 +11,11 @@ function Login() {
   const [password, setPassword] = useState('');
   const { isLoggedIn, login } = useAuth();
   const history = useHistory();
+
+  // alert in response to error "User not found"
+  const [alertModal, setAlertModal] = useState(false)
+  const handleClose = () => setAlertModal(false);
+
 
   if (isLoggedIn) {
     return <Redirect to="/" />;
@@ -22,7 +28,9 @@ function Login() {
       // navigate to the main menu
       .then(() => history.push('/'))
       .catch(err => {
-        alert(err.response.data.message);
+        if(err.response.data.message === "User not found") {
+          setAlertModal(true)
+        };
       });
   };
 
@@ -32,6 +40,15 @@ function Login() {
 
 
   return (
+    <>
+    <>
+      <Modal show={alertModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Oooops!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>User was not found</Modal.Body>
+      </Modal>
+    </>
     <div className="login overflow-auto">
       <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />
@@ -75,6 +92,7 @@ function Login() {
       <p>
       </p>
     </div>
+    </>
   );
 }
 

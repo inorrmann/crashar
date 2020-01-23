@@ -125,7 +125,7 @@ function MessageBoard() {
                                 <CardBody className="p-3">
                                     <CardTitle title={share.campground} />
                                     <CardSubDate className="mb-2 text-center" arrival={arrival} departure={departure} />
-                                    <CardText text={`Crasher: ${name}`} />
+                                    <CardText text={`Sharer: ${name}`} />
                                     <div className="d-flex justify-content-end">
                                         <CardLink styleBtn={styleBtn} to={`/messages/${share._id}`} label="Open" />
                                     </div>

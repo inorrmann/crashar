@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import API from './../utils/API';
 import { useAuth } from '../utils/auth';
+import Modal from "react-bootstrap/Modal"
 import Navbar from '../components/Navbar/Navbar';
 import NavBrand from "../components/NavbarBrand/index";
 import Button from "../components/ButtonSubmit/index";
@@ -22,6 +23,10 @@ function Signup() {
 
   const history = useHistory()
 
+  // alert in response to error 400 when creating an account (usually email already has an account)
+  const [alertModal, setAlertModal] = useState(false)
+  const handleClose = () => setAlertModal(false);
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
@@ -33,7 +38,11 @@ function Signup() {
         // once the user has created an account, send them to the login page
         history.replace('/login');
       })
-      .catch(err => alert(err));
+      .catch(err => {
+        if (err.response.status === 400) {
+          setAlertModal(true)
+        }
+      });
   };
 
   const handleChange = event => {
@@ -49,13 +58,25 @@ function Signup() {
   const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem" }
 
+
+
+
   return (
+    <>
+    <>
+      <Modal show={alertModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Oooops!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>There is already an account associated with that email address</Modal.Body>
+      </Modal>
+    </>
     <div className="signup overflow-auto">
-      
+
       <Navbar style={styleNavbar}>
         <NavBrand style={styleBrand} />
       </Navbar>
-      
+
       <div className="mt-5">
         <br></br>
         <br></br>
@@ -69,6 +90,7 @@ function Signup() {
             name="firstName"
             type="text"
             onChange={handleChange}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -77,6 +99,7 @@ function Signup() {
             name="lastName"
             type="text"
             onChange={handleChange}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -85,6 +108,7 @@ function Signup() {
             name="email"
             type="email"
             onChange={handleChange}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -93,6 +117,7 @@ function Signup() {
             name="password"
             type="password"
             onChange={handleChange}
+            required
           />
         </FormGroup>
         <div className="text-center mt-4">
@@ -105,8 +130,9 @@ function Signup() {
           Already have an account? <Link to="/login" style={{ color: "white" }}>Login here.</Link>
         </p>
       </div>
-      
+
     </div>
+    </>
   );
 }
 
