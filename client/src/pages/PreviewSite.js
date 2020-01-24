@@ -96,7 +96,6 @@ function PreviewSite() {
 
             <Navbar class="py-3" style={styleNavbar}>
                 <NavBrand style={{ paddingLeft: "0.5rem" }} />
-                {/* <NavLink link="/signup" styleLink={styleLink} name="Main Menu" /> */}
                 <div className="ml-auto">
                     <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="My Campsites" />
                 </div>

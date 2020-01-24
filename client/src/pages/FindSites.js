@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import API from "../utils/API";
 import Navbar from "../components/Navbar/Navbar";
 import NavBrand from "../components/NavbarBrand"
-// import NavLink from "../components/NavLink/index";
 import NavLogin from "../components/NavbarLogin/index";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal"

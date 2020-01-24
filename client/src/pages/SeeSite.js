@@ -5,7 +5,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import "./style.css";
 import Loading from "../components/Loading/index";
 import Navbar from "../components/Navbar/Navbar";
-import NavLink from "../components/NavLink/index";
+import NavBrand from "../components/NavbarBrand";
 import placeholder from "../pages/images/tent-placeholder.png";
 import NavButton from "../components/NavButton";
 import ButtonOnClick from "../components/ButtonOnClick"
@@ -36,6 +36,7 @@ function SeeSite() {
     useEffect(() => {
         API.getSharedSite(id)
             .then(res => {
+                console.log(res.data)
                 setSharedSite(res.data)
                 if (res.data.image === "") {
                     setImage(placeholder)
@@ -132,7 +133,7 @@ function SeeSite() {
         <div className="preview-site overflow-auto">
 
             <Navbar class="py-3" style={styleNavbar}>
-                <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                <NavBrand style={{ paddingLeft: "0.5rem" }} />
                 <div className="ml-auto">
                     <NavButton onClick={goBack} styleNavBtn={styleLink} btnName="Return to Results" />
                 </div>
@@ -176,8 +177,8 @@ function SeeSite() {
             <div className="text-center mt-4">
                 <ButtonOnClick style={styleButton} onClick={contactCamper} submitName="CONTACT CAMPERS" />
                 <hr></hr>
-                <h6 className="text-center text-light">For more information on this campground
-                <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{ color: "white" }}> click here</a>
+                <h6 className="text-center text-light px-3">For more information on this campground<span>&ensp;</span>
+                    <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{ color: "#EBC023" }}>click here</a>
                 </h6>
                 <p className="text-light text-center mb-2">Data Source: ridb.recreation.gov</p>
             </div>
