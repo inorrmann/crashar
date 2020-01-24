@@ -3,7 +3,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
 import Modal from "react-bootstrap/Modal"
 import Navbar from "../components/Navbar/Navbar";
-import NavBrand from "../components/NavbarBrand/index";
+import NavBrand from "../components/NavbarBrandDk/index";
 import Button from "../components/ButtonSubmit/index";
 
 function Login() {
@@ -51,7 +51,7 @@ function Login() {
     </>
     <div className="login overflow-auto">
       <Navbar style={styleNavbar}>
-        <NavBrand style={styleBrand} />
+      <NavBrand style={{paddingLeft: ".5rem"}} />
         <div className="ml-auto" >
           <Link to="/signup" style={{ color: "#24211C" }}>Signup</Link>
         </div>

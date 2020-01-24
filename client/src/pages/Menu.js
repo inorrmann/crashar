@@ -10,13 +10,8 @@ import "./style.css"
 function Menu() {
   const { user } = useAuth();
 
-  // const { user, logout } = useAuth();
-  // const history = useHistory();
-
-  // const goToEditProfile = () => history.push('/profile');
-
   const styleLogin = { color: "#EBC023", textShadow: "0 0 15px #0F0E0C" }
-  const styleLink = { color: "#EBC023", fontSize: "2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
+  const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px #302C26" }
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .2)" }
   const styleButton = { backgroundColor: "#4D453C", width: "70%" }
   const styleButtonLink = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px #0F0E0C" }
@@ -26,7 +21,7 @@ function Menu() {
       <div className="menuTop">
 
         <Navbar style={styleNavbar}>
-          <NavLink link={`/messages/all/${user.id}`} styleLink={styleLink} name={<i className="fas fa-envelope"></i>} />
+          <NavLink link={`/messages/all/${user.id}`} styleLink={styleLink} name="Messages" />
           <div className="ml-auto">
             <NavLogin style={styleLogin} />
           </div>
@@ -34,7 +29,6 @@ function Menu() {
         <br></br>
         <br></br>
         <h1 className="display-4 text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 20px #0F0E0C" }}>Share</h1>
-        {/* <h1 className="display-4 text-center" style={{ fontWeight: "bold", color: "#EBC023", textShadow: "0 0 10px rgb(15, 14, 12)" }}>Share</h1> */}
         <div className="text-center">
           <Button
             style={styleButton}

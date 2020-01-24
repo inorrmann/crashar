@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import API from "../utils/API";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
-import NavLink from "../components/NavLink/index";
+import NavBrand from "../components/NavbarBrandDk";
 import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
 import Cards from "../components/Card/index";
@@ -72,11 +72,10 @@ function MySites() {
     }
 
 
-    const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
-    const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
-    const styleLogin = { color: "#EBC023" }
+    const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", backgroundColor: "rgba(15, 14, 12, .2)" }
+    const styleLogin = { color: "#302C26" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
-    const notSharedMsg = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .3)"}
+    const notSharedMsg = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .3)" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
     const styleDel = { backgroundColor: "#9E273A", color: "#FFEAC9" }
     const styleLinkBtn = { color: "#302C26", fontSize: "1.2rem" }
@@ -88,7 +87,7 @@ function MySites() {
         return (
             <div className="my-sites overflow-auto">
                 <Navbar style={styleNavbar}>
-                    <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                    <NavBrand style={{ paddingLeft: "0.5rem" }} />
                     <div className="ml-auto">
                         <NavLogin style={styleLogin} />
                     </div>
@@ -98,9 +97,9 @@ function MySites() {
                     <>
                         <br />
                         <h3 className="font-weight-bold mx-4 text-center p-3" style={notSharedMsg}>You have not shared any campsites yet</h3>
-                        <br/>
+                        <br />
                         <div className="text-center mb-4">
-                        <ButtonLink link="/signup" style={styleBtn} styleLink={styleLinkBtn} name="GO BACK" />
+                            <ButtonLink link="/signup" style={styleBtn} styleLink={styleLinkBtn} name="GO BACK" />
                         </div>
                     </>}
                 {/* render header only if there are active sites */}

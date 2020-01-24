@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import ButtonDisabled from "../components/ButtonDisabled";
 import placeholder from "../pages/images/tent-placeholder.png";
+import NavBrand from "../components/NavbarBrand"
 
 
 function PreviewSite() {
@@ -23,7 +24,7 @@ function PreviewSite() {
     const [arrival, setArrival] = useState("");
     const [departure, setDeparture] = useState("");
     const [image, setImage] = useState("");
-    
+
 
     const { user } = useAuth();
     const userID = user.id
@@ -94,7 +95,8 @@ function PreviewSite() {
         <div className="preview-site overflow-auto">
 
             <Navbar class="py-3" style={styleNavbar}>
-                <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                <NavBrand style={{ paddingLeft: "0.5rem" }} />
+                {/* <NavLink link="/signup" styleLink={styleLink} name="Main Menu" /> */}
                 <div className="ml-auto">
                     <NavLink link={`/sites/all/${userID}`} styleLink={styleLink} name="My Campsites" />
                 </div>
@@ -141,8 +143,8 @@ function PreviewSite() {
             <div className="text-center mt-4">
                 <ButtonDisabled style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
                 <hr></hr>
-                <h6 className="text-center text-light">For more information on this campground<span>&ensp;</span>
-                <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{color: "#EBC023"}}>click here</a>
+                <h6 className="text-center text-light px-3">For more information on this campground<span>&ensp;</span>
+                    <a href={`https://www.recreation.gov/camping/campgrounds/${sharedSite.campgroundId}`} rel="external" target="_blank" style={{ color: "#EBC023" }}>click here</a>
                 </h6>
                 <p className="text-center text-light mb-2">Data Source: ridb.recreation.gov</p>
 

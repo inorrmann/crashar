@@ -115,10 +115,6 @@ function ShareSite() {
         else {
             submission()
         }
-        // console.log(arrival);
-        // // console.log(typeof(arrival))
-        // console.log(arrival.getTime());
-        // // console.log(Date.now());
     }
 
 
@@ -264,7 +260,7 @@ function ShareSite() {
                     <Modal.Header closeButton>
                         <Modal.Title>Oooops!</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>You selected an arrival time in the past</Modal.Body>
+                    <Modal.Body>You selected an arrival date in the past</Modal.Body>
                 </Modal>
             </>
             {/* ********** DEPARTURE < NOW MODAL ********** */}
@@ -273,7 +269,7 @@ function ShareSite() {
                     <Modal.Header closeButton>
                         <Modal.Title>Oooops!</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>You selected a departure time in the past</Modal.Body>
+                    <Modal.Body>You selected a departure date in the past</Modal.Body>
                 </Modal>
             </>
             {/* ********** DEPARTURE < ARRIVAL MODAL ********** */}
@@ -282,7 +278,7 @@ function ShareSite() {
                     <Modal.Header closeButton>
                         <Modal.Title>Oooops!</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Your departure time is before your arrival time</Modal.Body>
+                    <Modal.Body>Your departure date is before your arrival date</Modal.Body>
                 </Modal>
             </>
             <div className="shareSite overflow-auto pb-5">

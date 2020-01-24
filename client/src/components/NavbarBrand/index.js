@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../pages/images/logo-yellow-white.png"
 
 
 function Brand(props) {
     return (
         <Link className="navbar-brand" style={props.style} to="/">
-            Tent Crashing
+            <img src={logo} style={{ width: "160px" }} />
         </Link>
     )
 }

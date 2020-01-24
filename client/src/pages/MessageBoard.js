@@ -4,7 +4,6 @@ import { useAuth } from "../utils/auth";
 import API from "../utils/API";
 import CardColumns from "react-bootstrap/CardColumns"
 import Navbar from "../components/Navbar/Navbar";
-import NavLink from "../components/NavLink/index";
 import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
 import Cards from "../components/Card/index";
@@ -14,6 +13,7 @@ import CardSubDate from "../components/CardSubDate";
 import CardLink from "../components/CardLink/index";
 import CardText from "../components/CardText";
 import ButtonLink from "../components/ButtonLink";
+import NavBrand from "../components/NavbarBrand"
 
 
 function MessageBoard() {
@@ -44,24 +44,21 @@ function MessageBoard() {
     }, []);
 
 
-    const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", textShadow: "0 0 10px black" }
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     const styleLogin = { color: "#EBC023" }
     const headers = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black" }
     const noMsgHeader = { color: "#EBC023", fontWeight: "bold", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .3)" }
     const styleBtn = { backgroundColor: "#EBC023", color: "#302C26", }
-    const styleDel = { backgroundColor: "#9E273A", color: "#FFEAC9" }
     const styleLinkBtn = { color: "#302C26", fontSize: "1.2rem" }
 
 
     if (isLoading) {
         return <Loading />
     }
-    // else {
     return (
         <div className="message-board overflow-auto">
             <Navbar style={styleNavbar}>
-                <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                <NavBrand style={{paddingLeft: "0.5rem"}}/>
                 <div className="ml-auto">
                     <NavLogin style={styleLogin} />
                 </div>
@@ -142,6 +139,5 @@ function MessageBoard() {
 
     )
 }
-// }
 
 export default MessageBoard;

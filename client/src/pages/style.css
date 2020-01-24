@@ -63,7 +63,8 @@
 
 /* MENU PAGE */
 .menu {
-    background-color: rgb(255, 248, 213);
+    /* background-color: rgb(255, 248, 213); */
+    background-color: #574F44;
     position: fixed;
     top: 0px;
     left: 0px;

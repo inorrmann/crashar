@@ -13,6 +13,7 @@ import CardLink from "../components/CardLink/index";
 import CardSubDate from "../components/CardSubDate";
 import CardSite from "../components/CardSite";
 import ButtonLink from "../components/ButtonLink";
+import NavBrand from "../components/NavbarBrandDk";
 
 
 
@@ -80,7 +81,7 @@ function Results() {
     return (
         <div className="results overflow-auto">
             <Navbar style={styleNavbar}>
-                <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+                <NavBrand style={{ paddingLeft: "0.5rem" }} />
                 <div className="ml-auto">
                     <NavLink link="/sites/search" styleLink={styleLink} name="New Search" />
                 </div>

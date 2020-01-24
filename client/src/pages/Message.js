@@ -11,6 +11,7 @@ import CardText from "../components/CardText";
 import Forms from "../components/Form/index";
 import Loading from "../components/Loading";
 import Button from "../components/ButtonSubmit/index";
+import NavBrand from "../components/NavbarBrandDk";
 
 
 function Message() {
@@ -65,18 +66,19 @@ function Message() {
     event.preventDefault();
     setIsLoading(true)
     API.sendMessage(conversation._id, newMessage.authorId, newMessage.authorName, newMessage.text)
-        .then(res => {
-            loadmessage();
-          })
-        .catch(err => alert(err));
+      .then(res => {
+        loadmessage();
+      })
+      .catch(err => alert(err));
   }
 
 
-  const styleLink = { color: "#EBC023", fontSize: "1.2rem", paddingLeft: ".5rem", paddingRight: ".5rem", textShadow: "0 0 10px #302C26" }
-  const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px #302C26", backgroundColor: "rgba(15, 14, 12, .1)" }
+  const styleLink = { color: "#302C26", fontSize: "1.2rem", paddingRight: ".5rem", textShadow: "0 0 10px rgb(255, 248, 213)" }
+  const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px #302C26", backgroundColor: "rgba(255, 248, 213, .2)" }
   const textshadow = { color: "#EBC023", textShadow: "0 0 10px #0F0E0C" }
   const textYellow = { color: "#EBC023", textShadow: "0 0 10px #302C26" }
-  const styleSent = { backgroundColor: "#C7C7C7", padding: "0.5rem" }
+  const textBrown = { color: "#302C26", textShadow: "0 0 10px rgb(255, 248, 213)" }
+  const styleSent = { backgroundColor: "#C7C7C7", padding: "0.5rem", borderRadius: "4px" }
   const styleReceived = { padding: "0.5rem" }
   const styleText = { fontFamily: "Barlow", fontSize: "1.1rem", color: "#302C26" }
   const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
@@ -88,21 +90,21 @@ function Message() {
 
   return (
     <div className="message overflow-auto">
-      <Navbar class="py-3" style={styleNavbar}>
-        <NavLink link="/signup" styleLink={styleLink} name="Main Menu" />
+      <Navbar style={styleNavbar}>
+        <NavBrand style={{ paddingLeft: ".5rem" }} />
         <div className="ml-auto">
-          <NavLink link={`/messages/all/${userID}`} styleLink={styleLink} name="See All Conversations" />
+          <NavLink link={`/messages/all/${userID}`} styleLink={styleLink} name="Messages" />
         </div>
       </Navbar>
       <br />
       <h3 className="text-center text-wrap fint-weight-bold mx-3" style={textshadow}>{conversation.campground}</h3>
 
-      <div className="d-flex flex-row justify-content-between mx-4 mt-3" style={textYellow}>
+      <div className="d-flex flex-row justify-content-between mx-4 mt-3" style={textBrown}>
         <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: {dates.arrival}</h5>
         <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: {dates.departure}</h5>
       </div>
 
-      <div className="d-flex flex-row justify-content-between px-5 mx-5" style={textYellow}>
+      <div className="d-flex flex-row justify-content-between px-5 mx-5" style={textBrown}>
         <h4 className="text-justify d-inline">{conversation.people} <i className="fas fa-user"></i></h4>
         <h4 className="text-justify d-inline">{conversation.tents} <i className="fas fa-campground"></i></h4>
         <h4 className="text-justify d-inline">{conversation.cars} <i className="fas fa-car-alt"></i></h4>
@@ -120,7 +122,7 @@ function Message() {
                 return (
                   <>
                     <p className="text-light py-0 mb-0 text-right">{msg.authorName} - Sent: {date}</p>
-                    <Cards className="mb-3 shadow">
+                    <Cards className="mb-3 border-0 rounded shadow">
                       <CardBody styleBody={styleSent}>
                         <CardText styleText={styleText} text={msg.text} />
                       </CardBody>
@@ -132,7 +134,7 @@ function Message() {
                 return (
                   <>
                     <p className="text-light py-0 mb-0">{msg.authorName} - Sent: {date}</p>
-                    <Cards className="mb-3 shadow">
+                    <Cards className="mb-3 border-0 shadow">
                       <CardBody styleBody={styleReceived}>
                         <CardText styleText={styleText} text={msg.text} />
                       </CardBody>
