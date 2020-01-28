@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import NavLogin from "../components/NavbarLogin/index";
 import Button from "../components/ButtonLink/index"
 import "./style.css";
-import logo from "./images/logo-yellow-white.png";
+import logo from "./images/logo-yellow.png";
 import { Link } from "react-router-dom"
 
 const styleLogin = { color: "#EBC023", textShadow: "0 0 10px #0F0E0C" }
@@ -24,7 +24,7 @@ function Home() {
                 <br />
                 <br />
                 <img src={logo} className="img-fluid px-5" />
-                <h4 className="text-center px-4" style={styleLogin}>Building a camping community one stake at a time</h4>
+                <h4 className="text-center px-4" style={styleLogin}>Crash or Share a campsite and enjoy camping with others</h4>
                 <div className="text-center mt-5">
                     <Button link="/signup" name="START NOW" style={styleButton} styleLink={styleLink} />
                 </div>
