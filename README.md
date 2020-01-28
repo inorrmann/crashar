@@ -1,5 +1,16 @@
 # Crashar
 
+![language badge](https://img.shields.io/github/languages/top/inorrmann/crashar)
+[![npm version](https://badge.fury.io/js/react.svg)](https://badge.fury.io/js/react)
+[![npm version](https://badge.fury.io/js/react-bootstrap.svg)](https://badge.fury.io/js/react-bootstrap)
+[![npm version](https://badge.fury.io/js/react-router-dom.svg)](https://badge.fury.io/js/react-router-dom)
+[![npm version](https://badge.fury.io/js/use-react-router.svg)](https://badge.fury.io/js/use-react-router)
+[![npm version](https://badge.fury.io/js/bootstrap.svg)](https://badge.fury.io/js/bootstrap)
+[![npm version](https://badge.fury.io/js/axios.svg)](https://badge.fury.io/js/axios)
+[![npm version](https://badge.fury.io/js/express.svg)](https://badge.fury.io/js/express)
+[![npm version](https://badge.fury.io/js/express.svg)](https://badge.fury.io/js/express)
+[![npm version](https://badge.fury.io/js/mongoose.svg)](https://badge.fury.io/js/mongoose)
+
 ## Crash or Share a campsite and enjoy camping with others!
 
 During peak times many campgrounds at National Parks sell out, leaving those who didn't book a camping trip months in advance without the possibility of enjoying popular places. 
