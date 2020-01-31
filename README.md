@@ -11,6 +11,8 @@
 [![npm version](https://badge.fury.io/js/express.svg)](https://badge.fury.io/js/express)
 [![npm version](https://badge.fury.io/js/mongoose.svg)](https://badge.fury.io/js/mongoose)
 
+Deployed site: http://www.crashar.com
+
 ## Crash or Share a campsite and enjoy camping with others!
 
 During peak times many campgrounds at National Parks sell out, leaving those who didn't book a camping trip months in advance without the possibility of enjoying popular places. 
@@ -22,6 +24,10 @@ On the other hand, those who already have a campsite reservation often have room
 Crashar is the solution to connect those who need a campsite reservation and those who are looking to share their existing reservations.
 
 ![user-experience](./ReadMe/mobile.gif)
+
+## Technologies used
+
+HTML - CSS - React-Bootstrap - React - NodeJS - Express - Axios - MongoDB - Mongoose - Recreation.gov Database
 
 ## Current Features
 - Users are able to post a reservation and also search for existing reservations
