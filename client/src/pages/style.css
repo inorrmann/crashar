@@ -46,11 +46,29 @@
     font-family: 'Barlow', sans-serif ;
 }
 
+@media screen and (min-width: 738px) {
+    .home-pic {
+        width: 60%;
+    }
+}
+
 
 /* LOGIN PAGE */
 .login::after {
     opacity: 0.8;
     background-image: url("./images/single-tent-desert.jpg");
+}
+
+@media screen and (min-width: 738px) {
+    .login-form {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 737px) {
+    .login-form {
+        width: 100%;
+    }
 }
 
 

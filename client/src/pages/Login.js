@@ -28,7 +28,7 @@ function Login() {
       // navigate to the main menu
       .then(() => history.push('/'))
       .catch(err => {
-        if(err.response.data.message === "User not found") {
+        if (err.response.data.message === "User not found") {
           setAlertModal(true)
         };
       });
@@ -41,57 +41,59 @@ function Login() {
 
   return (
     <>
-    <>
-      <Modal show={alertModal} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Oooops!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>User was not found</Modal.Body>
-      </Modal>
-    </>
-    <div className="login overflow-auto">
-      <Navbar style={styleNavbar}>
-      <NavBrand style={{paddingLeft: ".5rem"}} />
-        <div className="ml-auto" >
-          <Link to="/signup" style={{ color: "#24211C" }}>Signup</Link>
+      <>
+        <Modal show={alertModal} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Oooops!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>User was not found</Modal.Body>
+        </Modal>
+      </>
+      <div className="login overflow-auto">
+        <Navbar style={styleNavbar}>
+          <NavBrand style={{ paddingLeft: ".5rem" }} />
+          <div className="ml-auto" >
+            <Link to="/signup" style={{ color: "#24211C" }}>Signup</Link>
+          </div>
+        </Navbar>
+        <div className="mt-5">
+          <br></br>
+          <br></br>
+          <br></br>
+          <h2 className="text-center mt-3" style={{ fontFamily: "Roboto", color: "#302C26" }}>Login</h2>
         </div>
-      </Navbar>
-      <div className="mt-5">
-        <br></br>
-        <br></br>
-        <br></br>
-        <h2 className="text-center mt-3" style={{ fontFamily: "Roboto", color: "#302C26" }}>Login</h2>
+        <div className="login-form-div d-flex justify-content-center">
+          <form className="login-form  mt-4 mx-4" onSubmit={handleFormSubmit}>
+            <div className="form-group">
+              <input
+                className="form-control"
+                placeholder="Email"
+                name="email"
+                type="email"
+                id="email"
+                value={email}
+                onChange={({ target }) => setEmail(target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                className="form-control"
+                placeholder="Password"
+                name="password"
+                type="password"
+                id="pwd"
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </div>
+            <div className="text-center mt-4">
+              <Button style={styleButton} name="SUBMIT" />
+            </div>
+          </form>
+        </div>
+        <p>
+        </p>
       </div>
-      <form className="mt-4 mx-4" onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <input
-            className="form-control"
-            placeholder="Email"
-            name="email"
-            type="email"
-            id="email"
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            className="form-control"
-            placeholder="Password"
-            name="password"
-            type="password"
-            id="pwd"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <div className="text-center mt-4">
-          <Button style={styleButton} name="SUBMIT" />
-        </div>
-      </form>
-      <p>
-      </p>
-    </div>
     </>
   );
 }
