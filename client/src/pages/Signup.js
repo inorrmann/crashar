@@ -83,8 +83,10 @@ function Signup() {
         <h2 className="text-center mt-3" style={{ fontFamily: "Roboto", color: "#302C26" }}>Create an Account</h2>
       </div>
 
+      <div className="d-flex justify-content-center">
+      <div className="signup-form">
       <Form onSubmit={handleFormSubmit}>
-        <FormGroup>
+        <FormGroup classname="signup-form">
           <FormControl
             placeholder="First Name"
             name="firstName"
@@ -124,6 +126,8 @@ function Signup() {
           <Button style={styleButton} name="SUBMIT" />
         </div>
       </Form>
+      </div>
+      </div>
 
       <div className="mt-3" style={{ color: "white" }}>
         <p className="text-center">

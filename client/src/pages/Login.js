@@ -34,10 +34,8 @@ function Login() {
       });
   };
 
-  const styleBrand = { color: "#24211C" }
   const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
   const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem" }
-
 
   return (
     <>

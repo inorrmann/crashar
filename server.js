@@ -265,8 +265,5 @@ app.get("*", function (req, res) {
 });
 
 app.listen(PORT, function () {
-
-  // '0.0.0.0' added because of proxy error (localhost:3000 wasn't able to communicate with localhost:3001)
-  // app.listen(PORT, '0.0.0.0', function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

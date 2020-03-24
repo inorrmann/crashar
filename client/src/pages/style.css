@@ -48,7 +48,7 @@
 
 @media screen and (min-width: 738px) {
     .home-pic {
-        width: 60%;
+        width: 40%;
     }
 }
 
@@ -76,6 +76,18 @@
 .signup::after {
     opacity: 0.8;
     background-image: url("./images/solo-tent-sunset.jpg")
+}
+
+@media screen and (min-width: 738px) {
+    .signup-form {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 737px) {
+    .signup-form {
+        width: 100%;
+    }
 }
 
 
