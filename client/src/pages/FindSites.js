@@ -211,68 +211,68 @@ function FindSites() {
                 <div style={styleText}>All fields are required</div>
 
                 <div className="d-flex justify-content-center">
-                <Forms onSubmit={handleFormSubmit}>
-                    {/* *************** STATE SEARCH *************** */}
-                    <FormGroup>
-                        <div className="input-group">
-                            <InputPrepend prepend="State" />
-                            <FormControlList placeholder="CA" name="state" list="state-data" type="text" value={searchState} onChange={handleStateChange} required />
-                            <datalist id="state-data">
-                                {states.map(state => (
-                                    <option value={state} key={state} />
+                    <Forms onSubmit={handleFormSubmit}>
+                        {/* *************** STATE SEARCH *************** */}
+                        <FormGroup>
+                            <div className="input-group">
+                                <InputPrepend prepend="State" />
+                                <FormControlList placeholder="CA" name="state" list="state-data" type="text" value={searchState} onChange={handleStateChange} required />
+                                <datalist id="state-data">
+                                    {states.map(state => (
+                                        <option value={state} key={state} />
+                                    ))}
+                                </datalist>
+                            </div>
+                        </FormGroup>
+                        {/* *************** NPS RECREATION AREA SEARCH *************** */}
+                        <FormGroup>
+                            <select className="custom-select select" name="park" onChange={handleParkChange} required={true}>
+                                <option value="">NPS Recreation Area</option>
+                                {parks.map(park => (
+                                    <option value={park} key={park}>{park}</option>
                                 ))}
-                            </datalist>
+                            </select>
+                        </FormGroup>
+                        {/* *************** CAMPGROUND SEARCH *************** */}
+                        <FormGroup>
+                            <select className="custom-select" name="campground" onChange={handleChange}>
+                                <option value="">Campground</option>
+                                {campgrounds.map(camp => (
+                                    <option value={camp} key={camp}>{camp}</option>
+                                ))}
+                            </select>
+                        </FormGroup>
+                        {/* *************** ARRIVAL AND DEPARTURE DATES SELECTORS *************** */}
+                        <FormRow>
+                            <Col>
+                                <FormGroup>
+                                    <div className="input-group">
+                                        <InputPrepend prepend="Arrival Date" />
+                                        <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
+                                    </div>
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <div className="input-group">
+                                        <InputPrepend prepend="Departure Date" />
+                                        <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
+                                    </div>
+                                </FormGroup>
+                            </Col>
+                        </FormRow>
+                        {/* *************** # PEOPLE / TENTS / CARS INPUT FIELDS *************** */}
+                        <FormGroup>
+                            <div className="input-group">
+                                <InputPrepend prepend="Min People" />
+                                <FormControl placeholder="1" name="people" type="number" onChange={handleChange} required />
+                            </div>
+                        </FormGroup>
+                        {/* *************** SUBMIT BUTTON *************** */}
+                        <div className="text-center mt-4">
+                            <Button style={styleButton} name="SEARCH" />
                         </div>
-                    </FormGroup>
-                    {/* *************** NPS RECREATION AREA SEARCH *************** */}
-                    <FormGroup>
-                        <select className="custom-select select" name="park" onChange={handleParkChange} required={true}>
-                            <option value="">NPS Recreation Area</option>
-                            {parks.map(park => (
-                                <option value={park} key={park}>{park}</option>
-                            ))}
-                        </select>
-                    </FormGroup>
-                    {/* *************** CAMPGROUND SEARCH *************** */}
-                    <FormGroup>
-                        <select className="custom-select" name="campground" onChange={handleChange}>
-                            <option value="">Campground</option>
-                            {campgrounds.map(camp => (
-                                <option value={camp} key={camp}>{camp}</option>
-                            ))}
-                        </select>
-                    </FormGroup>
-                    {/* *************** ARRIVAL AND DEPARTURE DATES SELECTORS *************** */}
-                    <FormRow>
-                        <Col>
-                            <FormGroup>
-                                <div className="input-group">
-                                    <InputPrepend prepend="Arrival Date" />
-                                    <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
-                                </div>
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <div className="input-group">
-                                    <InputPrepend prepend="Departure Date" />
-                                    <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
-                                </div>
-                            </FormGroup>
-                        </Col>
-                    </FormRow>
-                    {/* *************** # PEOPLE / TENTS / CARS INPUT FIELDS *************** */}
-                    <FormGroup>
-                        <div className="input-group">
-                            <InputPrepend prepend="Min People" />
-                            <FormControl placeholder="1" name="people" type="number" onChange={handleChange} required />
-                        </div>
-                    </FormGroup>
-                    {/* *************** SUBMIT BUTTON *************** */}
-                    <div className="text-center mt-4">
-                        <Button style={styleButton} name="SEARCH" />
-                    </div>
-                </Forms>
+                    </Forms>
                 </div>
             </div>
         </>
