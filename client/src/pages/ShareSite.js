@@ -287,122 +287,125 @@ function ShareSite() {
                 </Navbar>
                 <br></br>
                 <h1 className="text-center" style={{ fontWeight: "bold", color: "#302C26", textShadow: "0 0 20px #FFF8D5" }}>Share a Campsite</h1>
-                <Forms onSubmit={handleFormSubmit}>
-                    {/* *************** CAMPGROUND SEARCH *************** */}
-                    <FormGroup>
-                        <FormControlList placeholder="Campground *" name="campground" list="campground-data" type="text" value={searchCampground} onChange={handleCampgroundChange} required />
-                        <datalist id="campground-data">
-                            {campgrounds.map(campground => (
-                                <option value={campground} key={campground} />
-                            ))}
-                        </datalist>
-                    </FormGroup>
-                    {/* *************** NPS RECREATION AREA SEARCH *************** */}
-                    <FormGroup>
+                
+                <div className="d-flex justify-content-center">
+                    <Forms onSubmit={handleFormSubmit}>
+                        {/* *************** CAMPGROUND SEARCH *************** */}
+                        <FormGroup>
+                            <FormControlList placeholder="Campground *" name="campground" list="campground-data" type="text" value={searchCampground} onChange={handleCampgroundChange} required />
+                            <datalist id="campground-data">
+                                {campgrounds.map(campground => (
+                                    <option value={campground} key={campground} />
+                                ))}
+                            </datalist>
+                        </FormGroup>
+                        {/* *************** NPS RECREATION AREA SEARCH *************** */}
+                        <FormGroup>
 
-                        <select className="custom-select select" name="park" onChange={handleParkChange} required>
-                            <option value="">NPS Recreation Area *</option>
-                            {parks.map(park => (
-                                <option value={park} key={park}>{park}</option>
-                            ))}
-                        </select>
-                    </FormGroup>
-                    {/* *************** CAMPSITE AND LOOP INPUT FIELDS *************** */}
-                    <FormRow>
-                        <Col xs={7}>
-                            <FormGroup>
-                                <select className="custom-select" name="campsite" onChange={handleCampsiteInput} required={true}>
-                                    <option value="">Campsite *</option>
-                                    {siteNumbers.map(site => (
-                                        <option value={site} key={site}>{site}</option>
-                                    ))}
-                                </select>
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <select className="custom-select" name="loop" onChange={handleChange}>
-                                    <option value="null">Loop</option>
-                                    {loops.map(loop => (
-                                        <option value={loop} key={loop}>{loop}</option>
-                                    ))}
-                                </select>
-                            </FormGroup>
-                        </Col>
-                    </FormRow>
-                    {/* *************** # PEOPLE / TENTS / CARS INPUT FIELDS *************** */}
-                    <FormRow>
-                        <Col>
-                            <FormGroup>
-                                <FormControl placeholder="# People *" name="people" type="number" onChange={handleChange} required />
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <FormControl placeholder="# Tents *" name="tents" type="number" onChange={handleChange} required />
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <FormControl placeholder="# Cars" name="cars" type="number" onChange={handleChange} />
-                            </FormGroup>
-                        </Col>
-                    </FormRow>
-                    {/* *************** ARRIVAL AND DEPARTURE DATES SELECTORS *************** */}
-                    <FormRow>
-                        <Col>
-                            <FormGroup>
-                                <div className="input-group">
-                                    <InputPrepend prepend="Arrival Date *" />
-                                    <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
-                                </div>
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <div className="input-group">
-                                    <InputPrepend prepend="Departure Date *" />
-                                    <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
-                                </div>
-                            </FormGroup>
-                        </Col>
-                    </FormRow>
-                    {/* *************** COST PER NIGHT INPUT FIELD *************** */}
-                    <FormGroup>
-                        <div className="input-group">
-                            <InputPrepend prepend="Cost per night *  $" />
-                            {/* <InputPrepend prepend={`Cost per night * ${<span>&emsp;&emsp;</span>} $`} /> */}
-                            <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required />
+                            <select className="custom-select select" name="park" onChange={handleParkChange} required>
+                                <option value="">NPS Recreation Area *</option>
+                                {parks.map(park => (
+                                    <option value={park} key={park}>{park}</option>
+                                ))}
+                            </select>
+                        </FormGroup>
+                        {/* *************** CAMPSITE AND LOOP INPUT FIELDS *************** */}
+                        <FormRow>
+                            <Col xs={7}>
+                                <FormGroup>
+                                    <select className="custom-select" name="campsite" onChange={handleCampsiteInput} required={true}>
+                                        <option value="">Campsite *</option>
+                                        {siteNumbers.map(site => (
+                                            <option value={site} key={site}>{site}</option>
+                                        ))}
+                                    </select>
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <select className="custom-select" name="loop" onChange={handleChange}>
+                                        <option value="null">Loop</option>
+                                        {loops.map(loop => (
+                                            <option value={loop} key={loop}>{loop}</option>
+                                        ))}
+                                    </select>
+                                </FormGroup>
+                            </Col>
+                        </FormRow>
+                        {/* *************** # PEOPLE / TENTS / CARS INPUT FIELDS *************** */}
+                        <FormRow>
+                            <Col>
+                                <FormGroup>
+                                    <FormControl placeholder="# People *" name="people" type="number" onChange={handleChange} required />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <FormControl placeholder="# Tents *" name="tents" type="number" onChange={handleChange} required />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <FormControl placeholder="# Cars" name="cars" type="number" onChange={handleChange} />
+                                </FormGroup>
+                            </Col>
+                        </FormRow>
+                        {/* *************** ARRIVAL AND DEPARTURE DATES SELECTORS *************** */}
+                        <FormRow>
+                            <Col>
+                                <FormGroup>
+                                    <div className="input-group">
+                                        <InputPrepend prepend="Arrival Date *" />
+                                        <FormControl placeholder="Arrival Date" name="arrival" type="date" onChange={handleChange} required />
+                                    </div>
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <div className="input-group">
+                                        <InputPrepend prepend="Departure Date *" />
+                                        <FormControl placeholder="Departure Date" name="departure" type="date" onChange={handleChange} required />
+                                    </div>
+                                </FormGroup>
+                            </Col>
+                        </FormRow>
+                        {/* *************** COST PER NIGHT INPUT FIELD *************** */}
+                        <FormGroup>
+                            <div className="input-group">
+                                <InputPrepend prepend="Cost per night *  $" />
+                                {/* <InputPrepend prepend={`Cost per night * ${<span>&emsp;&emsp;</span>} $`} /> */}
+                                <FormControl placeholder="0.00" name="cost" type="number" onChange={handleChange} required />
+                            </div>
+                            <FormText style={styleTextSm} text="Do not ask for more than what you paid per night" />
+                        </FormGroup>
+                        {/* *************** ABOUT US INPUT FIELDS *************** */}
+                        <FormGroup>
+                            <textarea className="form-control shadow"
+                                placeholder="About us"
+                                name="about"
+                                type="text"
+                                id="about"
+                                rows="3"
+                                onChange={handleChange}
+                            ></textarea>
+                        </FormGroup>
+                        {/* *************** PREFERENCES CHECKBOXES *************** */}
+                        <div className="preferences py-3" style={{ color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }}>
+                            <h5 className="text-center" style={stylePreferences}>PREFERENCES</h5>
+                            <div className="preferences-checkboxes mx-5">
+                                <FormCheck id="children-switch" name="children" label="CHILDREN" onClick={onCheckClick} />
+                                <FormCheck id="party-switch" name="party" label="PARTIERS" onClick={onCheckClick} />
+                                <FormCheck id="pets-switch" name="pets" label="PETS" onClick={onCheckClick} />
+                                <FormCheck id="smokers-switch" name="smokers" label="SMOKERS" onClick={onCheckClick} />
+                                <FormCheck id="drinkers-switch" name="drinkers" label="DRINKERS" onClick={onCheckClick} />
+                            </div>
                         </div>
-                        <FormText style={styleTextSm} text="Do not ask for more than what you paid per night" />
-                    </FormGroup>
-                    {/* *************** ABOUT US INPUT FIELDS *************** */}
-                    <FormGroup>
-                        <textarea className="form-control shadow"
-                            placeholder="About us"
-                            name="about"
-                            type="text"
-                            id="about"
-                            rows="3"
-                            onChange={handleChange}
-                        ></textarea>
-                    </FormGroup>
-                    {/* *************** PREFERENCES CHECKBOXES *************** */}
-                    <div className="py-3" style={{ color: "#FFF8D5", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .4)" }}>
-                        <h5 className="text-center" style={stylePreferences}>PREFERENCES</h5>
-                        <div className=" ml-5 px-5">
-                            <FormCheck id="children-switch" name="children" label="CHILDREN" onClick={onCheckClick} />
-                            <FormCheck id="party-switch" name="party" label="PARTIERS" onClick={onCheckClick} />
-                            <FormCheck id="pets-switch" name="pets" label="PETS" onClick={onCheckClick} />
-                            <FormCheck id="smokers-switch" name="smokers" label="SMOKERS" onClick={onCheckClick} />
-                            <FormCheck id="drinkers-switch" name="drinkers" label="DRINKERS" onClick={onCheckClick} />
+                        {/* *************** SUBMIT BUTTON *************** */}
+                        <div className="text-center mt-4">
+                            <Button style={styleButton} name="SUBMIT" />
                         </div>
-                    </div>
-                    {/* *************** SUBMIT BUTTON *************** */}
-                    <div className="text-center mt-4">
-                        <Button style={styleButton} name="SUBMIT" />
-                    </div>
-                </Forms>
+                    </Forms>
+                </div>
             </div>
         </>
     )
