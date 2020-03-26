@@ -155,7 +155,7 @@ function FindSites() {
     const styleNavbar = { fontFamily: "Roboto", fontSize: "1.2rem", textShadow: "0 0 10px black", backgroundColor: "rgba(15, 14, 12, .2)" }
     const styleLogin = { color: "#EBC023" }
     const styleButton = { backgroundColor: "#EBC023", color: "#302C26", fontWeight: "bold" }
-    const styleText = { align: "left", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
+    const styleText = { textAlign: "center", fontFamily: "Barlow", fontSize: "0.9rem", color: "#EBC023", textShadow: "0 0 20px #0F0E0C", backgroundColor: "rgba(15, 14, 12, .3)" }
 
 
 
@@ -198,7 +198,6 @@ function FindSites() {
             <div className="find-sites overflow-auto">
                 <Navbar style={styleNavbar}>
                     <NavBrand style={{ paddingLeft: ".5rem" }} />
-                    {/* <NavLink link="/signup" styleLink={styleLink} name="Main Menu" /> */}
                     <div className="ml-auto">
                         <NavLogin style={styleLogin} />
                     </div>
@@ -209,8 +208,9 @@ function FindSites() {
                 <br></br>
                 <br></br>
 
+                <div style={styleText}>All fields are required</div>
                 <Forms onSubmit={handleFormSubmit}>
-                    <FormText style={styleText} text="All fields are required" />
+                    {/* <FormText style={styleText} text="All fields are required" /> */}
 
                     {/* *************** STATE SEARCH *************** */}
                     <FormGroup>

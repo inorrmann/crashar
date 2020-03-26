@@ -84,49 +84,49 @@ function Signup() {
       </div>
 
       <div className="d-flex justify-content-center">
-      <div className="signup-form">
-      <Form onSubmit={handleFormSubmit}>
-        <FormGroup classname="signup-form">
-          <FormControl
-            placeholder="First Name"
-            name="firstName"
-            type="text"
-            onChange={handleChange}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormControl
-            placeholder="Last Name"
-            name="lastName"
-            type="text"
-            onChange={handleChange}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormControl
-            placeholder="Email"
-            name="email"
-            type="email"
-            onChange={handleChange}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormControl
-            placeholder="Password"
-            name="password"
-            type="password"
-            onChange={handleChange}
-            required
-          />
-        </FormGroup>
-        <div className="text-center mt-4">
-          <Button style={styleButton} name="SUBMIT" />
+        <div className="signup-form">
+          <Form onSubmit={handleFormSubmit}>
+            <FormGroup classname="signup-form">
+              <FormControl
+                placeholder="First Name"
+                name="firstName"
+                type="text"
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <FormControl
+                placeholder="Last Name"
+                name="lastName"
+                type="text"
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <FormControl
+                placeholder="Email"
+                name="email"
+                type="email"
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <FormControl
+                placeholder="Password"
+                name="password"
+                type="password"
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <div className="text-center mt-4">
+              <Button style={styleButton} name="SUBMIT" />
+            </div>
+          </Form>
         </div>
-      </Form>
-      </div>
       </div>
 
       <div className="mt-3" style={{ color: "white" }}>
