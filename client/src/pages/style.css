@@ -41,55 +41,46 @@
     opacity: 0.8;
     background-image: url("./images/lighted-tents-night-sky.jpg");
 }
-
 .homeText {
     font-family: 'Barlow', sans-serif ;
 }
-
 @media screen and (min-width: 738px) {
     .home-pic {
         width: 40%;
     }
 }
 
-
 /* LOGIN PAGE */
 .login::after {
     opacity: 0.8;
     background-image: url("./images/single-tent-desert.jpg");
 }
-
 @media screen and (min-width: 738px) {
     .login-form {
         width: 30%;
     }
 }
-
 @media screen and (max-width: 737px) {
     .login-form {
         width: 100%;
     }
 }
-
 
 /* SIGNUP PAGE */
 .signup::after {
     opacity: 0.8;
     background-image: url("./images/solo-tent-sunset.jpg")
 }
-
 @media screen and (min-width: 738px) {
     .signup-form {
         width: 30%;
     }
 }
-
 @media screen and (max-width: 737px) {
     .signup-form {
         width: 100%;
     }
 }
-
 
 /* MENU PAGE */
 .menu {

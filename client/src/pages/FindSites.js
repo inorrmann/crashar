@@ -209,9 +209,9 @@ function FindSites() {
                 <br></br>
 
                 <div style={styleText}>All fields are required</div>
-                <Forms onSubmit={handleFormSubmit}>
-                    {/* <FormText style={styleText} text="All fields are required" /> */}
 
+                <div className="d-flex justify-content-center">
+                <Forms onSubmit={handleFormSubmit}>
                     {/* *************** STATE SEARCH *************** */}
                     <FormGroup>
                         <div className="input-group">
@@ -273,6 +273,7 @@ function FindSites() {
                         <Button style={styleButton} name="SEARCH" />
                     </div>
                 </Forms>
+                </div>
             </div>
         </>
     )
