@@ -163,6 +163,37 @@
     height: 35%;
     background-size: 100%;
 }
+.shadow-preview {
+    margin: 0 10%;
+}
+@media screen and (min-width: 738px) {
+    .preview-image {
+        width: 80%;  
+        margin: auto;
+    }
+    .topImage {
+        padding-bottom: 15%;
+        background-size: cover;
+    }
+    .shadow-preview {
+        margin: auto;
+        width: 70%;
+    }
+    .campsite-info-sm {
+        display: none;
+    }
+    .campsite-info-lg {
+        padding: 1% 0;
+        width: 70%;
+        margin: auto;
+        margin-top: 3%;
+    }
+}
+@media screen and (max-width: 737px) {
+    .campsite-info-lg {
+        display: none;
+    }
+}
 
 /* MY SITES */
 .my-sites::after {
