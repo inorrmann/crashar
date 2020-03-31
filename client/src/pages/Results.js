@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 import API from "../utils/API";
-import CardColumns from "react-bootstrap/CardColumns"
+import CardDeck from "react-bootstrap/CardDeck";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import Loading from "../components/Loading/index";
@@ -106,7 +106,7 @@ function Results() {
             {!selectedCamp[0] && otherCamps[0] && <h3 className="font-weight-bold ml-3 text-center" style={headers}>No open sites found at {query.campground}</h3>}
 
             <div className="d-flex justify-content-center">
-                <CardColumns>
+                <CardDeck>
                     {selectedCamp.map(selected => (
                         <Cards className="mt-3 shadow" key={selected._id}>
                             <CardBody className="p-3">
@@ -119,14 +119,14 @@ function Results() {
                             </CardBody>
                         </Cards>
                     ))}
-                </CardColumns>
+                </CardDeck>
             </div>
 
             <hr></hr>
             {otherCamps[0] && <h3 className="font-weight-bold text-center pt-3" style={headers}>Other Campgrounds</h3>}
 
             <div className="d-flex mb-4 justify-content-center">
-                <CardColumns>
+                <CardDeck>
                     {otherCamps.map(other => (
                         <Cards className="mt-3 shadow" key={other._id}>
                             <CardBody className="p-3">
@@ -139,7 +139,7 @@ function Results() {
                             </CardBody>
                         </Cards>
                     ))}
-                </CardColumns>
+                </CardDeck>
             </div>
 
         </div>
