@@ -200,6 +200,14 @@
     opacity: 0.8;
     background-image: url("./images/tents-on-beach.jpg")
 }
+@media screen and (min-width: 738px) {
+    /* .my-sites-container {
+        margin: auto;
+    } */
+}
+@media screen and (max-width: 737px) {
+    
+}
 
 /* FIND SITES */
 .find-sites::after {

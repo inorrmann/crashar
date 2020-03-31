@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import API from "../utils/API";
-import CardColumns from "react-bootstrap/CardColumns"
+import CardDeck from "react-bootstrap/CardDeck";
 import Navbar from "../components/Navbar/Navbar";
 import NavBrand from "../components/NavbarBrandDk";
 import NavLogin from "../components/NavbarLogin/index";
@@ -106,32 +106,32 @@ function MySites() {
                 {futureSites[0] && <h3 className="text-center font-weight-bold ml-3" style={headers}>Active Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
-                    <CardColumns>
+                    <CardDeck>
                         {futureSites.map(future => (
-                            <Cards className="mt-3 shadow" key={future._id}>
+                            <Cards className="mt-3 shadow mx-4" key={future._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={future.campground} />
                                     <CardSubtitle subtitle={future.park} />
                                     <CardDate arrival={future.arrival} departure={future.departure} />
                                     <div className="d-flex flex-row justify-content-between">
                                         <CardLink styleBtn={styleBtn} to={`/sites/preview/${future._id}`} label="Preview" />
-                                        {/* <CardLink styleBtn={styleBtn} to={`/sites/edit/${future._id}`} label="Edit Post" /> */}
                                         <CardDelete styleBtn={styleDel} label="Delete" onClick={() => deleteSite(future._id)} />
                                     </div>
                                 </CardBody>
                             </Cards>
                         ))}
-                    </CardColumns>
+                    </CardDeck>
                 </div>
-
-                <hr></hr>
+                
+                <br/>
+                <hr/>
                 {/* render header only if there are expired sites */}
                 {pastSites[0] && <h3 className="text-center font-weight-bold ml-3" style={headers}>Expired Campsites</h3>}
 
                 <div className="d-flex justify-content-center">
-                    <CardColumns>
+                    <CardDeck>
                         {pastSites.map(past => (
-                            <Cards className="mt-3 shadow" key={past._id}>
+                            <Cards className="mt-3 shadow mx-4" key={past._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={past.campground} />
                                     <CardSubtitle subtitle={past.park} />
@@ -140,7 +140,7 @@ function MySites() {
                                 </CardBody>
                             </Cards>
                         ))}
-                    </CardColumns>
+                        </CardDeck>
                 </div >
             </div >
 
