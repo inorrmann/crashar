@@ -177,6 +177,7 @@ function PreviewSite() {
                 {(sharedSite.about !== "") && <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>}
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
+            
             <div className="text-center mt-4">
                 <ButtonDisabled style={styleButton} styleLink={styleButton} name="CONTACT CAMPERS" />
                 <hr></hr>

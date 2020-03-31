@@ -138,16 +138,53 @@ function SeeSite() {
                     <NavButton onClick={goBack} styleNavBtn={styleLink} btnName="Return to Results" />
                 </div>
             </Navbar>
-            <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat" }}>
-                <br></br>
-                <br></br>
-                <div className="mt-5 mx-3" style={textshadow1}>
-                    <h4 className="text-center font-weight-bold mt-3 mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
-                    <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
-                    <h5 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
+            <div className="preview-image">
+                <div className="topImage" style={{ backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat" }}>
+                    <br></br>
+                    <br></br>
+                    <div className="shadow-preview" style={textshadow1}>
+                        <h4 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.campground}</h4>
+                        <h6 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>{sharedSite.park}</h6>
+                        <h5 className="text-center font-weight-bold mx-3 text-wrap" style={textshadow}>Site {sharedSite.campsite}{loop}</h5>
+                    </div>
+                    <div className="campsite-info-lg mb-5" style={textshadow1}>
+                        <div className="text-light text-center">
+                            <div className="text-left mx-5 my-3">
+                                <h5 className="mt-4 mb-3">Cost per night ${sharedSite.cost}</h5>
+                            </div>
+
+                            <div className="text-left mx-5 my-4">
+                                <h5 className="d-inline mr-5" style={{ fontSize: "1.2rem" }}>From: {arrival}</h5>
+                                <h5 className="d-inline ml-5" style={{ fontSize: "1.2rem" }}>Until: {departure}</h5>
+                            </div>
+                            <div className="text-left mx-5 my-4">
+                                <h5 className="d-inline">Availability:</h5>
+                                <h5 className="d-inline mx-4">{sharedSite.people} <i className="fas fa-user"></i></h5>
+                                <h5 className="d-inline">{sharedSite.tents} <i className="fas fa-campground"></i></h5>
+                                <h5 className="d-inline mx-4">{sharedSite.cars} <i className="fas fa-car-alt"></i></h5 >
+                                <h5 className="d-inline">{accessible} <i className="fas fa-wheelchair"></i></h5>
+                            </div>
+
+                            <div className="text-left mx-5 my-4">
+                                <h6 className="d-inline" style={{ fontSize: "1.1rem" }}>PREFERENCES:</h6>
+                                <h6 className="d-inline mx-4">{children} Children</h6>
+                                <h6 className="d-inline">{partiers} Partiers</h6>
+                                <h6 className="d-inline mx-4">{pets} Pets</h6>
+                                <h6 className="d-inline">{smokers} Smokers</h6>
+                                <h6 className="d-inline ml-4">{drinkers} Drinkers</h6>
+                            </div>
+
+                            {(sharedSite.about !== "") && (<div className="text-left mx-5 my-4">
+                            <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>
+                            <h6 className="text-justify px-4">{sharedSite.about}</h6>
+                            </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="text-light text-center">
+
+            <div className="campsite-info-sm text-light text-center">
                 <h5 className="mt-4 mb-3">Cost per night ${sharedSite.cost}</h5>
 
                 <div className="d-flex flex-row justify-content-between m-4">
@@ -174,6 +211,7 @@ function SeeSite() {
                 {(sharedSite.about !== "") && <h6 className="text-center mt-4" style={{ fontSize: "1.1rem" }}>ABOUT THE CAMPERS:</h6>}
                 <h6 className="text-justify px-4">{sharedSite.about}</h6>
             </div>
+            
             <div className="text-center mt-4">
                 <ButtonOnClick style={styleButton} onClick={contactCamper} submitName="CONTACT CAMPERS" />
                 <hr></hr>
