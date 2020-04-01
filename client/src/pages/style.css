@@ -33,7 +33,16 @@
 /* LOADING PAGE */
 .loading::after {
     opacity: 0.8;
-    background-image: url("./images/Fire-left.gif");
+}
+@media screen and (min-width: 769px) {
+    .loading::after {
+        background-image: url("./images/Fire.gif");
+    }
+}
+@media screen and (max-width: 768px) {
+    .loading::after {
+        background-image: url("./images/Fire-left.gif");
+    }
 }
 
 /* HOME PAGE */
@@ -44,7 +53,7 @@
 .homeText {
     font-family: 'Barlow', sans-serif ;
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .home-pic {
         width: 40%;
     }
@@ -55,12 +64,12 @@
     opacity: 0.8;
     background-image: url("./images/single-tent-desert.jpg");
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .login-form {
         width: 30%;
     }
 }
-@media screen and (max-width: 737px) {
+@media screen and (max-width: 768px) {
     .login-form {
         width: 100%;
     }
@@ -71,12 +80,12 @@
     opacity: 0.8;
     background-image: url("./images/solo-tent-sunset.jpg")
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .signup-form {
         width: 30%;
     }
 }
-@media screen and (max-width: 737px) {
+@media screen and (max-width: 768px) {
     .signup-form {
         width: 100%;
     }
@@ -84,7 +93,6 @@
 
 /* MENU PAGE */
 .menu {
-    /* background-color: rgb(255, 248, 213); */
     background-color: #574F44;
     position: fixed;
     top: 0px;
@@ -96,46 +104,118 @@
 
 .menuTop {
     position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 50%;
+    z-index: -1;
 }
 
 .menuTop::after {
     content: "";
     position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 50%;
     background-size: cover;
     opacity: 0.8;
-    z-index: -1;
+    z-index: -10;
     background-image: url("./images/single-tent-campsite.jpg")
 }
 
 .menuBottom {
     position: fixed;
-    top: 50%;
-    left: 0px;
-    width: 100%;
-    height: 50%;
+    z-index: -1;
 }
 
 .menuBottom::after {
     content: "";
     position: fixed;
-    top: 50%;
-    left: 0px;
-    width: 100%;
-    height: 50%;
     background-size: cover;
     opacity: 0.8;
-    z-index: -1;
+    z-index: -10;
     background-image: url("./images/two-red-tents-short.jpg")
 }
 
+.shareButtons {
+    margin-top: 25%;
+}
+
+@media screen and (min-width: 769px) {
+    .menuButton {
+        width: 50%;
+        margin: auto;
+    }
+    .crashButton {
+        margin-top: 20%;
+    }
+    .menuTop {
+        top: 0px;
+        left: 0px;
+        width: 50%;
+        height: 100%;
+    }
+    .menuTop::after {
+        top: 0px;
+        left: 0px;
+        width: 50%;
+        height: 100%;
+    }
+    .menuBottom {
+        top: 0px;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+    }
+    .menuBottom::after {
+        top: 0px;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .menuButton {
+        width: 100%;
+    }
+    .crashButton {
+        margin-top: 15%;
+    }
+    .menuTop {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 50%;
+    }
+    
+    .menuTop::after {
+        content: "";
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 50%;
+        background-size: cover;
+        opacity: 0.8;
+        z-index: -1;
+        background-image: url("./images/single-tent-campsite.jpg")
+    }
+    
+    .menuBottom {
+        position: fixed;
+        top: 50%;
+        left: 0px;
+        width: 100%;
+        height: 50%;
+    }
+    
+    .menuBottom::after {
+        content: "";
+        position: fixed;
+        top: 50%;
+        left: 0px;
+        width: 100%;
+        height: 50%;
+        background-size: cover;
+        opacity: 0.8;
+        z-index: -1;
+        background-image: url("./images/two-red-tents-short.jpg")
+    }
+}
 
 /* SHARE SITE */
 .shareSite::after {
@@ -145,7 +225,7 @@
 .preferences-checkboxes {
     padding-left: 15%;
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .shareSite::after {
         background-image: url("./images/single-tent-yellow-trees.jpg")
     }
@@ -166,7 +246,7 @@
 .shadow-preview {
     margin: 0 10%;
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .preview-image {
         width: 80%;  
         margin: auto;
@@ -189,7 +269,7 @@
         margin-top: 3%;
     }
 }
-@media screen and (max-width: 737px) {
+@media screen and (max-width: 768px) {
     .campsite-info-lg {
         display: none;
     }
@@ -218,7 +298,7 @@
     opacity: 0.8;
     background-image: url("./images/orange-tent-cloudy.jpg")
 }
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 769px) {
     .message-sm {
         display: none;
     }
@@ -227,7 +307,7 @@
         margin: auto;
     }
 }
-@media screen and (max-width: 737px) {
+@media screen and (max-width: 768px) {
     .message-lg {
         display: none;
     }
