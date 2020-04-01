@@ -80177,12 +80177,9 @@ const campsitesSeed = [{
 }
 ];
 
-
 module.exports = () => db.Campsite
 	.remove({})
 	.then(() => db.Campsite.collection.insertMany(campsitesSeed))
 	.then(data => {
 		console.log(data.result.n + " sites inserted!");
 	})
-	
-	

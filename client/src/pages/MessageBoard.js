@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 import API from "../utils/API";
-import CardColumns from "react-bootstrap/CardColumns"
+import CardColumns from "react-bootstrap/CardColumns";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import Navbar from "../components/Navbar/Navbar";
 import NavLogin from "../components/NavbarLogin/index";
 import Loading from "../components/Loading/index";
@@ -76,9 +78,9 @@ function MessageBoard() {
                 </>}
 
             {/* render header only if there are messages for shared sites */}
-            {sharingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Shared Campsites</h3>}
-            <div className="d-flex justify-content-center">
-                <CardColumns>
+            {sharingSites[0] && <h3 className="font-weight-bold text-center" style={headers}>Shared Campsites</h3>}
+            <Container>
+                <Row className="d-flex justify-content-center">
                     {sharingSites.map(share => {
                         let arrival = `${share.arrival.slice(5, 7)}/${share.arrival.slice(8, 10)}/${share.arrival.slice(0, 4)}`
                         let departure = `${share.departure.slice(5, 7)}/${share.departure.slice(8, 10)}/${share.departure.slice(0, 4)}`
@@ -89,7 +91,7 @@ function MessageBoard() {
                             }
                         })
                         return (
-                            <Cards className="mt-3 shadow" key={share._id}>
+                            <Cards className="m-3 shadow" key={share._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={share.campground} />
                                     <CardSubDate className="mb-2 text-muted" arrival={arrival} departure={departure} />
@@ -101,13 +103,14 @@ function MessageBoard() {
                             </Cards>
                         )
                     })}
-                </CardColumns>
-            </div >
-
+                </Row>
+            </Container>
+            <br />
+            <hr/>
             {/* render header only if there are active sites */}
-            {crashingSites[0] && <h3 className="font-weight-bold ml-3" style={headers}>Crashed Campsites</h3>}
-            <div className="d-flex justify-content-center">
-                <CardColumns>
+            {crashingSites[0] && <h3 className="font-weight-bold text-center" style={headers}>Crashed Campsites</h3>}
+            <Container>
+                <Row className="d-flex justify-content-center">
                     {crashingSites.map(share => {
                         let arrival = `${share.arrival.slice(5, 7)}/${share.arrival.slice(8, 10)}/${share.arrival.slice(0, 4)}`
                         let departure = `${share.departure.slice(5, 7)}/${share.departure.slice(8, 10)}/${share.departure.slice(0, 4)}`
@@ -118,7 +121,7 @@ function MessageBoard() {
                             }
                         })
                         return (
-                            <Cards className="mt-3 shadow" key={share._id}>
+                            <Cards className="m-3 shadow" key={share._id}>
                                 <CardBody className="p-3">
                                     <CardTitle title={share.campground} />
                                     <CardSubDate className="mb-2 text-center" arrival={arrival} departure={departure} />
@@ -130,13 +133,9 @@ function MessageBoard() {
                             </Cards>
                         )
                     })}
-                </CardColumns>
-            </div>
-
-            <hr></hr>
-
+                </Row>
+            </Container>
         </div >
-
     )
 }
 

@@ -25,11 +25,12 @@ function MySites() {
     const { pathname } = useLocation();
     let id = pathname.split("/")[3]
 
-    // find current date to compared with shared sites to determine
+    // find current date to compare with shared sites to determine
     // active and expired posts
     var date = new Date();
     let month = `0${date.getMonth() + 1}`.slice(-2)
-    var currentDate = `${date.getFullYear()}-${month}-${date.getDate()}`
+    var currentDate = `${date.getFullYear()}-${month}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+
 
     useEffect(() => {
         loadSites(id);
@@ -122,7 +123,6 @@ function MySites() {
                         ))}
                     </CardDeck>
                 </div>
-                
                 <br/>
                 <hr/>
                 {/* render header only if there are expired sites */}

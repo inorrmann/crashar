@@ -13,7 +13,6 @@ import FormControl from "../components/FormControl/index";
 import FormControlList from "../components/FormControlList/index";
 import FormRow from "../components/FormRow/index";
 import Loading from "../components/Loading/index";
-import FormText from "../components/FormText/index"
 import InputPrepend from "../components/InputPrepend"
 
 function FindSites() {
