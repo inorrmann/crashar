@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import API from '../utils/API';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
-import CardColumns from "react-bootstrap/CardColumns";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import Navbar from "../components/Navbar/Navbar";
 import NavLink from "../components/NavLink/index";
 import Cards from "../components/Card";
@@ -97,59 +99,94 @@ function Message() {
         </div>
       </Navbar>
       <br />
-      <h3 className="text-center text-wrap fint-weight-bold mx-3" style={textshadow}>{conversation.campground}</h3>
 
-      <div className="d-flex flex-row justify-content-between mx-4 mt-3" style={textBrown}>
-        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: {dates.arrival}</h5>
-        <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: {dates.departure}</h5>
+      <h3 className="text-center text-wrap font-weight-bold mx-3" style={textshadow}>{conversation.campground}</h3>
+      
+      <Container className="message-lg">
+        <div className="d-flex justify-content-center mx-4 mt-3" style={textBrown}>
+            <h5 className="d-inline mr-4" >From: {dates.arrival}</h5>
+            <h5 className="d-inline mr-5" >Until: {dates.departure}</h5>
+            <h5 className="d-inline ml-5">{conversation.people} <i className="fas fa-user" style={{ fontSize: "1.1rem" }}></i></h5>
+            <h5 className="d-inline mx-4">{conversation.tents} <i className="fas fa-campground" style={{ fontSize: "1rem" }}></i></h5>
+            <h5 className="d-inline">{conversation.cars} <i className="fas fa-car-alt"></i></h5>
+        </div>
+      </Container>
+      
+      <div className="message-sm">
+        <div className="d-flex flex-row justify-content-between mx-4 mt-3" style={textBrown}>
+          <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>From: {dates.arrival}</h5>
+          <h5 className="text-justify d-inline" style={{ fontSize: "1.2rem" }}>Until: {dates.departure}</h5>
+        </div>
+
+        <div className="d-flex flex-row justify-content-between px-5 mx-5" style={textBrown}>
+          <h4 className="text-justify d-inline">{conversation.people} <i className="fas fa-user"></i></h4>
+          <h4 className="text-justify d-inline">{conversation.tents} <i className="fas fa-campground"></i></h4>
+          <h4 className="text-justify d-inline">{conversation.cars} <i className="fas fa-car-alt"></i></h4>
+        </div>
       </div>
 
-      <div className="d-flex flex-row justify-content-between px-5 mx-5" style={textBrown}>
-        <h4 className="text-justify d-inline">{conversation.people} <i className="fas fa-user"></i></h4>
-        <h4 className="text-justify d-inline">{conversation.tents} <i className="fas fa-campground"></i></h4>
-        <h4 className="text-justify d-inline">{conversation.cars} <i className="fas fa-car-alt"></i></h4>
-      </div>
       <hr />
 
       {/* ******************** MESSAGES BETWEEN CAMPERS ******************** */}
       <div className="d-flex justify-content-center">
-        <CardColumns>
+        <Container>
 
           {conversation.messages.map(msg => {
             if (msg.text !== "") {
               if (msg.authorId === userID) {
                 let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
                 return (
-                  <>
-                    <p className="text-light py-0 mb-0 text-right">{msg.authorName} - Sent: {date}</p>
-                    <Cards className="mb-3 border-0 rounded shadow">
-                      <CardBody styleBody={styleSent}>
-                        <CardText styleText={styleText} text={msg.text} />
-                      </CardBody>
-                    </Cards>
-                  </>
+                  <Row className="d-flex justify-content-end mr-1">
+                    <Col className="float-right">
+                      <p className="text-light py-0 mb-0 text-right">{msg.authorName} - Sent: {date}</p>
+
+                      <Cards className="message-sm mb-3 border-0 rounded shadow float-right">
+                        <CardBody styleBody={styleSent}>
+                          <CardText styleText={styleText} text={msg.text} />
+                        </CardBody>
+                      </Cards>
+
+                      <Cards className="message-lg mb-3 border-0 rounded shadow float-right w-50">
+                        <CardBody styleBody={styleSent}>
+                          <CardText styleText={styleText} text={msg.text} />
+                        </CardBody>
+                      </Cards>
+
+                    </Col>
+                  </Row>
                 )
               } else {
                 let date = `${msg.createdAt.slice(5, 7)}/${msg.createdAt.slice(8, 10)}/${msg.createdAt.slice(0, 4)}`
                 return (
-                  <>
-                    <p className="text-light py-0 mb-0">{msg.authorName} - Sent: {date}</p>
-                    <Cards className="mb-3 border-0 shadow">
-                      <CardBody styleBody={styleReceived}>
-                        <CardText styleText={styleText} text={msg.text} />
-                      </CardBody>
-                    </Cards>
-                  </>
+                  <Row className="d-flex justify-content-start ml-1">
+                    <Col className="float-left">
+                      <p className="text-light py-0 mb-0 text-left">{msg.authorName} - Sent: {date}</p>
+                      
+                      <Cards className="message-sm mb-3 border-0 shadow float-left">
+                        <CardBody styleBody={styleReceived}>
+                          <CardText styleText={styleText} text={msg.text} />
+                        </CardBody>
+                      </Cards>
+
+                      <Cards className="message-lg mb-3 border-0 shadow float-left w-50">
+                        <CardBody styleBody={styleReceived}>
+                          <CardText styleText={styleText} text={msg.text} />
+                        </CardBody>
+                      </Cards>
+
+                    </Col>
+                  </Row>
                 )
               }
             }
           })}
 
-        </CardColumns>
+        </Container>
       </div>
       <br />
       {/* ******************** FORM TO SEND MESSAGE ******************** */}
-      <Forms className="m-5" onSubmit={handleFormSubmit}>
+      <div className="message-submit">
+      <Forms className="my-5" onSubmit={handleFormSubmit}>
         <div className="input-group mb-3">
           <textarea className="form-control shadow"
             placeholder="Type your message here..."
@@ -163,6 +200,7 @@ function Message() {
           </div>
         </div>
       </Forms>
+      </div>
 
     </div>
   );

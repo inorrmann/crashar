@@ -218,6 +218,20 @@
     opacity: 0.8;
     background-image: url("./images/orange-tent-cloudy.jpg")
 }
+@media screen and (min-width: 738px) {
+    .message-sm {
+        display: none;
+    }
+    .message-submit {
+        width: 45%;
+        margin: auto;
+    }
+}
+@media screen and (max-width: 737px) {
+    .message-lg {
+        display: none;
+    }
+}
 
 /* MESSAGE BOARD PAGE */
 .message-board::after {
