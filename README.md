@@ -11,7 +11,7 @@
 [![npm version](https://badge.fury.io/js/express.svg)](https://badge.fury.io/js/express)
 [![npm version](https://badge.fury.io/js/mongoose.svg)](https://badge.fury.io/js/mongoose)
 
-Deployed site: http://www.crashar.com
+
 
 ## Crash or Share a campsite and enjoy camping with others!
 
